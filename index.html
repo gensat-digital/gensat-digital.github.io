@@ -137,10 +137,15 @@ footer .logo b{font-size:28px;color:#fff}
 .snd .bars i:nth-child(2){animation-delay:.2s}.snd .bars i:nth-child(3){animation-delay:.4s}
 .snd.muted .bars i{animation:none;height:20%;background:var(--muted)}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.lang{position:absolute;top:max(14px, env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));z-index:5;display:flex;border:1px solid rgba(255,255,255,.35);border-radius:20px;overflow:hidden}
+.lang button{appearance:none;border:0;background:transparent;color:#c9d0db;font:600 12px var(--font);letter-spacing:.08em;padding:7px 11px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.hero{position:relative}
 @media (prefers-reduced-motion: reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important}}
 </style>
 
 <div class="intro" id="intro" role="dialog" aria-label="Bienvenida a GENSAT">
+  <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   <div class="grid" aria-hidden="true"></div>
   <div class="gwrap" id="gwrap" aria-hidden="true">
     <div class="flash"></div><div class="ring"></div>
@@ -157,21 +162,22 @@ footer .logo b{font-size:28px;color:#fff}
     </svg>
   </div>
   <div class="iname">GENSAT</div>
-  <div class="isub">SOLUCIONES DIGITALES PARA TU NEGOCIO</div>
+  <div class="isub" data-i18n="isub">SOLUCIONES DIGITALES PARA TU NEGOCIO</div>
   <div class="irot" aria-live="polite"><span id="rot"></span><span class="cur"></span></div>
-  <button class="ienter" id="ienter" type="button">ENTRAR</button>
-  <div class="ihint">Con música · puedes silenciarla abajo</div>
+  <button class="ienter" id="ienter" type="button" data-i18n="ienter">ENTRAR</button>
+  <div class="ihint" data-i18n="ihint">Con música · puedes silenciarla abajo</div>
 </div>
 <button class="snd" id="snd" type="button" aria-label="Silenciar música" hidden><span class="bars"><i></i><i></i><i></i></span></button>
 
 </head>
 <body>
 <header class="hero band">
+  <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   <div class="in">
     <div class="logo" aria-label="GENSAT"><span id="mark-top"></span><b>ENSAT</b></div>
-    <div class="tag">SOLUCIONES DIGITALES · AUTOMATIZACIÓN</div>
-    <h1>Herramientas digitales hechas a la medida de tu negocio</h1>
-    <p>Páginas web, datos y automatización. Todo en español y sin palabras complicadas.</p>
+    <div class="tag" data-i18n="tag">SOLUCIONES DIGITALES · AUTOMATIZACIÓN</div>
+    <h1 data-i18n="h1">Herramientas digitales hechas a la medida de tu negocio</h1>
+    <p data-i18n="hp">Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.</p>
   </div>
 </header>
 
@@ -180,17 +186,17 @@ footer .logo b{font-size:28px;color:#fff}
 
   <section class="band" id="proyecto">
     <div class="in">
-      <div class="eyebrow">Proyectos reales</div>
-      <h2>Trabajos que ya están funcionando</h2>
-      <p class="lead">Para el celular y para la computadora, según lo que necesite cada negocio.</p>
+      <div class="eyebrow" data-i18n="pe">Proyectos reales</div>
+      <h2 data-i18n="ph">Trabajos que ya están funcionando</h2>
+      <p class="lead" data-i18n="pl">Para el celular y para la computadora, según lo que necesite cada negocio.</p>
       <div style="display:flex;flex-direction:column;gap:12px">
       <a class="proj" id="proj-link" target="_blank" rel="noopener">
         <img src="img/proyecto-salon.jpg" alt="Tres pantallas de la página del salón Stylos Evieth: bienvenida, enlaces y reservas" loading="lazy">
-        <div><b>Salón de belleza · Página con reservas</b><small>Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</small><em>Ver la página funcionando →</em></div>
+        <div><b data-i18n="s1t">Salón de belleza · Página con reservas</b><small data-i18n="s1d">Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</small><em data-i18n="s1c">Ver la página funcionando →</em></div>
       </a>
-      <a class="proj" href="caso-manufactura.html">
+      <a class="proj" id="case-link" href="caso-manufactura.html">
         <img src="img/proyecto-manufactura.jpg" alt="Demostración: celular del operador registrando un material y computadora del supervisor con la orden de trabajo al 100%" loading="lazy">
-        <div><b>Planta de manufactura · Captura desde el celular</b><small>Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.</small><em>Probar la demostración →</em></div>
+        <div><b data-i18n="s2t">Planta de manufactura · Captura desde el celular</b><small data-i18n="s2d">Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.</small><em data-i18n="s2c">Probar la demostración →</em></div>
       </a>
       </div>
     </div>
@@ -198,30 +204,30 @@ footer .logo b{font-size:28px;color:#fff}
 
   <section class="band" id="servicios">
     <div class="in">
-      <div class="eyebrow">Servicios</div>
-      <h2>¿Qué puede hacer GENSAT por tu negocio?</h2>
-      <p class="lead">Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.</p>
+      <div class="eyebrow" data-i18n="se">Servicios</div>
+      <h2 data-i18n="sh">¿Qué puede hacer GENSAT por tu negocio?</h2>
+      <p class="lead" data-i18n="sl">Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.</p>
       <div class="svc" id="svc"></div>
     </div>
   </section>
 
   <section class="band" id="como">
     <div class="in">
-      <div class="eyebrow">Cómo trabajamos</div>
-      <h2>Así de simple empezamos</h2>
-      <p class="lead">Sin contratos enredados. Primero conversamos y tú decides.</p>
+      <div class="eyebrow" data-i18n="ce">Cómo trabajamos</div>
+      <h2 data-i18n="ch">Así de simple empezamos</h2>
+      <p class="lead" data-i18n="cl">Sin contratos enredados. Primero conversamos y tú decides.</p>
       <ol class="steps">
-        <li><i>1</i><span>Me escribes por WhatsApp.</span></li>
-        <li><i>2</i><span>Me cuentas qué necesita tu negocio.</span></li>
-        <li><i>3</i><span>Te muestro una propuesta clara, con precio y sin compromiso.</span></li>
+        <li><i>1</i><span data-i18n="c1">Me escribes por WhatsApp.</span></li>
+        <li><i>2</i><span data-i18n="c2">Me cuentas qué necesita tu negocio.</span></li>
+        <li><i>3</i><span data-i18n="c3">Te muestro una propuesta clara, con precio y sin compromiso.</span></li>
       </ol>
     </div>
   </section>
 
   <section class="band" id="plantillas">
     <div class="in">
-      <div class="eyebrow">Plantillas de Excel</div>
-      <div class="xl"><span id="xl-ic"></span><div><b>Plantillas en español e inglés</b><small>Control de producción, costos y más. Muy pronto disponibles.</small></div><span class="soon">Próximamente</span></div>
+      <div class="eyebrow" data-i18n="xe">Plantillas de Excel</div>
+      <div class="xl"><span id="xl-ic"></span><div><b data-i18n="xt">Plantillas en español e inglés</b><small data-i18n="xd">Control de producción, costos y más. Muy pronto disponibles.</small></div><span class="soon" data-i18n="soon">Próximamente</span></div>
     </div>
   </section>
 </main>
@@ -230,7 +236,7 @@ footer .logo b{font-size:28px;color:#fff}
   <div class="in" style="display:flex;flex-direction:column;align-items:center;gap:10px">
     <div class="logo" aria-label="GENSAT"><span id="mark-foot"></span><b>ENSAT</b></div>
     <span id="foot-mail"></span>
-    <span>© GENSAT · Soluciones digitales</span>
+    <span data-i18n="foot">© GENSAT · Soluciones digitales</span>
   </div>
 </footer>
 
@@ -238,12 +244,59 @@ footer .logo b{font-size:28px;color:#fff}
 /* ============ DATOS DE GENSAT: cambiar solo aquí ============ */
 const GENSAT = {
   whatsapp: "13855745556",      // número de GENSAT con código de país, sin + ni espacios
-  mensajeWhatsApp: "Hola, vi GENSAT y quiero información",
+  mensajeWhatsApp: { es: "Hola, vi GENSAT y quiero información", en: "Hi, I saw GENSAT and I'd like more information" },
   instagram: "gensat10",        // usuario de Instagram sin @ (confirmar al crear la cuenta)
   correo: "gensat10@gmail.com",
   proyecto: "https://stylos-evieth.github.io"
 };
 /* ============================================================ */
+
+/* ===== Textos en español e inglés ===== */
+const T = {
+ es: {
+  isub:'SOLUCIONES DIGITALES PARA TU NEGOCIO', ienter:'ENTRAR', ihint:'Con música · puedes silenciarla abajo',
+  rot:['Páginas web','Análisis de datos','Seguimiento de pedidos','Automatización'],
+  tag:'SOLUCIONES DIGITALES · AUTOMATIZACIÓN', h1:'Herramientas digitales hechas a la medida de tu negocio',
+  hp:'Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.',
+  wa:'Escríbeme por WhatsApp', waSub:'Respuesta directa, sin compromiso', waSoon:'Número nuevo muy pronto', soonShort:'Pronto',
+  proj:'Ver proyectos reales', projSub:'Salón de belleza y planta de manufactura',
+  svc:'Servicios', svcSub:'Páginas web, datos, seguimiento y automatización',
+  xl:'Plantillas de Excel', xlSub:'En español e inglés', soon:'Próximamente', mail:'Correo', copy:'Copiar', copied:'Copiado',
+  pe:'Proyectos reales', ph:'Trabajos que ya están funcionando', pl:'Para el celular y para la computadora, según lo que necesite cada negocio.',
+  s1t:'Salón de belleza · Página con reservas', s1d:'Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.', s1c:'Ver la página funcionando →',
+  s2t:'Planta de manufactura · Captura desde el celular', s2d:'Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.', s2c:'Probar la demostración →',
+  se:'Servicios', sh:'¿Qué puede hacer GENSAT por tu negocio?', sl:'Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.',
+  services:[['page','Páginas web','Con reservas, catálogo y botón directo a tu WhatsApp.'],['chart','Análisis de datos','Descubre qué vendes más y dónde ganas o pierdes dinero.'],['box','Seguimiento de pedidos','Tus pedidos actualizados desde el celular, sin papel.'],['gear','Automatización','Menos tareas repetidas, más tiempo para tu negocio.']],
+  ce:'Cómo trabajamos', ch:'Así de simple empezamos', cl:'Sin contratos enredados. Primero conversamos y tú decides.',
+  c1:'Me escribes por WhatsApp.', c2:'Me cuentas qué necesita tu negocio.', c3:'Te muestro una propuesta clara, con precio y sin compromiso.',
+  xe:'Plantillas de Excel', xt:'Plantillas en español e inglés', xd:'Control de producción, costos y más. Muy pronto disponibles.',
+  foot:'© GENSAT · Soluciones digitales', mute:'Silenciar música', unmute:'Activar música'
+ },
+ en: {
+  isub:'DIGITAL SOLUTIONS FOR YOUR BUSINESS', ienter:'ENTER', ihint:'With music · you can mute it below',
+  rot:['Websites','Data analysis','Order tracking','Automation'],
+  tag:'DIGITAL SOLUTIONS · AUTOMATION', h1:'Digital tools built around your business',
+  hp:'Websites, data and automation. In English or Spanish, without the jargon.',
+  wa:'Message me on WhatsApp', waSub:'Direct reply, no commitment', waSoon:'New number coming soon', soonShort:'Soon',
+  proj:'See real projects', projSub:'Beauty salon and manufacturing plant',
+  svc:'Services', svcSub:'Websites, data, tracking and automation',
+  xl:'Excel templates', xlSub:'In English and Spanish', soon:'Coming soon', mail:'Email', copy:'Copy', copied:'Copied',
+  pe:'Real projects', ph:'Work that is already running', pl:'For phones and computers, depending on what each business needs.',
+  s1t:'Beauty salon · Booking website', s1d:'Clients see her work, pick a day and time, and the booking goes straight to her WhatsApp.', s1c:'See it live →',
+  s2t:'Manufacturing plant · Mobile data capture', s2d:'Several operators log data at the same time from their phones while the supervisor follows progress on the computer.', s2c:'Try the demo →',
+  se:'Services', sh:'What can GENSAT do for your business?', sl:'Every project is custom-made. Tell me what takes up your time and I\'ll suggest the right tool.',
+  services:[['page','Websites','With bookings, a catalog and a direct WhatsApp button.'],['chart','Data analysis','See what sells most and where you make or lose money.'],['box','Order tracking','Orders updated from a phone, no paperwork.'],['gear','Automation','Fewer repetitive tasks, more time for your business.']],
+  ce:'How we work', ch:'Getting started is simple', cl:'No complicated contracts. We talk first and you decide.',
+  c1:'You message me on WhatsApp.', c2:'You tell me what your business needs.', c3:'I show you a clear proposal, with a price and no commitment.',
+  xe:'Excel templates', xt:'Templates in English and Spanish', xd:'Production control, costs and more. Available soon.',
+  foot:'© GENSAT · Digital solutions', mute:'Mute music', unmute:'Play music'
+ }
+};
+let LANG = (() => {
+  const q = new URLSearchParams(location.search).get('lang'); if (q === 'en' || q === 'es') return q;
+  try { const s = localStorage.getItem('gensat-lang'); if (s === 'en' || s === 'es') return s; } catch(_) {}
+  return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+})();
 
 /* ===== Entrada animada ===== */
 (function(){
@@ -252,10 +305,10 @@ const GENSAT = {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   setTimeout(() => gw.classList.add('pum', 'solid'), reduce ? 0 : 2200);
   // Descripción que se escribe sola
-  const words = ['Páginas web', 'Análisis de datos', 'Seguimiento de pedidos', 'Automatización'];
   const rot = document.getElementById('rot');
   let w = 0, c = 0, del = false;
   function tick(){
+    const words = T[LANG].rot; if (w >= words.length) w = 0;
     const word = words[w];
     rot.textContent = word.slice(0, c);
     if (!del && c < word.length){ c++; setTimeout(tick, 55); }
@@ -293,7 +346,7 @@ function startMusic(){
   MASTER.gain.setValueAtTime(0.25, now); MASTER.gain.linearRampToValueAtTime(VOL, now + 0.8);
   ON = true;
   const btn = document.getElementById('snd'); btn.hidden = false;
-  btn.onclick = () => { ON = !ON; MASTER.gain.setTargetAtTime(ON ? VOL : 0, AC.currentTime, 0.25); btn.classList.toggle('muted', !ON); btn.setAttribute('aria-label', ON ? 'Silenciar música' : 'Activar música'); };
+  btn.onclick = () => { ON = !ON; MASTER.gain.setTargetAtTime(ON ? VOL : 0, AC.currentTime, 0.25); btn.classList.toggle('muted', !ON); btn.setAttribute('aria-label', ON ? T[LANG].mute : T[LANG].unmute); };
   const BPM = 112, S16 = 60 / BPM / 4;
   // La menor · Fa · Do · Sol
   const PROG = [[57,60,64,69],[53,57,60,65],[48,55,60,64],[55,59,62,67]];
@@ -344,32 +397,36 @@ function btn({icon, title, sub, href, main, soon, extra}){
   return el;
 }
 const links = document.getElementById('links');
-const waHref = GENSAT.whatsapp ? 'https://wa.me/' + GENSAT.whatsapp + '?text=' + encodeURIComponent(GENSAT.mensajeWhatsApp) : '';
-links.append(
-  btn({icon:'wa', title:'Escríbeme por WhatsApp', sub: GENSAT.whatsapp ? 'Respuesta directa, sin compromiso' : 'Número nuevo muy pronto', href:waHref, main:true, soon: GENSAT.whatsapp ? '' : 'Pronto'}),
-  btn({icon:'web', title:'Ver proyectos reales', sub:'Salón de belleza y planta de manufactura', href:'#proyecto'}),
-  btn({icon:'grid', title:'Servicios', sub:'Páginas web, datos, seguimiento y automatización', href:'#servicios'}),
-  btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram + '/'}),
-  btn({icon:'xl', title:'Plantillas de Excel', sub:'En español e inglés', soon:'Próximamente'}),
-  btn({icon:'mail', title:'Correo', sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail">Copiar</button>'})
-);
+function render(){
+  const t = T[LANG];
+  const waHref = GENSAT.whatsapp ? 'https://wa.me/' + GENSAT.whatsapp + '?text=' + encodeURIComponent(GENSAT.mensajeWhatsApp[LANG]) : '';
+  links.innerHTML = '';
+  links.append(
+    btn({icon:'wa', title:t.wa, sub: GENSAT.whatsapp ? t.waSub : t.waSoon, href:waHref, main:true, soon: GENSAT.whatsapp ? '' : t.soonShort}),
+    btn({icon:'web', title:t.proj, sub:t.projSub, href:'#proyecto'}),
+    btn({icon:'grid', title:t.svc, sub:t.svcSub, href:'#servicios'}),
+    btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram + '/'}),
+    btn({icon:'xl', title:t.xl, sub:t.xlSub, soon:t.soon}),
+    btn({icon:'mail', title:t.mail, sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail">' + t.copy + '</button>'})
+  );
+  document.getElementById('copy-mail').addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    const b = e.currentTarget;
+    try { navigator.clipboard.writeText(GENSAT.correo).then(() => { b.textContent = T[LANG].copied; setTimeout(() => b.textContent = T[LANG].copy, 1500); }, () => { b.textContent = GENSAT.correo; }); } catch(_) { b.textContent = GENSAT.correo; }
+  });
+  document.getElementById('svc').innerHTML = t.services.map(([i,tt,d]) => '<div>' + I[i] + '<b>' + tt + '</b><span>' + d + '</span></div>').join('');
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = t[el.dataset.i18n]; if (v != null) el.textContent = v; });
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
+  document.documentElement.lang = LANG;
+  document.getElementById('case-link').href = 'caso-manufactura.html' + (LANG === 'en' ? '?lang=en' : '');
+  const snd = document.getElementById('snd'); snd.setAttribute('aria-label', snd.classList.contains('muted') ? t.unmute : t.mute);
+}
+function setLang(l){ LANG = l; try { localStorage.setItem('gensat-lang', l); } catch(_) {} render(); }
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 document.getElementById('proj-link').href = GENSAT.proyecto;
 document.getElementById('foot-mail').textContent = GENSAT.correo;
 document.getElementById('xl-ic').innerHTML = '<span class="ic" style="width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:var(--bg)">' + I.xl.replace('<svg ','<svg width="22" height="22" ') + '</span>';
-
-document.getElementById('copy-mail').addEventListener('click', e => {
-  e.preventDefault(); e.stopPropagation();
-  const b = e.currentTarget;
-  try { navigator.clipboard.writeText(GENSAT.correo).then(() => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1500); }, () => { b.textContent = GENSAT.correo; }); } catch(_) { b.textContent = GENSAT.correo; }
-});
-
-const SVC = [
-  ['page','Páginas web','Con reservas, catálogo y botón directo a tu WhatsApp.'],
-  ['chart','Análisis de datos','Descubre qué vendes más y dónde ganas o pierdes dinero.'],
-  ['box','Seguimiento de pedidos','Tus pedidos actualizados desde el celular, sin papel.'],
-  ['gear','Automatización','Menos tareas repetidas, más tiempo para tu negocio.']
-];
-document.getElementById('svc').innerHTML = SVC.map(([i,t,d]) => '<div>' + I[i] + '<b>' + t + '</b><span>' + d + '</span></div>').join('');
+render();
 </script>
 
 </body>
