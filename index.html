@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#0f1b2d">
 <link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="GENSAT · Soluciones digitales">
-<meta property="og:description" content="Páginas web, datos y automatización para tu negocio.">
+<meta property="og:title" content="GENSAT · Soluciones digitales para tu negocio">
+<meta property="og:description" content="Páginas web, análisis de datos, seguimiento de pedidos y automatización para negocios. Todo en español y sin palabras complicadas.">
 <meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
 <meta property="og:locale" content="es_LA">
 <meta name="twitter:card" content="summary_large_image">
@@ -111,13 +111,19 @@ footer .logo b{font-size:28px;color:#fff}
 
   <section class="band" id="proyecto">
     <div class="in">
-      <div class="eyebrow">Proyecto real</div>
-      <h2>Página con reservas para un salón de belleza</h2>
-      <p class="lead">Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</p>
+      <div class="eyebrow">Proyectos reales</div>
+      <h2>Trabajos que ya están funcionando</h2>
+      <p class="lead">Para el celular y para la computadora, según lo que necesite cada negocio.</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
       <a class="proj" id="proj-link" target="_blank" rel="noopener">
         <img src="img/proyecto-salon.jpg" alt="Tres pantallas de la página del salón Stylos Evieth: bienvenida, enlaces y reservas" loading="lazy">
-        <div><b>Salón Stylos Evieth</b><small>Reservas con día y hora · Asistente que recomienda el servicio · Antes y después · Formas de pago</small><em>Ver la página funcionando →</em></div>
+        <div><b>Salón de belleza · Página con reservas</b><small>Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</small><em>Ver la página funcionando →</em></div>
       </a>
+      <a class="proj" href="caso-manufactura.html">
+        <img src="img/proyecto-manufactura.jpg" alt="Demostración: celular del operador registrando un material y computadora del supervisor con la orden de trabajo al 100%" loading="lazy">
+        <div><b>Planta de manufactura · Captura desde el celular</b><small>Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.</small><em>Probar la demostración →</em></div>
+      </a>
+      </div>
     </div>
   </section>
 
@@ -199,7 +205,7 @@ const links = document.getElementById('links');
 const waHref = GENSAT.whatsapp ? 'https://wa.me/' + GENSAT.whatsapp + '?text=' + encodeURIComponent(GENSAT.mensajeWhatsApp) : '';
 links.append(
   btn({icon:'wa', title:'Escríbeme por WhatsApp', sub: GENSAT.whatsapp ? 'Respuesta directa, sin compromiso' : 'Número nuevo muy pronto', href:waHref, main:true, soon: GENSAT.whatsapp ? '' : 'Pronto'}),
-  btn({icon:'web', title:'Ver proyecto real', sub:'Página con reservas para un salón de belleza', href:'#proyecto'}),
+  btn({icon:'web', title:'Ver proyectos reales', sub:'Salón de belleza y planta de manufactura', href:'#proyecto'}),
   btn({icon:'grid', title:'Servicios', sub:'Páginas web, datos, seguimiento y automatización', href:'#servicios'}),
   btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram + '/'}),
   btn({icon:'xl', title:'Plantillas de Excel', sub:'En español e inglés', soon:'Próximamente'}),
