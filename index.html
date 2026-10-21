@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GENSAT · Soluciones digitales para tu negocio</title>
+<meta name="description" content="Páginas web, análisis de datos, seguimiento de pedidos y automatización para negocios. Todo en español y sin palabras complicadas.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GENSAT · Soluciones digitales">
+<meta property="og:description" content="Páginas web, datos y automatización para tu negocio.">
+<meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
+<meta property="og:locale" content="es_LA">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
+<style>
+/* Layout: columna de enlaces (máx. 520px); encabezado azul marino con el logo, cuerpo claro con botones grandes para el pulgar */
+:root{
+  --navy:#0f1b2d; --navy-2:#18294a; --gold:#f5b83d; --gold-ink:#7a5200;
+  --bg:#f4f5f8; --card:#ffffff; --ink:#0f1b2d; --muted:#5d6675; --line:#e1e5ec;
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
+.band{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.in{max-width:520px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* Encabezado */
+.hero{background:var(--navy);color:#fff;padding-block:40px 34px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-160px;top:-180px;background:var(--gold);opacity:.16;filter:blur(40px)}
+.hero .in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.logo{display:inline-flex;align-items:flex-end;gap:3px}
+.logo svg{width:76px;height:76px;margin-bottom:-7px}
+.logo b{font-weight:800;font-size:53px;letter-spacing:.1em;line-height:.78;padding-bottom:2px}
+.tag{font-size:10px;letter-spacing:.22em;color:#b8c0cc;font-weight:500}
+.hero h1{margin:10px 0 0;font-size:24px;line-height:1.25;font-weight:600;text-wrap:balance}
+.hero p{margin:0;color:#c9d0db;font-size:15px;max-width:34ch}
+
+/* Botones */
+.links{display:flex;flex-direction:column;gap:10px;padding-block:22px 8px}
+.btn{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-decoration:none;min-height:64px}
+.btn .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--bg);flex:none}
+.btn .ic svg{width:22px;height:22px}
+.btn .t{flex:1;min-width:0}
+.btn .t b{display:block;font-weight:600;font-size:16px}
+.btn .t small{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.btn .ar{color:var(--muted);font-size:20px}
+.btn:hover{border-color:var(--ink)}
+.btn.main{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.btn.main .ic{background:rgba(15,27,45,.12)}
+.btn.main .t small{color:var(--navy);opacity:.75}
+.btn.main .ar{color:var(--navy)}
+.btn.off{opacity:.6;cursor:default}
+.soon{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--navy);color:var(--gold);padding:4px 8px;border-radius:20px;white-space:nowrap}
+.copy{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 12px var(--font);padding:7px 10px;border-radius:8px;cursor:pointer}
+
+/* Secciones */
+section{padding-block:26px}
+h2{margin:0 0 4px;font-size:21px;font-weight:700;text-wrap:balance}
+.lead{margin:0 0 16px;color:var(--muted);font-size:15px}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold-ink);margin-bottom:6px}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svc div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.svc svg{width:26px;height:26px}
+.svc b{font-size:15px;line-height:1.25}
+.svc span{font-size:13px;color:var(--muted);line-height:1.4}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;display:block}
+.proj img{width:100%;display:block;aspect-ratio:1200/760;object-fit:cover;background:var(--line)}
+.proj div{padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.proj b{font-size:16px}
+.proj small{color:var(--muted);font-size:13.5px}
+.proj em{font-style:normal;color:var(--gold-ink);font-weight:600;font-size:14px;margin-top:4px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.steps li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.steps i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;flex:none}
+:root[data-theme="dark"] .steps i{background:var(--gold);color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .steps i{background:var(--gold);color:var(--navy)}}
+.xl{background:var(--card);border:1px dashed var(--gold);border-radius:14px;padding:16px;display:flex;gap:12px;align-items:center}
+.xl b{display:block}.xl small{color:var(--muted)}
+footer{background:var(--navy);color:#b8c0cc;padding-block:26px;text-align:center;font-size:13px;margin-top:20px}
+footer .logo svg{width:40px;height:40px;margin-bottom:-4px}
+footer .logo b{font-size:28px;color:#fff}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="hero band">
+  <div class="in">
+    <div class="logo" aria-label="GENSAT"><span id="mark-top"></span><b>ENSAT</b></div>
+    <div class="tag">SOLUCIONES DIGITALES · AUTOMATIZACIÓN</div>
+    <h1>Herramientas digitales hechas a la medida de tu negocio</h1>
+    <p>Páginas web, datos y automatización. Todo en español y sin palabras complicadas.</p>
+  </div>
+</header>
+
+<main>
+  <div class="band"><nav class="in links" id="links" aria-label="Enlaces de GENSAT"></nav></div>
+
+  <section class="band" id="proyecto">
+    <div class="in">
+      <div class="eyebrow">Proyecto real</div>
+      <h2>Página con reservas para un salón de belleza</h2>
+      <p class="lead">Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</p>
+      <a class="proj" id="proj-link" target="_blank" rel="noopener">
+        <img src="img/proyecto-salon.jpg" alt="Tres pantallas de la página del salón Stylos Evieth: bienvenida, enlaces y reservas" loading="lazy">
+        <div><b>Salón Stylos Evieth</b><small>Reservas con día y hora · Asistente que recomienda el servicio · Antes y después · Formas de pago</small><em>Ver la página funcionando →</em></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="band" id="servicios">
+    <div class="in">
+      <div class="eyebrow">Servicios</div>
+      <h2>¿Qué puede hacer GENSAT por tu negocio?</h2>
+      <p class="lead">Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.</p>
+      <div class="svc" id="svc"></div>
+    </div>
+  </section>
+
+  <section class="band" id="como">
+    <div class="in">
+      <div class="eyebrow">Cómo trabajamos</div>
+      <h2>Así de simple empezamos</h2>
+      <p class="lead">Sin contratos enredados. Primero conversamos y tú decides.</p>
+      <ol class="steps">
+        <li><i>1</i><span>Me escribes por WhatsApp.</span></li>
+        <li><i>2</i><span>Me cuentas qué necesita tu negocio.</span></li>
+        <li><i>3</i><span>Te muestro una propuesta clara, con precio y sin compromiso.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="plantillas">
+    <div class="in">
+      <div class="eyebrow">Plantillas de Excel</div>
+      <div class="xl"><span id="xl-ic"></span><div><b>Plantillas en español e inglés</b><small>Control de producción, costos y más. Muy pronto disponibles.</small></div><span class="soon">Próximamente</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="band">
+  <div class="in" style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div class="logo" aria-label="GENSAT"><span id="mark-foot"></span><b>ENSAT</b></div>
+    <span id="foot-mail"></span>
+    <span>© GENSAT · Soluciones digitales</span>
+  </div>
+</footer>
+
+<script>
+/* ============ DATOS DE GENSAT: cambiar solo aquí ============ */
+const GENSAT = {
+  whatsapp: "",                 // PENDIENTE: número nuevo con código de país, sin + ni espacios. Ej: "584141234567"
+  mensajeWhatsApp: "Hola, vi GENSAT y quiero información",
+  instagram: "gensat10",        // usuario de Instagram sin @ (confirmar al crear la cuenta)
+  correo: "gensat10@gmail.com",
+  proyecto: "https://stylos-evieth.github.io"
+};
+/* ============================================================ */
+
+const NAVY = '#0f1b2d', GOLD = '#f5b83d';
+const mark = (c) => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
+document.getElementById('mark-top').innerHTML = mark('#fff');
+document.getElementById('mark-foot').innerHTML = mark('#fff');
+
+const I = {
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1.1 2.8.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>',
+  web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
+  ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  xl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  box:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>',
+  gear:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>',
+  page:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h10"/></svg>'
+};
+
+function btn({icon, title, sub, href, main, soon, extra}){
+  const el = document.createElement(href ? 'a' : 'div');
+  el.className = 'btn' + (main ? ' main' : '') + (href ? '' : ' off');
+  if (href){ el.href = href; if (!href.startsWith('#')){ el.target = '_blank'; el.rel = 'noopener'; } }
+  el.innerHTML = '<span class="ic">' + I[icon] + '</span><span class="t"><b>' + title + '</b><small>' + sub + '</small></span>' + (soon ? '<span class="soon">' + soon + '</span>' : (extra || '<span class="ar">→</span>'));
+  return el;
+}
+const links = document.getElementById('links');
+const waHref = GENSAT.whatsapp ? 'https://wa.me/' + GENSAT.whatsapp + '?text=' + encodeURIComponent(GENSAT.mensajeWhatsApp) : '';
+links.append(
+  btn({icon:'wa', title:'Escríbeme por WhatsApp', sub: GENSAT.whatsapp ? 'Respuesta directa, sin compromiso' : 'Número nuevo muy pronto', href:waHref, main:true, soon: GENSAT.whatsapp ? '' : 'Pronto'}),
+  btn({icon:'web', title:'Ver proyecto real', sub:'Página con reservas para un salón de belleza', href:'#proyecto'}),
+  btn({icon:'grid', title:'Servicios', sub:'Páginas web, datos, seguimiento y automatización', href:'#servicios'}),
+  btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram + '/'}),
+  btn({icon:'xl', title:'Plantillas de Excel', sub:'En español e inglés', soon:'Próximamente'}),
+  btn({icon:'mail', title:'Correo', sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail">Copiar</button>'})
+);
+document.getElementById('proj-link').href = GENSAT.proyecto;
+document.getElementById('foot-mail').textContent = GENSAT.correo;
+document.getElementById('xl-ic').innerHTML = '<span class="ic" style="width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:var(--bg)">' + I.xl.replace('<svg ','<svg width="22" height="22" ') + '</span>';
+
+document.getElementById('copy-mail').addEventListener('click', e => {
+  e.preventDefault(); e.stopPropagation();
+  const b = e.currentTarget;
+  try { navigator.clipboard.writeText(GENSAT.correo).then(() => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1500); }, () => { b.textContent = GENSAT.correo; }); } catch(_) { b.textContent = GENSAT.correo; }
+});
+
+const SVC = [
+  ['page','Páginas web','Con reservas, catálogo y botón directo a tu WhatsApp.'],
+  ['chart','Análisis de datos','Descubre qué vendes más y dónde ganas o pierdes dinero.'],
+  ['box','Seguimiento de pedidos','Tus pedidos actualizados desde el celular, sin papel.'],
+  ['gear','Automatización','Menos tareas repetidas, más tiempo para tu negocio.']
+];
+document.getElementById('svc').innerHTML = SVC.map(([i,t,d]) => '<div>' + I[i] + '<b>' + t + '</b><span>' + d + '</span></div>').join('');
+</script>
+
+</body>
+</html>
