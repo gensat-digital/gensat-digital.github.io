@@ -93,7 +93,76 @@ footer{background:var(--navy);color:#b8c0cc;padding-block:26px;text-align:center
 footer .logo svg{width:40px;height:40px;margin-bottom:-4px}
 footer .logo b{font-size:28px;color:#fff}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+/* ===== Entrada animada ===== */
+.intro{position:fixed;inset:0;z-index:50;background:radial-gradient(ellipse at 50% 42%,#1b2d52 0%,#0f1b2d 62%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;
+  padding:max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));overflow:hidden;transition:opacity .7s ease, transform .7s ease}
+.intro.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.intro .grid{position:absolute;inset:-50%;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;transform:perspective(600px) rotateX(55deg) translateY(10%);opacity:0;animation:gridIn 1.6s ease .2s forwards}
+@keyframes gridIn{to{opacity:1}}
+.gwrap{position:relative;width:min(210px,52vw);aspect-ratio:1}
+.gwrap svg{width:100%;height:100%;overflow:visible}
+.gpart{transform-box:fill-box;transform-origin:center;opacity:0;animation:fly 1s cubic-bezier(.2,.9,.25,1) forwards}
+.p1{--x:140px;--y:-160px;--r:70deg;animation-delay:.25s}
+.p2{--x:-180px;--y:-40px;--r:-90deg;animation-delay:.4s}
+.p3{--x:-60px;--y:190px;--r:60deg;animation-delay:.55s}
+.p4{--x:200px;--y:40px;--r:0deg;animation-delay:.7s}
+.p5{--x:0px;--y:160px;--r:0deg;animation-delay:.85s}
+.p6{--x:0px;--y:190px;--r:0deg;animation-delay:.95s}
+.p7{--x:0px;--y:220px;--r:0deg;animation-delay:1.05s}
+.p8{--x:220px;--y:-220px;--r:0deg;animation-delay:1.15s}
+@keyframes fly{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.6)}60%{opacity:1}100%{opacity:1;transform:none}}
+.gfull{opacity:0}.gwrap.solid .gfull{opacity:1}.gwrap.solid .gpart{visibility:hidden}
+.gwrap.pum svg{animation:pum .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pum{0%{transform:scale(1)}35%{transform:scale(1.14)}100%{transform:scale(1)}}
+.ring{position:absolute;left:50%;top:50%;width:100%;aspect-ratio:1;border-radius:50%;border:2px solid var(--gold);transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none}
+.gwrap.pum .ring{animation:ring 1s ease-out}
+@keyframes ring{0%{opacity:.9;transform:translate(-50%,-50%) scale(.7)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.1)}}
+.flash{position:absolute;left:50%;top:50%;width:160%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,184,61,.45),transparent 60%);transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+.gwrap.pum .flash{animation:flash .9s ease-out}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+.iname{font-weight:800;font-size:clamp(30px,8vw,46px);letter-spacing:.32em;padding-left:.32em;opacity:0;animation:nameIn .9s ease 2.15s forwards}
+@keyframes nameIn{from{opacity:0;letter-spacing:.8em}to{opacity:1;letter-spacing:.32em}}
+.isub{font-size:13px;letter-spacing:.24em;color:#b8c0cc;opacity:0;animation:fadeIn .6s ease 2.6s forwards}
+.irot{height:30px;font-size:21px;font-weight:600;color:var(--gold);opacity:0;animation:fadeIn .6s ease 2.8s forwards;display:flex;align-items:center;gap:2px}
+.irot .cur{width:2px;height:22px;background:var(--gold);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@keyframes fadeIn{to{opacity:1}}
+.ienter{appearance:none;margin-top:14px;border:1.5px solid var(--gold);background:transparent;color:#fff;font:600 14px var(--font);letter-spacing:.3em;padding:15px 44px 15px 50px;border-radius:40px;cursor:pointer;opacity:0;animation:fadeIn .6s ease 3.2s forwards;transition:background .25s,color .25s}
+.ienter:hover{background:var(--gold);color:var(--navy)}
+.ihint{font-size:12px;color:#8e98a8;opacity:0;animation:fadeIn .6s ease 3.5s forwards}
+.snd{position:fixed;z-index:40;right:max(16px, calc(env(safe-area-inset-right, 0px) + 12px));bottom:calc(env(safe-area-inset-bottom, 0px) + 16px);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(15,27,45,.15)}
+.snd .bars{display:flex;gap:3px;align-items:flex-end;height:16px}
+.snd .bars i{width:3px;background:var(--gold);height:30%;animation:eq 1s ease-in-out infinite}
+.snd .bars i:nth-child(2){animation-delay:.2s}.snd .bars i:nth-child(3){animation-delay:.4s}
+.snd.muted .bars i{animation:none;height:20%;background:var(--muted)}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+@media (prefers-reduced-motion: reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important}}
 </style>
+
+<div class="intro" id="intro" role="dialog" aria-label="Bienvenida a GENSAT">
+  <div class="grid" aria-hidden="true"></div>
+  <div class="gwrap" id="gwrap" aria-hidden="true">
+    <div class="flash"></div><div class="ring"></div>
+    <svg viewBox="0 0 100 100">
+      <path class="gpart p1" d="M80 27 A37 37 0 0 0 21.66 26.22" fill="none" stroke="#fff" stroke-width="12"/>
+      <path class="gpart p2" d="M21.66 26.22 A37 37 0 0 0 32.92 82.82" fill="none" stroke="#fff" stroke-width="12"/>
+      <path class="gpart p3" d="M32.92 82.82 A37 37 0 0 0 87 60" fill="none" stroke="#fff" stroke-width="12"/>
+      <path class="gpart p4" d="M93 60 L62 60" fill="none" stroke="#fff" stroke-width="12"/>
+      <rect class="gpart p5" x="30" y="58" width="8" height="15" fill="#fff"/>
+      <rect class="gpart p6" x="42" y="49" width="8" height="24" fill="#fff"/>
+      <rect class="gpart p7" x="54" y="38" width="8" height="35" fill="#f5b83d"/>
+      <circle class="gpart p8" cx="86" cy="18" r="7" fill="#f5b83d"/>
+      <g class="gfull"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="#fff"/><rect x="42" y="49" width="8" height="24" fill="#fff"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></g>
+    </svg>
+  </div>
+  <div class="iname">GENSAT</div>
+  <div class="isub">SOLUCIONES DIGITALES PARA TU NEGOCIO</div>
+  <div class="irot" aria-live="polite"><span id="rot"></span><span class="cur"></span></div>
+  <button class="ienter" id="ienter" type="button">ENTRAR</button>
+  <div class="ihint">Con música · puedes silenciarla abajo</div>
+</div>
+<button class="snd" id="snd" type="button" aria-label="Silenciar música" hidden><span class="bars"><i></i><i></i><i></i></span></button>
 
 </head>
 <body>
@@ -175,6 +244,79 @@ const GENSAT = {
   proyecto: "https://stylos-evieth.github.io"
 };
 /* ============================================================ */
+
+/* ===== Entrada animada ===== */
+(function(){
+  const intro = document.getElementById('intro'), gw = document.getElementById('gwrap');
+  document.body.style.overflow = 'hidden';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => gw.classList.add('pum', 'solid'), reduce ? 0 : 2200);
+  // Descripción que se escribe sola
+  const words = ['Páginas web', 'Análisis de datos', 'Seguimiento de pedidos', 'Automatización'];
+  const rot = document.getElementById('rot');
+  let w = 0, c = 0, del = false;
+  function tick(){
+    const word = words[w];
+    rot.textContent = word.slice(0, c);
+    if (!del && c < word.length){ c++; setTimeout(tick, 55); }
+    else if (!del){ del = true; setTimeout(tick, 1300); }
+    else if (c > 0){ c--; setTimeout(tick, 28); }
+    else { del = false; w = (w + 1) % words.length; setTimeout(tick, 250); }
+  }
+  setTimeout(tick, reduce ? 0 : 2900);
+  document.getElementById('ienter').addEventListener('click', () => {
+    gw.classList.remove('pum'); void gw.offsetWidth; gw.classList.add('pum');
+    startMusic();
+    setTimeout(() => { intro.classList.add('out'); document.body.style.overflow = ''; }, 420);
+    setTimeout(() => { intro.hidden = true; }, 1150);
+  });
+})();
+
+/* ===== Música electrónica generada en la página (original, sin derechos) ===== */
+let AC, MASTER, ON = false;
+const VOL = 0.09;
+function startMusic(){
+  try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return; }
+  MASTER = AC.createGain(); MASTER.gain.value = 0; MASTER.connect(AC.destination);
+  const comp = AC.createDynamicsCompressor(); comp.connect(MASTER);
+  const delay = AC.createDelay(); delay.delayTime.value = 0.32; const fb = AC.createGain(); fb.gain.value = 0.32;
+  const wet = AC.createGain(); wet.gain.value = 0.35; delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(comp);
+  const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 6; lp.connect(comp); lp.connect(delay);
+  // barrido lento del filtro para sensación de "máquina trabajando"
+  const lfo = AC.createOscillator(), lfoG = AC.createGain(); lfo.frequency.value = 0.06; lfoG.gain.value = 700; lfo.connect(lfoG); lfoG.connect(lp.frequency); lfo.start();
+  const noiseBuf = AC.createBuffer(1, AC.sampleRate * 0.2, AC.sampleRate); const nd = noiseBuf.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  const now = AC.currentTime;
+  // golpe de entrada ("pum")
+  const k = AC.createOscillator(), kg = AC.createGain(); k.frequency.setValueAtTime(140, now); k.frequency.exponentialRampToValueAtTime(40, now + 0.5);
+  kg.gain.setValueAtTime(0.9, now); kg.gain.exponentialRampToValueAtTime(0.001, now + 0.6); k.connect(kg); kg.connect(comp); k.start(now); k.stop(now + 0.65);
+  MASTER.gain.setValueAtTime(0.25, now); MASTER.gain.linearRampToValueAtTime(VOL, now + 0.8);
+  ON = true;
+  const btn = document.getElementById('snd'); btn.hidden = false;
+  btn.onclick = () => { ON = !ON; MASTER.gain.setTargetAtTime(ON ? VOL : 0, AC.currentTime, 0.25); btn.classList.toggle('muted', !ON); btn.setAttribute('aria-label', ON ? 'Silenciar música' : 'Activar música'); };
+  const BPM = 112, S16 = 60 / BPM / 4;
+  // La menor · Fa · Do · Sol
+  const PROG = [[57,60,64,69],[53,57,60,65],[48,55,60,64],[55,59,62,67]];
+  const BASS = [45,41,36,43];
+  const PAT = [0,2,1,3,2,1,3,2,0,2,1,3,2,3,1,2];
+  function note(type, f, t, d, g, dest){ const o = AC.createOscillator(), a = AC.createGain(); o.type = type; o.frequency.value = f; a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(g, t + 0.008); a.gain.exponentialRampToValueAtTime(0.0008, t + d); o.connect(a); a.connect(dest); o.start(t); o.stop(t + d + 0.05); }
+  function hat(t, g){ const s = AC.createBufferSource(), h = AC.createBiquadFilter(), a = AC.createGain(); s.buffer = noiseBuf; h.type = 'highpass'; h.frequency.value = 7000; a.gain.setValueAtTime(g, t); a.gain.exponentialRampToValueAtTime(0.0008, t + 0.05); s.connect(h); h.connect(a); a.connect(comp); s.start(t); s.stop(t + 0.06); }
+  function kick(t){ const o = AC.createOscillator(), a = AC.createGain(); o.frequency.setValueAtTime(110, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18); a.gain.setValueAtTime(0.5, t); a.gain.exponentialRampToValueAtTime(0.001, t + 0.25); o.connect(a); a.connect(comp); o.start(t); o.stop(t + 0.3); }
+  let step = 0, next = now + 0.7;
+  (function sched(){
+    while (next < AC.currentTime + 0.3){
+      const bar = Math.floor(step / 16) % 4, s = step % 16, ch = PROG[bar];
+      const intro = step < 64; // primeras 4 barras más suaves
+      note('sawtooth', mtof(ch[PAT[s]] + 12), next, S16 * 0.9, intro ? 0.05 : 0.07, lp);
+      if (s % 2 === 0) note('triangle', mtof(BASS[bar]), next, S16 * 1.8, 0.16, comp);
+      if (!intro && s % 4 === 0) kick(next);
+      if (s % 2 === 1) hat(next, intro ? 0.015 : 0.03);
+      next += S16; step++;
+    }
+    setTimeout(sched, 60);
+  })();
+  document.addEventListener('visibilitychange', () => { if (document.hidden) AC.suspend(); else AC.resume(); });
+}
 
 const NAVY = '#0f1b2d', GOLD = '#f5b83d';
 const mark = (c) => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
