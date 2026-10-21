@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo: app para choferes · GENSAT</title>
+<meta name="description" content="App para negocios que reparten: el chofer marca cada entrega con foto y firma y el despachador lo sigue en el mapa.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo: app para choferes · GENSAT">
+<meta property="og:description" content="App para negocios que reparten: el chofer marca cada entrega con foto y firma y el despachador lo sigue en el mapa.">
+<meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
+<meta property="og:locale" content="es_LA">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
+<style>
+/* Layout: demo con dos pantallas; celular del chofer a la izquierda y panel del despachador con mapa a la derecha; en el celular se alternan con pestañas */
+:root{
+  --navy:#0f1b2d; --gold:#f5b83d; --gold-ink:#7a5200;
+  --bg:#f4f5f8; --card:#ffffff; --ink:#0f1b2d; --muted:#5d6675; --line:#e1e5ec;
+  --ok:#1f9d63; --ok-bg:#e1f4ea; --go:#2f5bd3; --go-bg:#e4ebfb; --wait-bg:#eef0f4;
+  --map:#eef1f6; --road:#ffffff; --block:#e3e8f0; --water:#cfe0f5;
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok-bg:#123a2a; --ok:#4cc98d; --go:#7c9cff; --go-bg:#1b2a52; --wait-bg:#1b2a45; --map:#0f1a2c; --road:#23344f; --block:#16243b; --water:#16304f; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok-bg:#123a2a; --ok:#4cc98d; --go:#7c9cff; --go-bg:#1b2a52; --wait-bg:#1b2a45; --map:#0f1a2c; --road:#23344f; --block:#16243b; --water:#16304f; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
+.band{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.in{max-width:1080px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.hero{background:var(--navy);color:#fff;padding-block:28px 34px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:26px}
+.logo{display:inline-flex;align-items:flex-end;gap:2px;text-decoration:none;color:#fff}
+.logo svg{width:40px;height:40px;margin-bottom:-4px}
+.logo b{font-weight:800;font-size:27px;letter-spacing:.1em;line-height:.78;padding-bottom:1px}
+.back{font-size:14px;color:#c9d0db;text-decoration:none}
+.lang{display:flex;border:1px solid rgba(255,255,255,.35);border-radius:20px;overflow:hidden}
+.lang button{appearance:none;border:0;background:transparent;color:#c9d0db;font:600 12px var(--font);letter-spacing:.08em;padding:6px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:20px;background:rgba(245,184,61,.15);color:var(--gold)}
+.hero h1{margin:12px 0 10px;font-size:clamp(28px,5vw,44px);line-height:1.1;font-weight:800;text-wrap:balance;max-width:22ch}
+.hero p{margin:0;color:#c9d0db;max-width:60ch}
+section{padding-block:28px}
+h2{margin:0 0 6px;font-size:22px;font-weight:700}
+.lead{margin:0 0 18px;color:var(--muted);max-width:62ch}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold-ink);margin-bottom:6px}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.feat div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.feat b{display:block;font-size:15px;margin-bottom:4px}
+.feat span{font-size:13.5px;color:var(--muted)}
+.demo-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.play{appearance:none;border:0;background:var(--gold);color:var(--navy);font:700 15px var(--font);padding:12px 18px;border-radius:12px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.reset{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px var(--font);padding:11px 14px;border-radius:12px;cursor:pointer}
+.views{display:none;gap:6px;margin-bottom:12px}
+.views button{flex:1;appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px var(--font);padding:10px;border-radius:10px;cursor:pointer}
+.views button[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.stage{display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:start}
+.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+/* Phone */
+.phone{border:10px solid var(--navy);border-radius:36px;background:var(--card);overflow:hidden;max-width:330px}
+.ph-head{background:var(--navy);color:#fff;padding:10px 14px 12px;display:flex;justify-content:space-between;align-items:flex-end}
+.ph-head small{display:block;color:#b8c0cc;font-size:11.5px}
+.ph-head b{font-size:15px}
+.ph-head em{font-style:normal;font-size:12px;color:var(--gold);font-weight:600}
+.ph-body{padding:14px;display:flex;flex-direction:column;gap:12px;min-height:520px}
+.cur{border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.cur small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.cur b{font-size:17px}
+.cur span{font-size:13.5px;color:var(--muted)}
+.chip{align-self:flex-start;font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:12px}
+.chip.w{background:var(--wait-bg);color:var(--muted)} .chip.g{background:var(--go-bg);color:var(--go)} .chip.o{background:var(--ok-bg);color:var(--ok)}
+.act{appearance:none;border:0;border-radius:12px;padding:13px;font:700 15px var(--font);cursor:pointer;background:var(--navy);color:#fff}
+:root[data-theme="dark"] .act{background:var(--gold);color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .act{background:var(--gold);color:var(--navy)}}
+.act.okb{background:var(--ok);color:#fff}
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ph{border:1px dashed var(--line);border-radius:10px;height:84px;display:grid;place-items:center;font-size:12px;color:var(--muted);text-align:center;cursor:pointer;background:var(--bg)}
+.ph.done{border-style:solid;border-color:var(--ok);color:var(--ok);background:var(--ok-bg);font-weight:600}
+canvas.sig{width:100%;height:84px;border:1px dashed var(--line);border-radius:10px;background:var(--bg);touch-action:none;display:block}
+.next{display:flex;flex-direction:column;gap:6px}
+.next div{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:8px 10px;border-radius:10px;background:var(--bg)}
+.next div span{color:var(--muted)}
+.dmsg{font-size:12.5px;border-radius:10px;padding:8px 10px;background:var(--ok-bg);color:var(--ok)}
+/* Dispatcher */
+.screen{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;min-width:0}
+.scr-top{display:flex;gap:6px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--bg)}
+.scr-top i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.scr-top span{margin-left:8px;font-size:12px;color:var(--muted)}
+.disp{padding:14px;display:flex;flex-direction:column;gap:12px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpis div{border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.kpis b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.kpis small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.map{border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.map svg{display:block;width:100%;height:auto}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:7px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr.flash td{background:var(--ok-bg)}
+.feed{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px;min-height:38px}
+.feed b{color:var(--ink);font-weight:600}
+.cta{background:var(--navy);color:#fff;border-radius:18px;padding:26px 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.cta h2{color:#fff;margin:0}
+.cta p{margin:4px 0 0;color:#c9d0db}
+.cta a{background:var(--gold);color:var(--navy);text-decoration:none;font-weight:700;padding:14px 20px;border-radius:12px}
+footer{padding-block:26px;text-align:center;color:var(--muted);font-size:13px}
+@media (max-width:860px){
+  .feat{grid-template-columns:1fr 1fr}
+  .views{display:flex}
+  .stage{grid-template-columns:1fr}
+  .stage>[data-view]{display:none}
+  .stage>[data-view].on{display:block}
+  .phone{margin:0 auto}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="hero band">
+  <div class="in">
+    <div class="top">
+      <a class="logo" href="./" aria-label="GENSAT"><span id="mk"></span><b>ENSAT</b></a>
+      <div style="display:flex;gap:14px;align-items:center"><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div><a class="back" href="./" data-i18n="back">← Volver</a></div>
+    </div>
+    <span class="pill" data-i18n="pill">Demostración · App para choferes</span>
+    <h1 data-i18n="h1">Tus entregas en orden: el chofer en el celular, tú en la computadora</h1>
+    <p data-i18n="hp">Una app para negocios que reparten: el chofer ve su ruta y marca cada entrega con foto y firma, y el despachador sigue todo en vivo desde el mapa.</p>
+  </div>
+</header>
+
+<main>
+  <section class="band">
+    <div class="in feat">
+      <div><b data-i18n="f1t">Ruta del día</b><span data-i18n="f1d">Cada chofer ve sus paradas en orden.</span></div>
+      <div><b data-i18n="f2t">Estado en vivo</b><span data-i18n="f2d">En camino, llegó y entregado, con un toque.</span></div>
+      <div><b data-i18n="f3t">Prueba de entrega</b><span data-i18n="f3d">Foto y firma del cliente en el celular.</span></div>
+      <div><b data-i18n="f4t">Panel del despacho</b><span data-i18n="f4d">Mapa, avance y aviso de cada entrega.</span></div>
+    </div>
+  </section>
+
+  <section class="band" id="demo">
+    <div class="in">
+      <div class="eyebrow" data-i18n="de">Pruébalo</div>
+      <h2 data-i18n="dh">Así funciona</h2>
+      <p class="lead" data-i18n="dl">Marca una entrega en el celular del chofer y mira cómo se mueve en el mapa del despachador. Es una demostración con datos de ejemplo.</p>
+      <div class="demo-bar">
+        <button class="play" type="button" id="auto"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span data-i18n="auto">Ver demostración automática</span></button>
+        <button class="reset" type="button" id="reset" data-i18n="reset">Reiniciar</button>
+      </div>
+      <div class="views" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-show="phone" data-i18n="tabp">Celular del chofer</button>
+        <button type="button" role="tab" aria-selected="false" data-show="desk" data-i18n="tabd">Computadora del despacho</button>
+      </div>
+      <div class="stage">
+        <div data-view="phone" class="on">
+          <div class="lbl" data-i18n="tabp">Celular del chofer</div>
+          <div class="phone">
+            <div class="ph-head"><div><small data-i18n="route">Ruta de hoy</small><b>Carlos · Moto 03</b></div><em id="ph-count"></em></div>
+            <div class="ph-body">
+              <div class="cur" id="cur"></div>
+              <div id="proofBox" hidden>
+                <div class="proof">
+                  <div class="ph" id="photo" role="button" tabindex="0"></div>
+                  <canvas class="sig" id="sig" width="240" height="84" aria-label="Firma"></canvas>
+                </div>
+              </div>
+              <button class="act" type="button" id="act"></button>
+              <div class="dmsg" id="dmsg" hidden></div>
+              <div>
+                <div class="lbl" style="margin-bottom:6px" data-i18n="nextl">Siguientes paradas</div>
+                <div class="next" id="next"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-view="desk">
+          <div class="lbl" data-i18n="tabd">Computadora del despacho</div>
+          <div class="screen">
+            <div class="scr-top"><i></i><i></i><i></i><span data-i18n="live">Despacho · en vivo</span></div>
+            <div class="disp">
+              <div class="kpis"><div><b id="k-ok">0</b><small data-i18n="kok">Entregados</small></div><div><b id="k-go">0</b><small data-i18n="kgo">En camino</small></div><div><b id="k-w">0</b><small data-i18n="kw">Pendientes</small></div></div>
+              <div class="map"><svg viewBox="0 0 600 300" id="map">
+                <rect width="600" height="300" fill="var(--map)"/>
+                <path d="M0 230 C120 200 200 260 320 235 S520 190 600 215 L600 300 L0 300Z" fill="var(--water)"/>
+                <g fill="var(--block)"><rect x="20" y="20" width="110" height="70" rx="6"/><rect x="160" y="20" width="130" height="70" rx="6"/><rect x="320" y="20" width="120" height="70" rx="6"/><rect x="470" y="20" width="110" height="70" rx="6"/><rect x="20" y="115" width="110" height="70" rx="6"/><rect x="160" y="115" width="130" height="70" rx="6"/><rect x="320" y="115" width="120" height="70" rx="6"/><rect x="470" y="115" width="110" height="70" rx="6"/></g>
+                <g stroke="var(--road)" stroke-width="12" fill="none"><path d="M0 102H600"/><path d="M145 0V215"/><path d="M305 0V230"/><path d="M455 0V215"/></g>
+                <path id="route" d="M60 102 H145 V50 H305 V102 H455 V160 H530" fill="none" stroke="var(--go)" stroke-width="4" stroke-dasharray="8 7" stroke-linecap="round"/>
+                <g id="pins"></g>
+                <g id="drv"><circle r="13" fill="var(--gold)" opacity=".35"/><circle r="8" fill="var(--gold)" stroke="#0f1b2d" stroke-width="2.5"/></g>
+              </svg></div>
+              <div class="tbl"><table><thead><tr><th>#</th><th data-i18n="thc">Cliente</th><th data-i18n="tha">Dirección</th><th data-i18n="thh">Hora</th><th data-i18n="ths">Estado</th></tr></thead><tbody id="rows"></tbody></table></div>
+              <div class="feed" id="feed"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="in" style="max-width:720px">
+      <div class="cta"><div><h2 data-i18n="ch">¿Tu negocio hace entregas?</h2><p data-i18n="cp">Te muestro cómo quedaría con tus rutas y tus choferes, sin compromiso.</p></div><a id="cta" target="_blank" rel="noopener" data-i18n="cta">Escríbeme por WhatsApp</a></div>
+    </div>
+  </section>
+</main>
+<footer class="band" data-i18n="foot">Demostración con datos de ejemplo. © GENSAT</footer>
+
+<script>
+const WHATSAPP = "13855745556";
+const GOLD = '#f5b83d';
+document.getElementById('mk').innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="#fff"/><rect x="42" y="49" width="8" height="24" fill="#fff"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
+
+const T = {
+ es:{back:'← Volver',pill:'Demostración · App para choferes',h1:'Tus entregas en orden: el chofer en el celular, tú en la computadora',hp:'Una app para negocios que reparten: el chofer ve su ruta y marca cada entrega con foto y firma, y el despachador sigue todo en vivo desde el mapa.',
+  f1t:'Ruta del día',f1d:'Cada chofer ve sus paradas en orden.',f2t:'Estado en vivo',f2d:'En camino, llegó y entregado, con un toque.',f3t:'Prueba de entrega',f3d:'Foto y firma del cliente en el celular.',f4t:'Panel del despacho',f4d:'Mapa, avance y aviso de cada entrega.',
+  de:'Pruébalo',dh:'Así funciona',dl:'Marca una entrega en el celular del chofer y mira cómo se mueve en el mapa del despachador. Es una demostración con datos de ejemplo.',auto:'Ver demostración automática',reset:'Reiniciar',tabp:'Celular del chofer',tabd:'Computadora del despacho',route:'Ruta de hoy',nextl:'Siguientes paradas',live:'Despacho · en vivo',kok:'Entregados',kgo:'En camino',kw:'Pendientes',thc:'Cliente',tha:'Dirección',thh:'Hora',ths:'Estado',
+  ch:'¿Tu negocio hace entregas?',cp:'Te muestro cómo quedaría con tus rutas y tus choferes, sin compromiso.',cta:'Escríbeme por WhatsApp',foot:'Demostración con datos de ejemplo. © GENSAT',
+  stop:'Parada',of:'de',items:'Pedido',start:'Salir hacia esta parada',arrive:'Llegué',deliver:'Confirmar entrega',photo:'Tocar para tomar foto',photoOk:'Foto lista',sign:'Firma aquí',needProof:'Falta la foto y la firma del cliente.',delivered:'Entrega confirmada. El despacho ya lo ve.',allDone:'Ruta completa. ¡Buen trabajo!',
+  w:'Pendiente',g:'En camino',a:'En el lugar',o:'Entregado',fGo:'<b>Carlos</b> salió hacia {c}',fArr:'<b>Carlos</b> llegó a {c}',fOk:'<b>Carlos</b> entregó en {c} · foto y firma',none:'Sin paradas pendientes',waMsg:'Hola, vi la demostración de la app para choferes de GENSAT y quiero información'},
+ en:{back:'← Back',pill:'Demo · Driver app',h1:'Deliveries under control: drivers on their phones, you on the computer',hp:'An app for businesses that deliver: drivers see their route and confirm each drop-off with a photo and signature, while dispatch follows everything live on the map.',
+  f1t:'Daily route',f1d:'Each driver sees their stops in order.',f2t:'Live status',f2d:'On the way, arrived and delivered, in one tap.',f3t:'Proof of delivery',f3d:'Customer photo and signature on the phone.',f4t:'Dispatch panel',f4d:'Map, progress and an alert for every delivery.',
+  de:'Try it',dh:'How it works',dl:'Mark a delivery on the driver\'s phone and watch it move on the dispatcher\'s map. This demo uses sample data.',auto:'Watch automatic demo',reset:'Reset',tabp:'Driver\'s phone',tabd:'Dispatch computer',route:'Today\'s route',nextl:'Next stops',live:'Dispatch · live',kok:'Delivered',kgo:'On the way',kw:'Pending',thc:'Customer',tha:'Address',thh:'Time',ths:'Status',
+  ch:'Does your business deliver?',cp:'I\'ll show you how it would look with your routes and drivers, no commitment.',cta:'Message me on WhatsApp',foot:'Demo with sample data. © GENSAT',
+  stop:'Stop',of:'of',items:'Order',start:'Head to this stop',arrive:'I\'ve arrived',deliver:'Confirm delivery',photo:'Tap to take photo',photoOk:'Photo ready',sign:'Sign here',needProof:'The customer\'s photo and signature are missing.',delivered:'Delivery confirmed. Dispatch can see it.',allDone:'Route complete. Great job!',
+  w:'Pending',g:'On the way',a:'On site',o:'Delivered',fGo:'<b>Carlos</b> left for {c}',fArr:'<b>Carlos</b> arrived at {c}',fOk:'<b>Carlos</b> delivered at {c} · photo and signature',none:'No pending stops',waMsg:'Hi, I saw the GENSAT driver app demo and I\'d like more information'}
+};
+let LANG = (() => { const q = new URLSearchParams(location.search).get('lang'); if (q === 'en' || q === 'es') return q; try { const s = localStorage.getItem('gensat-lang'); if (s === 'en' || s === 'es') return s; } catch(_) {} return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en'; })();
+const t = (k, v = {}) => T[LANG][k].replace(/\{(\w+)\}/g, (_, x) => v[x]);
+const $ = id => document.getElementById(id);
+
+/* Datos de ejemplo: paradas sobre la ruta del mapa (fracción del recorrido) */
+const STOPS = [
+  {c:'Panadería La Espiga', a:'Calle 5 #12-30', h:'9:30', items:{es:'3 cajas de harina',en:'3 boxes of flour'}, at:.18},
+  {c:'Farmacia Central', a:'Av. Principal 220', h:'10:15', items:{es:'1 paquete refrigerado',en:'1 refrigerated package'}, at:.43},
+  {c:'Café Aroma', a:'Calle 9 #4-18', h:'11:00', items:{es:'2 sacos de café',en:'2 bags of coffee'}, at:.68},
+  {c:'Tienda Mía', a:'Av. del Río 77', h:'11:40', items:{es:'5 cajas surtidas',en:'5 mixed boxes'}, at:1}
+];
+let st, idx, phase, posFrac, photoOk, signed;
+const route = $('route'), L = route.getTotalLength();
+function ptAt(f){ return route.getPointAtLength(L * f); }
+function drawPins(){
+  $('pins').innerHTML = STOPS.map((s, i) => { const p = ptAt(s.at); const c = st[i] === 'o' ? 'var(--ok)' : (i === idx ? 'var(--go)' : 'var(--muted)');
+    return `<g transform="translate(${p.x},${p.y})"><circle r="11" fill="${c}"/><text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Inter,sans-serif">${i+1}</text></g>`; }).join('');
+}
+function moveDriver(f){ const p = ptAt(f); $('drv').setAttribute('transform', `translate(${p.x},${p.y})`); }
+function animateTo(f, ms){ return new Promise(r => { const a = posFrac, t0 = performance.now(); (function step(n){ const k = Math.min(1, (n - t0) / ms), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k+2, 2)/2; posFrac = a + (f - a) * e; moveDriver(posFrac); k < 1 ? requestAnimationFrame(step) : r(); })(t0); }); }
+function chip(s){ return `<span class="chip ${s === 'a' ? 'g' : s}">${t(s)}</span>`; }
+function render(){
+  const ok = st.filter(x => x === 'o').length, go = st.filter(x => x === 'g' || x === 'a').length;
+  $('k-ok').textContent = ok; $('k-go').textContent = go; $('k-w').textContent = STOPS.length - ok - go;
+  $('rows').innerHTML = STOPS.map((s, i) => `<tr id="r${i}"><td>${i+1}</td><td>${s.c}</td><td>${s.a}</td><td>${s.h}</td><td>${chip(st[i])}</td></tr>`).join('');
+  $('ph-count').textContent = `${Math.min(idx+1, STOPS.length)} ${t('of')} ${STOPS.length}`;
+  if (idx >= STOPS.length){
+    $('cur').innerHTML = `<small>${t('route')}</small><b>${t('allDone')}</b>`; $('act').hidden = true; $('proofBox').hidden = true;
+  } else {
+    const s = STOPS[idx];
+    $('cur').innerHTML = `<small>${t('stop')} ${idx+1} ${t('of')} ${STOPS.length}</small><b>${s.c}</b><span>${s.a} · ${s.h}</span><span>${t('items')}: ${s.items[LANG]}</span>${chip(st[idx])}`;
+    $('act').hidden = false;
+    $('act').textContent = phase === 0 ? t('start') : phase === 1 ? t('arrive') : t('deliver');
+    $('act').classList.toggle('okb', phase === 2);
+    $('proofBox').hidden = phase !== 2;
+    $('photo').textContent = photoOk ? '✓ ' + t('photoOk') : t('photo'); $('photo').classList.toggle('done', photoOk);
+  }
+  const rest = STOPS.map((s, i) => ({s, i})).filter(o => o.i > idx);
+  $('next').innerHTML = rest.length ? rest.map(o => `<div><b>${o.i+1}. ${o.s.c}</b><span>${o.s.h}</span></div>`).join('') : `<div><span>${t('none')}</span></div>`;
+  drawPins();
+}
+function feed(html){ const f = $('feed'); const d = document.createElement('div'); d.innerHTML = html + ' · ' + new Date().toLocaleTimeString(LANG, {hour:'2-digit', minute:'2-digit'}); f.prepend(d); while (f.children.length > 3) f.lastChild.remove(); }
+function flash(i){ const r = $('r'+i); if (r){ r.classList.add('flash'); setTimeout(() => r.classList.remove('flash'), 1300); } }
+let busy = false;
+async function act(){
+  if (busy || idx >= STOPS.length) return;
+  const s = STOPS[idx]; $('dmsg').hidden = true;
+  if (phase === 0){ busy = true; st[idx] = 'g'; phase = 1; render(); flash(idx); feed(t('fGo', {c:s.c})); await animateTo(s.at, 1600); busy = false; }
+  else if (phase === 1){ st[idx] = 'a'; phase = 2; render(); flash(idx); feed(t('fArr', {c:s.c})); clearSig(); }
+  else {
+    if (!photoOk || !signed){ $('dmsg').hidden = false; $('dmsg').style.background = 'var(--wait-bg)'; $('dmsg').style.color = 'var(--ink)'; $('dmsg').textContent = t('needProof'); return; }
+    st[idx] = 'o'; feed(t('fOk', {c:s.c})); const done = idx; idx++; phase = 0; photoOk = false; signed = false; render(); flash(done);
+    $('dmsg').hidden = false; $('dmsg').style.background = ''; $('dmsg').style.color = ''; $('dmsg').textContent = t('delivered');
+  }
+}
+$('act').addEventListener('click', act);
+const takePhoto = () => { if (phase === 2){ photoOk = true; render(); } };
+$('photo').addEventListener('click', takePhoto); $('photo').addEventListener('keydown', e => { if (e.key === 'Enter') takePhoto(); });
+
+/* Firma con el dedo o el mouse */
+const cv = $('sig'), cx = cv.getContext('2d');
+function clearSig(){ if (cv.clientWidth) cv.width = Math.round(cv.clientWidth); cx.clearRect(0, 0, cv.width, cv.height); cx.font = '12px Inter, sans-serif'; cx.fillStyle = getComputedStyle(document.body).getPropertyValue('--muted'); cx.fillText(t('sign'), 10, 18); signed = false; }
+let drawing = false;
+function pos(e){ const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * cv.width / r.width, (e.clientY - r.top) * cv.height / r.height]; }
+cv.addEventListener('pointerdown', e => { if (phase !== 2) return; drawing = true; cv.setPointerCapture(e.pointerId); const [x, y] = pos(e); cx.beginPath(); cx.moveTo(x, y); });
+cv.addEventListener('pointermove', e => { if (!drawing) return; const [x, y] = pos(e); cx.lineTo(x, y); cx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--ink'); cx.lineWidth = 2.2; cx.lineCap = 'round'; cx.stroke(); signed = true; });
+cv.addEventListener('pointerup', () => { drawing = false; });
+function autoSign(){ return new Promise(r => { const pts = []; for (let i = 0; i <= 40; i++){ const x = 20 + i * 5; pts.push([x, 50 + Math.sin(i / 3) * 16 - i * .2]); } let i = 1; cx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--ink'); cx.lineWidth = 2.2; cx.lineCap = 'round'; (function f(){ cx.beginPath(); cx.moveTo(...pts[i-1]); cx.lineTo(...pts[i]); cx.stroke(); i++; if (i < pts.length) setTimeout(f, 18); else { signed = true; r(); } })(); }); }
+
+/* Pestañas */
+function show(v){ document.querySelectorAll('[data-view]').forEach(el => el.classList.toggle('on', el.dataset.view === v)); document.querySelectorAll('.views button').forEach(b => b.setAttribute('aria-selected', b.dataset.show === v)); }
+document.querySelectorAll('.views button').forEach(b => b.addEventListener('click', () => show(b.dataset.show)));
+
+/* Demostración automática */
+const wait = ms => new Promise(r => setTimeout(r, ms));
+let running = false;
+async function auto(){
+  if (running) return; running = true; reset();
+  const narrow = matchMedia('(max-width:860px)').matches;
+  for (let k = 0; k < 2; k++){
+    if (narrow) show('phone'); await wait(700);
+    await act(); if (narrow){ show('desk'); await wait(1900); show('phone'); } else await wait(400);
+    await act(); await wait(700);
+    takePhoto(); await wait(500); await autoSign(); await wait(400);
+    await act(); if (narrow){ await wait(800); show('desk'); await wait(1800); } else await wait(1400);
+  }
+  running = false;
+}
+function reset(){
+  st = STOPS.map(() => 'w'); idx = 0; phase = 0; posFrac = 0; photoOk = false; signed = false;
+  $('feed').innerHTML = ''; $('dmsg').hidden = true; moveDriver(0); render(); clearSig();
+}
+function applyLang(){
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = T[LANG][el.dataset.i18n]; if (v != null) el.textContent = v; });
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
+  document.documentElement.lang = LANG;
+  $('cta').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(T[LANG].waMsg);
+  document.querySelectorAll('a.back, a.logo').forEach(a => a.href = './' + (LANG === 'en' ? '?lang=en' : ''));
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { if (running) return; LANG = b.dataset.lang; try { localStorage.setItem('gensat-lang', LANG); } catch(_) {} applyLang(); render(); clearSig(); }));
+$('auto').addEventListener('click', auto);
+$('reset').addEventListener('click', () => { if (!running) reset(); });
+applyLang(); reset();
+</script>
+
+</body>
+</html>

@@ -73,6 +73,7 @@ h2{margin:0 0 4px;font-size:21px;font-weight:700;text-wrap:balance}
 .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold-ink);margin-bottom:6px}
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .svc div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.svc div:last-child:nth-child(odd){grid-column:span 2}
 .svc svg{width:26px;height:26px}
 .svc b{font-size:15px;line-height:1.25}
 .svc span{font-size:13px;color:var(--muted);line-height:1.4}
@@ -198,6 +199,10 @@ footer .logo b{font-size:28px;color:#fff}
         <img src="img/proyecto-manufactura.jpg" alt="Demostración: celular del operador registrando un material y computadora del supervisor con la orden de trabajo al 100%" loading="lazy">
         <div><b data-i18n="s2t">Planta de manufactura · Captura desde el celular</b><small data-i18n="s2d">Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.</small><em data-i18n="s2c">Probar la demostración →</em></div>
       </a>
+      <a class="proj" id="drv-link" href="demo-choferes.html">
+        <img src="img/proyecto-choferes.jpg" alt="Demostración de app para choferes: celular del chofer confirmando una entrega y mapa del despachador" loading="lazy">
+        <div><b data-i18n="s3t">App para choferes · Entregas en vivo</b><small data-i18n="s3d">El chofer marca cada entrega con foto y firma, y el despachador lo sigue en el mapa desde la computadora.</small><em data-i18n="s3c">Probar la demostración →</em></div>
+      </a>
       </div>
     </div>
   </section>
@@ -259,14 +264,15 @@ const T = {
   tag:'SOLUCIONES DIGITALES · AUTOMATIZACIÓN', h1:'Herramientas digitales hechas a la medida de tu negocio',
   hp:'Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.',
   wa:'Escríbeme por WhatsApp', waSub:'Respuesta directa, sin compromiso', waSoon:'Número nuevo muy pronto', soonShort:'Pronto',
-  proj:'Ver proyectos reales', projSub:'Salón de belleza y planta de manufactura',
+  proj:'Ver proyectos reales', projSub:'Salón, manufactura y app para choferes',
   svc:'Servicios', svcSub:'Páginas web, datos, seguimiento y automatización',
   xl:'Plantillas de Excel', xlSub:'En español e inglés', soon:'Próximamente', mail:'Correo', copy:'Copiar', copied:'Copiado',
   pe:'Proyectos reales', ph:'Trabajos que ya están funcionando', pl:'Para el celular y para la computadora, según lo que necesite cada negocio.',
   s1t:'Salón de belleza · Página con reservas', s1d:'Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.', s1c:'Ver la página funcionando →',
   s2t:'Planta de manufactura · Captura desde el celular', s2d:'Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.', s2c:'Probar la demostración →',
+  s3t:'App para choferes · Entregas en vivo', s3d:'El chofer marca cada entrega con foto y firma, y el despachador lo sigue en el mapa desde la computadora.', s3c:'Probar la demostración →',
   se:'Servicios', sh:'¿Qué puede hacer GENSAT por tu negocio?', sl:'Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.',
-  services:[['page','Páginas web','Con reservas, catálogo y botón directo a tu WhatsApp.'],['chart','Análisis de datos','Descubre qué vendes más y dónde ganas o pierdes dinero.'],['box','Seguimiento de pedidos','Tus pedidos actualizados desde el celular, sin papel.'],['gear','Automatización','Menos tareas repetidas, más tiempo para tu negocio.']],
+  services:[['page','Páginas web','Con reservas, catálogo y botón directo a tu WhatsApp.'],['chart','Análisis de datos','Descubre qué vendes más y dónde ganas o pierdes dinero.'],['box','Seguimiento de pedidos','Tus pedidos actualizados desde el celular, sin papel.'],['phone','Apps para tu equipo','Apps para choferes, vendedores o técnicos, en el celular.'],['gear','Automatización','Menos tareas repetidas, más tiempo para tu negocio.']],
   ce:'Cómo trabajamos', ch:'Así de simple empezamos', cl:'Sin contratos enredados. Primero conversamos y tú decides.',
   c1:'Me escribes por WhatsApp.', c2:'Me cuentas qué necesita tu negocio.', c3:'Te muestro una propuesta clara, con precio y sin compromiso.',
   xe:'Plantillas de Excel', xt:'Plantillas en español e inglés', xd:'Control de producción, costos y más. Muy pronto disponibles.',
@@ -278,14 +284,15 @@ const T = {
   tag:'DIGITAL SOLUTIONS · AUTOMATION', h1:'Digital tools built around your business',
   hp:'Websites, data and automation. In English or Spanish, without the jargon.',
   wa:'Message me on WhatsApp', waSub:'Direct reply, no commitment', waSoon:'New number coming soon', soonShort:'Soon',
-  proj:'See real projects', projSub:'Beauty salon and manufacturing plant',
+  proj:'See real projects', projSub:'Salon, manufacturing and driver app',
   svc:'Services', svcSub:'Websites, data, tracking and automation',
   xl:'Excel templates', xlSub:'In English and Spanish', soon:'Coming soon', mail:'Email', copy:'Copy', copied:'Copied',
   pe:'Real projects', ph:'Work that is already running', pl:'For phones and computers, depending on what each business needs.',
   s1t:'Beauty salon · Booking website', s1d:'Clients see her work, pick a day and time, and the booking goes straight to her WhatsApp.', s1c:'See it live →',
   s2t:'Manufacturing plant · Mobile data capture', s2d:'Several operators log data at the same time from their phones while the supervisor follows progress on the computer.', s2c:'Try the demo →',
+  s3t:'Driver app · Live deliveries', s3d:'Drivers confirm each delivery with a photo and signature, and dispatch follows them on the map from the computer.', s3c:'Try the demo →',
   se:'Services', sh:'What can GENSAT do for your business?', sl:'Every project is custom-made. Tell me what takes up your time and I\'ll suggest the right tool.',
-  services:[['page','Websites','With bookings, a catalog and a direct WhatsApp button.'],['chart','Data analysis','See what sells most and where you make or lose money.'],['box','Order tracking','Orders updated from a phone, no paperwork.'],['gear','Automation','Fewer repetitive tasks, more time for your business.']],
+  services:[['page','Websites','With bookings, a catalog and a direct WhatsApp button.'],['chart','Data analysis','See what sells most and where you make or lose money.'],['box','Order tracking','Orders updated from a phone, no paperwork.'],['phone','Apps for your team','Apps for drivers, sales reps or technicians, on their phones.'],['gear','Automation','Fewer repetitive tasks, more time for your business.']],
   ce:'How we work', ch:'Getting started is simple', cl:'No complicated contracts. We talk first and you decide.',
   c1:'You message me on WhatsApp.', c2:'You tell me what your business needs.', c3:'I show you a clear proposal, with a price and no commitment.',
   xe:'Excel templates', xt:'Templates in English and Spanish', xd:'Production control, costs and more. Available soon.',
@@ -386,6 +393,7 @@ const I = {
   chart:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
   box:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>',
   gear:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>',
   page:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h10"/></svg>'
 };
 
@@ -419,6 +427,7 @@ function render(){
   document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
   document.documentElement.lang = LANG;
   document.getElementById('case-link').href = 'caso-manufactura.html' + (LANG === 'en' ? '?lang=en' : '');
+  document.getElementById('drv-link').href = 'demo-choferes.html' + (LANG === 'en' ? '?lang=en' : '');
   const snd = document.getElementById('snd'); snd.setAttribute('aria-label', snd.classList.contains('muted') ? t.unmute : t.mute);
 }
 function setLang(l){ LANG = l; try { localStorage.setItem('gensat-lang', l); } catch(_) {} render(); }
