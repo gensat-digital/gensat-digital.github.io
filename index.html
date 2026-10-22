@@ -250,7 +250,7 @@ footer .logo b{font-size:28px;color:#fff}
 const GENSAT = {
   whatsapp: "13855745556",      // número de GENSAT con código de país, sin + ni espacios
   mensajeWhatsApp: { es: "Hola, vi GENSAT y quiero información", en: "Hi, I saw GENSAT and I'd like more information" },
-  instagram: "gensat10",        // usuario de Instagram sin @ (confirmar al crear la cuenta)
+  instagram: "yeison_e_genes_v", // usuario de Instagram sin @ (cuenta oficial de GENSAT)
   correo: "gensat10@gmail.com",
   proyecto: "https://stylos-evieth.github.io"
 };
@@ -413,7 +413,7 @@ function render(){
     btn({icon:'wa', title:t.wa, sub: GENSAT.whatsapp ? t.waSub : t.waSoon, href:waHref, main:true, soon: GENSAT.whatsapp ? '' : t.soonShort}),
     btn({icon:'web', title:t.proj, sub:t.projSub, href:'#proyecto'}),
     btn({icon:'grid', title:t.svc, sub:t.svcSub, href:'#servicios'}),
-    btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram + '/'}),
+    btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram}),
     btn({icon:'xl', title:t.xl, sub:t.xlSub, soon:t.soon}),
     btn({icon:'mail', title:t.mail, sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail">' + t.copy + '</button>'})
   );
