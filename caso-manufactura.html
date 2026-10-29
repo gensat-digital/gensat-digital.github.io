@@ -126,6 +126,69 @@ td.r{text-align:right}
 .cta a svg{width:20px;height:20px}
 footer{padding-block:26px;text-align:center;color:var(--muted);font-size:13px}
 
+
+/* Presentación tipo video: lienzo fijo 1080x1350 escalado al ancho disponible */
+.deck-wrap{max-width:560px;margin:0 auto}
+.deck{position:relative;width:100%;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:#0b1422;box-shadow:0 24px 60px -24px rgba(0,0,0,.55);cursor:pointer;user-select:none}
+.deck:fullscreen{border-radius:0;max-width:none;aspect-ratio:auto;background:#000;display:grid;place-items:center}
+.cv{position:absolute;left:0;top:0;width:1080px;height:1350px;transform-origin:0 0;color:#eef2f8;font-family:var(--font);overflow:hidden;
+ background:radial-gradient(900px 700px at 85% 5%,rgba(245,184,61,.13),transparent 70%),radial-gradient(1000px 900px at 5% 100%,rgba(40,80,150,.35),transparent 70%),linear-gradient(180deg,#0b1422,#0f1b2d 60%,#0b1422)}
+.cv .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:72px 72px}
+.cv .hd{position:absolute;left:60px;right:60px;top:50px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.cv .hd .lg{display:flex;align-items:center;gap:4px}.cv .hd .lg svg{width:70px;height:70px}.cv .hd .lg b{font-weight:800;font-size:58px;letter-spacing:3px;line-height:1}
+.cv .hd .ch{border:2px solid #22324f;background:#13213a;border-radius:999px;padding:12px 24px;font-weight:700;font-size:28px;color:#f5b83d}
+.sl{position:absolute;inset:0;opacity:0;pointer-events:none}
+.sl.on{opacity:1}
+.cap{position:absolute;left:60px;right:60px;bottom:120px;text-align:center}
+.cap .n{display:inline-block;background:#f5b83d;color:#0b1422;font-weight:900;font-size:28px;letter-spacing:3px;border-radius:999px;padding:8px 22px;margin-bottom:16px}
+.cap h3{margin:0;font-size:58px;line-height:1.12;font-weight:800;color:#fff;text-wrap:balance}
+.cap p{margin:14px 0 0;font-size:36px;color:#9fb0c8;line-height:1.3}
+.g{color:#f5b83d}.rd{color:#ff5a5f}.gr{color:#21c07a}
+.ph{position:absolute;left:50%;top:150px;width:470px;height:800px;margin-left:-235px;border-radius:64px;background:#05080f;border:3px solid #2a3a58;box-shadow:0 0 0 9px #101a2c,0 40px 100px rgba(0,0,0,.6);overflow:hidden}
+.ph .sc{position:absolute;inset:16px;border-radius:50px;overflow:hidden;background:#f4f5f8;color:#0f1b2d}
+.ph .nt{position:absolute;left:50%;top:14px;width:140px;height:36px;margin-left:-70px;border-radius:20px;background:#05080f;z-index:3}
+.ph .bar{background:#0f1b2d;color:#fff;padding:60px 26px 20px}.ph .bar small{display:block;color:#b8c0cc;font-size:22px}.ph .bar b{font-size:30px}
+.ph .bd{padding:22px;display:flex;flex-direction:column;gap:16px}
+.it{background:#fff;border:2px solid #e1e5ec;border-radius:20px;padding:18px 20px;font-size:26px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.it small{display:block;color:#5d6675;font-size:20px}
+.bdg{font-size:19px;font-weight:700;border-radius:999px;padding:6px 14px;white-space:nowrap}
+.b-y{background:#fdf0dc;color:#b4570f}.b-g{background:#e1f4ea;color:#1f9d63}.b-n{background:#eef0f4;color:#5d6675}
+.fl label{display:block;font-size:20px;font-weight:700;color:#5d6675;margin-bottom:6px}
+.fl .in2{border:2px solid #e1e5ec;border-radius:16px;padding:14px 16px;font-size:28px;font-weight:600;background:#fff;min-height:62px;display:flex;align-items:center;gap:8px}
+.fl .in2.ok{border-color:#1f9d63}.fl .in2.bad{border-color:#d9534f}
+.al{border-radius:16px;padding:14px 16px;font-size:22px;font-weight:600;line-height:1.3}
+.al.bad{background:#fdecea;color:#b3261e}.al.good{background:#e1f4ea;color:#1f9d63}
+.btn{background:#0f1b2d;color:#fff;font-weight:800;font-size:26px;text-align:center;border-radius:18px;padding:18px}
+.tap{position:absolute;width:30px;height:30px;border-radius:50%;border:5px solid #f5b83d;transform:translate(-50%,-50%);opacity:0;z-index:6}
+.dk{position:absolute;left:60px;right:60px;top:170px;height:760px;background:#13213a;border:2px solid #22324f;border-radius:26px;overflow:hidden}
+.dk .tb{display:flex;gap:10px;align-items:center;padding:16px 22px;border-bottom:2px solid #22324f}.dk .tb i{width:16px;height:16px;border-radius:50%;background:#22324f;display:block}.dk .tb span{margin-left:10px;color:#9fb0c8;font-size:24px}
+.dk .wh{display:flex;justify-content:space-between;align-items:flex-end;padding:22px 26px 12px;gap:20px}.dk .wh b{font-size:32px}.dk .wh small{display:block;color:#9fb0c8;font-size:22px}
+.mt{width:300px}.mt div{display:flex;justify-content:space-between;font-size:22px;margin-bottom:8px;color:#9fb0c8}.mt b{color:#fff}
+.trk{height:16px;background:#22324f;border-radius:8px;overflow:hidden}.trk i{display:block;height:100%;width:0;background:#21c07a}
+.tbx{margin:0 26px;font-size:23px}
+.tr2{display:grid;grid-template-columns:40px 1.6fr 1fr .9fr 1fr 1.1fr;gap:8px;align-items:center;padding:13px 6px;border-bottom:1px solid #22324f}
+.tr2.h{color:#9fb0c8;font-size:18px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.tr2.fl2{background:rgba(33,192,122,.12)}
+.fd{margin:16px 26px 0;font-size:21px;color:#9fb0c8;display:flex;flex-direction:column;gap:6px}.fd b{color:#fff}
+.av{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font-weight:800;font-size:18px;color:#0b1422}
+.kp3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.kp3 div{background:#fff;border:2px solid #e1e5ec;border-radius:18px;padding:14px;text-align:center}.kp3 b{display:block;font-size:40px}.kp3 small{font-size:18px;color:#5d6675}
+.paper{position:absolute;left:50%;top:210px;width:480px;height:620px;margin-left:-240px;background:#f3eee2;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:40px 36px;color:#5b5444}
+.paper .l{height:14px;background:#d8cfbb;border-radius:7px;margin-bottom:22px}
+.xm{position:absolute;font-weight:900;font-size:40px;color:#ff5a5f;background:#2a1418;border:2px solid #ff5a5f;border-radius:999px;padding:12px 26px;white-space:nowrap;opacity:0}
+.chp{position:absolute;background:#13213a;border:2px solid #22324f;border-radius:999px;padding:22px 34px;font-size:34px;font-weight:800;white-space:nowrap;opacity:0}
+.doc{position:absolute;left:50%;top:180px;width:460px;height:600px;margin-left:-230px;background:#fff;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:36px;color:#0f1b2d}
+.stamp{position:absolute;right:30px;bottom:110px;border:6px solid #1f9d63;color:#1f9d63;font-weight:900;font-size:40px;padding:10px 20px;border-radius:14px;transform:rotate(-12deg);opacity:0}
+.deck-ctl{display:flex;align-items:center;gap:10px;margin-top:12px}
+.deck-ctl button{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);width:44px;height:44px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
+.deck-ctl button.pp{background:var(--gold);border-color:var(--gold);color:var(--navy);width:52px;height:52px}
+.deck-ctl svg{width:20px;height:20px}
+.segs{flex:1;display:flex;gap:4px}.segs i{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden;display:block;cursor:pointer}.segs i b{display:block;height:100%;width:0;background:var(--gold)}
+.deck-note{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+.bigplay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,20,34,.35);z-index:20;transition:opacity .25s}
+.bigplay span{width:92px;height:92px;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.bigplay svg{width:40px;height:40px;margin-left:6px}
+.deck.playing .bigplay{opacity:0;pointer-events:none}
+
 @media (max-width:860px){
   .three{grid-template-columns:1fr}
   .views{display:flex}
@@ -152,6 +215,31 @@ footer{padding-block:26px;text-align:center;color:var(--muted);font-size:13px}
 </header>
 
 <main>
+
+  <section class="band" id="presentacion">
+    <div class="in">
+      <div class="eyebrow" style="text-align:center"><span data-i18n="pe">Mira cómo funciona</span></div>
+      <h2 style="text-align:center"><span data-i18n="ph">El sistema, paso a paso</span></h2>
+      <p class="lead" style="text-align:center;margin-inline:auto"><span data-i18n="pl">Una presentación de un minuto: desde que el operador abre la orden en su celular hasta que el supervisor tiene la orden final.</span></p>
+      <div class="deck-wrap">
+        <div class="deck" id="deck" role="region" aria-roledescription="presentación" aria-label="Presentación del caso">
+          <div class="cv" id="cv"><div class="grid"></div>
+            <div class="hd"><div class="lg" id="cvlg"></div><div class="ch"><span data-i18n="cvch">Caso real</span></div></div>
+            <div id="slides"></div>
+          </div>
+          <div class="bigplay" id="bigplay"><span><svg viewBox="0 0 24 24" fill="#0f1b2d"><path d="M7 4v16l13-8z"/></svg></span></div>
+        </div>
+        <div class="deck-ctl">
+          <button type="button" id="dprev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="pp" id="dplay" aria-label="Reproducir / pausar"><svg id="dpi" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></button>
+          <button type="button" id="dnext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <div class="segs" id="segs"></div>
+          <button type="button" id="dfull" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+        <div class="deck-note"><span data-i18n="pn">Toca la presentación para pausar. Datos de ejemplo.</span></div>
+      </div>
+    </div>
+  </section>
   <section class="band">
     <div class="in three">
       <div class="box"><span data-i18n="tp" class="tag t-p">El problema</span><h3><span data-i18n="p0">Un solo papel para todos</span></h3><ul><li><span data-i18n="p1">La orden de trabajo se imprimía y pasaba de mano en mano.</span></li><li><span data-i18n="p2">Solo una persona podía llenarla a la vez.</span></li><li><span data-i18n="p3">Errores de lote o de firma se veían tarde.</span></li></ul></div>
@@ -240,7 +328,7 @@ footer{padding-block:26px;text-align:center;color:var(--muted);font-size:13px}
 const WHATSAPP = "13855745556";
 const GOLD = '#f5b83d';
 document.getElementById('mk').innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="#fff"/><rect x="42" y="49" width="8" height="24" fill="#fff"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
-const T = {"es": {"back": "← Volver", "pill": "Caso real · Manufactura", "h1": "De la hoja de papel a la captura en vivo desde el celular", "hp": "Una planta de producción llenaba a mano sus órdenes de trabajo. Construimos un sistema para que varios operadores registren al mismo tiempo desde su celular y el supervisor vea todo en la computadora.", "tp": "El problema", "p0": "Un solo papel para todos", "p1": "La orden de trabajo se imprimía y pasaba de mano en mano.", "p2": "Solo una persona podía llenarla a la vez.", "p3": "Errores de lote o de firma se veían tarde.", "ts": "La solución", "q0": "Captura desde el celular", "q1": "Cada operador registra lo que pesa, desde su estación.", "q2": "El sistema revisa que el lote corresponda al material.", "q3": "Dos firmas distintas con PIN en cada línea.", "tr": "El resultado", "r0": "Todo en orden y en vivo", "r1": "El supervisor ve el avance en tiempo real.", "r2": "Varias personas trabajan a la vez, sin esperar.", "r3": "La orden final queda lista para imprimir o archivar.", "de": "Pruébalo", "dh": "Así funciona", "dl": "Registra un material en el celular y mira cómo aparece en la computadora del supervisor. Es una demostración con datos de ejemplo.", "reset": "Reiniciar", "tabp": "Celular del operador", "tabd": "Computadora del supervisor", "st2": "Estación de pesaje 2", "ord": "Orden OT-2481", "lmat": "Material", "llot": "Lote", "lkg": "Peso (kg)", "ls1": "Pesó", "ls2": "Verificó", "lpin": "PIN de 6 dígitos de quien pesó", "pinh": "Para probar: AR usa 123456 y MV usa 234567.", "send": "Registrar", "live": "Orden de trabajo · en vivo", "woh": "OT-2481 · Mezcla en polvo sabor vainilla", "wos": "Lote planificado A1 · 5 materiales", "progl": "Avance", "te": "Con qué se construyó", "th": "Herramientas que la empresa ya tenía", "tl": "No hizo falta comprar un sistema nuevo. Se usaron las herramientas de Microsoft que la planta ya pagaba.", "t1": "Listas de SharePoint", "t5": "Página web a la medida", "ch": "¿Tu negocio todavía trabaja en papel?", "cp": "Te muestro cómo se vería en el tuyo, sin compromiso.", "foot": "Caso presentado con datos de ejemplo para proteger la información del cliente. © GENSAT", "cta": "Escríbeme por WhatsApp", "auto": "Ver demostración automática", "thm": "Material", "thr": "Requerido", "thl": "Lote", "thp": "Pesado", "thf": "Firmas", "the": "Estado", "msgNeed": "Escribe el lote y el peso.", "msgWrongLot": "El lote {lot} es de {owner}, no de {mat}. Revisa la etiqueta.", "msgNoLot": "El lote {lot} no está registrado para {mat}.", "msgSig": "Faltan las dos firmas.", "msgSame": "Las dos firmas deben ser de personas distintas.", "msgPin": "PIN incorrecto para {who}.", "msgOk": "Registrado. Ya aparece en la computadora del supervisor.", "feed": "<b>{who}</b> registró {mat} desde la estación {st} · {t}", "ex": "ejemplo", "done": "Completo", "pend": "Pendiente", "pdfReady": "Orden final lista: todas las líneas completas y firmadas.", "pdfWait": "La orden final se genera cuando todas las líneas estén completas.", "waMsg": "Hola, vi el caso de manufactura de GENSAT y quiero información", "mats": ["Proteína de suero", "Cacao en polvo", "Estevia", "Goma xantana", "Sabor vainilla"]}, "en": {"back": "← Back", "pill": "Case study · Manufacturing", "h1": "From paper forms to live data capture on the phone", "hp": "A production plant filled out its work orders by hand. We built a system so several operators can log data at the same time from their phones while the supervisor sees everything on the computer.", "tp": "The problem", "p0": "One sheet of paper for everyone", "p1": "The work order was printed and passed from hand to hand.", "p2": "Only one person could fill it out at a time.", "p3": "Lot or signature mistakes were caught too late.", "ts": "The solution", "q0": "Capture from the phone", "q1": "Each operator logs what they weigh, right from their station.", "q2": "The system checks that the lot matches the material.", "q3": "Two different signatures with a PIN on every line.", "tr": "The result", "r0": "Everything organized and live", "r1": "The supervisor sees progress in real time.", "r2": "Several people work at once, without waiting.", "r3": "The final order is ready to print or file.", "de": "Try it", "dh": "How it works", "dl": "Log a material on the phone and watch it appear on the supervisor's computer. This demo uses sample data.", "reset": "Reset", "tabp": "Operator's phone", "tabd": "Supervisor's computer", "st2": "Weighing station 2", "ord": "Order WO-2481", "lmat": "Material", "llot": "Lot", "lkg": "Weight (kg)", "ls1": "Weighed by", "ls2": "Checked by", "lpin": "6-digit PIN of the person who weighed", "pinh": "To try it: AR uses 123456 and MV uses 234567.", "send": "Submit", "live": "Work order · live", "woh": "WO-2481 · Vanilla powder blend", "wos": "Planned lot A1 · 5 materials", "progl": "Progress", "te": "How it was built", "th": "Tools the company already had", "tl": "No new system had to be purchased. We used the Microsoft tools the plant was already paying for.", "t1": "SharePoint lists", "t5": "Custom web page", "ch": "Is your business still running on paper?", "cp": "I'll show you how it would look in yours, no commitment.", "foot": "Case shown with sample data to protect the client's information. © GENSAT", "cta": "Message me on WhatsApp", "auto": "Watch automatic demo", "thm": "Material", "thr": "Required", "thl": "Lot", "thp": "Weighed", "thf": "Signatures", "the": "Status", "msgNeed": "Enter the lot and the weight.", "msgWrongLot": "Lot {lot} belongs to {owner}, not {mat}. Check the label.", "msgNoLot": "Lot {lot} is not registered for {mat}.", "msgSig": "Both signatures are required.", "msgSame": "The two signatures must be from different people.", "msgPin": "Wrong PIN for {who}.", "msgOk": "Saved. It now shows on the supervisor's computer.", "feed": "<b>{who}</b> logged {mat} from station {st} · {t}", "ex": "sample", "done": "Done", "pend": "Pending", "pdfReady": "Final order ready: all lines complete and signed.", "pdfWait": "The final order is generated once every line is complete.", "waMsg": "Hi, I saw the GENSAT manufacturing case and I'd like more information", "mats": ["Whey protein", "Cocoa powder", "Stevia", "Xanthan gum", "Vanilla flavor"]}};
+const T = {"es": {"ph": "El sistema, paso a paso", "pl": "Una presentación de un minuto: desde que el operador abre la orden en su celular hasta que el supervisor tiene la orden final.", "pn": "Toca la presentación para pausar. Datos de ejemplo.", "cvch": "Caso real", "pe": "Mira cómo funciona", "back": "← Volver", "pill": "Caso real · Manufactura", "h1": "De la hoja de papel a la captura en vivo desde el celular", "hp": "Una planta de producción llenaba a mano sus órdenes de trabajo. Construimos un sistema para que varios operadores registren al mismo tiempo desde su celular y el supervisor vea todo en la computadora.", "tp": "El problema", "p0": "Un solo papel para todos", "p1": "La orden de trabajo se imprimía y pasaba de mano en mano.", "p2": "Solo una persona podía llenarla a la vez.", "p3": "Errores de lote o de firma se veían tarde.", "ts": "La solución", "q0": "Captura desde el celular", "q1": "Cada operador registra lo que pesa, desde su estación.", "q2": "El sistema revisa que el lote corresponda al material.", "q3": "Dos firmas distintas con PIN en cada línea.", "tr": "El resultado", "r0": "Todo en orden y en vivo", "r1": "El supervisor ve el avance en tiempo real.", "r2": "Varias personas trabajan a la vez, sin esperar.", "r3": "La orden final queda lista para imprimir o archivar.", "de": "Pruébalo", "dh": "Así funciona", "dl": "Registra un material en el celular y mira cómo aparece en la computadora del supervisor. Es una demostración con datos de ejemplo.", "reset": "Reiniciar", "tabp": "Celular del operador", "tabd": "Computadora del supervisor", "st2": "Estación de pesaje 2", "ord": "Orden OT-2481", "lmat": "Material", "llot": "Lote", "lkg": "Peso (kg)", "ls1": "Pesó", "ls2": "Verificó", "lpin": "PIN de 6 dígitos de quien pesó", "pinh": "Para probar: AR usa 123456 y MV usa 234567.", "send": "Registrar", "live": "Orden de trabajo · en vivo", "woh": "OT-2481 · Mezcla en polvo sabor vainilla", "wos": "Lote planificado A1 · 5 materiales", "progl": "Avance", "te": "Con qué se construyó", "th": "Herramientas que la empresa ya tenía", "tl": "No hizo falta comprar un sistema nuevo. Se usaron las herramientas de Microsoft que la planta ya pagaba.", "t1": "Listas de SharePoint", "t5": "Página web a la medida", "ch": "¿Tu negocio todavía trabaja en papel?", "cp": "Te muestro cómo se vería en el tuyo, sin compromiso.", "foot": "Caso presentado con datos de ejemplo para proteger la información del cliente. © GENSAT", "cta": "Escríbeme por WhatsApp", "auto": "Ver demostración automática", "thm": "Material", "thr": "Requerido", "thl": "Lote", "thp": "Pesado", "thf": "Firmas", "the": "Estado", "msgNeed": "Escribe el lote y el peso.", "msgWrongLot": "El lote {lot} es de {owner}, no de {mat}. Revisa la etiqueta.", "msgNoLot": "El lote {lot} no está registrado para {mat}.", "msgSig": "Faltan las dos firmas.", "msgSame": "Las dos firmas deben ser de personas distintas.", "msgPin": "PIN incorrecto para {who}.", "msgOk": "Registrado. Ya aparece en la computadora del supervisor.", "feed": "<b>{who}</b> registró {mat} desde la estación {st} · {t}", "ex": "ejemplo", "done": "Completo", "pend": "Pendiente", "pdfReady": "Orden final lista: todas las líneas completas y firmadas.", "pdfWait": "La orden final se genera cuando todas las líneas estén completas.", "waMsg": "Hola, vi el caso de manufactura de GENSAT y quiero información", "mats": ["Proteína de suero", "Cacao en polvo", "Estevia", "Goma xantana", "Sabor vainilla"]}, "en": {"ph": "The system, step by step", "pl": "A one-minute walkthrough: from the moment an operator opens the order on their phone to the supervisor getting the final order.", "pn": "Tap the presentation to pause. Sample data.", "cvch": "Case study", "pe": "See how it works", "back": "← Back", "pill": "Case study · Manufacturing", "h1": "From paper forms to live data capture on the phone", "hp": "A production plant filled out its work orders by hand. We built a system so several operators can log data at the same time from their phones while the supervisor sees everything on the computer.", "tp": "The problem", "p0": "One sheet of paper for everyone", "p1": "The work order was printed and passed from hand to hand.", "p2": "Only one person could fill it out at a time.", "p3": "Lot or signature mistakes were caught too late.", "ts": "The solution", "q0": "Capture from the phone", "q1": "Each operator logs what they weigh, right from their station.", "q2": "The system checks that the lot matches the material.", "q3": "Two different signatures with a PIN on every line.", "tr": "The result", "r0": "Everything organized and live", "r1": "The supervisor sees progress in real time.", "r2": "Several people work at once, without waiting.", "r3": "The final order is ready to print or file.", "de": "Try it", "dh": "How it works", "dl": "Log a material on the phone and watch it appear on the supervisor's computer. This demo uses sample data.", "reset": "Reset", "tabp": "Operator's phone", "tabd": "Supervisor's computer", "st2": "Weighing station 2", "ord": "Order WO-2481", "lmat": "Material", "llot": "Lot", "lkg": "Weight (kg)", "ls1": "Weighed by", "ls2": "Checked by", "lpin": "6-digit PIN of the person who weighed", "pinh": "To try it: AR uses 123456 and MV uses 234567.", "send": "Submit", "live": "Work order · live", "woh": "WO-2481 · Vanilla powder blend", "wos": "Planned lot A1 · 5 materials", "progl": "Progress", "te": "How it was built", "th": "Tools the company already had", "tl": "No new system had to be purchased. We used the Microsoft tools the plant was already paying for.", "t1": "SharePoint lists", "t5": "Custom web page", "ch": "Is your business still running on paper?", "cp": "I'll show you how it would look in yours, no commitment.", "foot": "Case shown with sample data to protect the client's information. © GENSAT", "cta": "Message me on WhatsApp", "auto": "Watch automatic demo", "thm": "Material", "thr": "Required", "thl": "Lot", "thp": "Weighed", "thf": "Signatures", "the": "Status", "msgNeed": "Enter the lot and the weight.", "msgWrongLot": "Lot {lot} belongs to {owner}, not {mat}. Check the label.", "msgNoLot": "Lot {lot} is not registered for {mat}.", "msgSig": "Both signatures are required.", "msgSame": "The two signatures must be from different people.", "msgPin": "Wrong PIN for {who}.", "msgOk": "Saved. It now shows on the supervisor's computer.", "feed": "<b>{who}</b> logged {mat} from station {st} · {t}", "ex": "sample", "done": "Done", "pend": "Pending", "pdfReady": "Final order ready: all lines complete and signed.", "pdfWait": "The final order is generated once every line is complete.", "waMsg": "Hi, I saw the GENSAT manufacturing case and I'd like more information", "mats": ["Whey protein", "Cocoa powder", "Stevia", "Xanthan gum", "Vanilla flavor"]}};
 let LANG = (() => { const q = new URLSearchParams(location.search).get('lang'); if (q === 'en' || q === 'es') return q; try { const s = localStorage.getItem('gensat-lang'); if (s === 'en' || s === 'es') return s; } catch(_) {} return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en'; })();
 const tr = (k, v = {}) => T[LANG][k].replace(/\{(\w+)\}/g, (_, x) => v[x]);
 const mname = i => T[LANG].mats[i];
@@ -317,16 +405,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 let running = false;
 async function type(el, text){ el.value = ''; for (const ch of text){ el.value += ch; await wait(70); } }
 async function auto(){
-  if (running) return; running = true; function applyLang(){
-  document.querySelectorAll('[data-i18n]').forEach(el => { const v = T[LANG][el.dataset.i18n]; if (typeof v === 'string') el.textContent = v; });
-  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
-  document.documentElement.lang = LANG;
-  document.getElementById('cta').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(T[LANG].waMsg);
-  document.querySelectorAll('a.back, a.logo').forEach(a => a.href = './' + (LANG === 'en' ? '?lang=en' : ''));
-}
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { if (running) return; LANG = b.dataset.lang; try { localStorage.setItem('gensat-lang', LANG); } catch(_) {} applyLang(); reset(); }));
-applyLang();
-reset();
+  if (running) return; running = true; reset();
   const narrow = matchMedia('(max-width:860px)').matches;
   const steps = [
     {i:0, lot:'L-207', kg:'12.48', s1:'AR', s2:'MV', pin:'123456'},
@@ -364,6 +443,158 @@ function applyLang(){
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { if (running) return; LANG = b.dataset.lang; try { localStorage.setItem('gensat-lang', LANG); } catch(_) {} applyLang(); reset(); }));
 applyLang();
 reset();
+/* ===== Presentación tipo video (datos de ejemplo) ===== */
+(function(){
+const D = {
+ es:{
+  s1t:'Del papel <span class="g">al celular</span>', s1p:'Cómo una planta de producción digitalizó sus órdenes de trabajo', s1k:'CASO REAL · MANUFACTURA',
+  s2n:'ANTES', s2t:'Una sola hoja de papel para todos', s2p:'Pasaba de mano en mano, y solo una persona podía llenarla a la vez.', s2x:['Una persona a la vez','Errores de lote se ven tarde','Firmas a mano'],
+  s3n:'PASO 1', s3t:'Cada operador abre la orden <span class="g">en su celular</span>', s3p:'Desde su propia estación de pesaje.', s3h:'Órdenes de hoy', s3st:'Estación de pesaje 2', s3o:[['OT-2481','Mezcla sabor vainilla','En proceso','b-y'],['OT-2482','Mezcla sabor chocolate','Pendiente','b-n'],['OT-2479','Mezcla sabor fresa','Completa','b-g']],
+  s4n:'PASO 2', s4t:'El sistema <span class="g">calcula</span> cuánto pesar', s4p:'Pones el tamaño del lote y cada cantidad sale sola.', s4l:'Tamaño del lote', s4m:['Proteína de suero','Cacao en polvo','Estevia','Goma xantana','Sabor vainilla'],
+  s5n:'PASO 3', s5t:'Valida el lote <span class="g">al instante</span>', s5p:'Si el lote no corresponde al material, avisa antes de seguir.', s5ma:'Material', s5lo:'Lote', s5kg:'Peso (kg)', s5bad:'⚠️ El lote L-118 es de Proteína de suero, no de Cacao en polvo.', s5ok:'✓ Lote correcto para Cacao en polvo.',
+  s6n:'PASO 4', s6t:'Dos firmas, <span class="g">dos personas</span>', s6p:'Quien pesa y quien verifica firman con su PIN personal.', s6a:'Pesó', s6b:'Verificó', s6ok:'Firmado ✓', s6btn:'Registrar',
+  s7n:'PASO 5', s7t:'El supervisor lo ve <span class="g">en vivo</span>', s7p:'Varias personas trabajan a la vez, sin esperar el papel.', s7w:'OT-2481 · Mezcla sabor vainilla', s7s:'5 materiales · 3 estaciones', s7pr:'Avance', s7h:['#','Material','Lote','Pesado','Firmas'], s7f:'<b>{w}</b> registró {m} · estación {e}', s7live:'Orden de trabajo · en vivo',
+  s8n:'PASO 6', s8t:'Resumen de productividad <span class="g">en el celular</span>', s8p:'El supervisor revisa el día desde cualquier lugar.', s8h:'Resumen de hoy', s8k:[['Órdenes','8'],['Listas','6'],['En proceso','2']], s8c:'Líneas pesadas por operador',
+  s9n:'PASO 7', s9t:'La orden final, <span class="g">lista</span>', s9p:'Se genera el documento completo para imprimir o archivar.', s9d:'ORDEN DE TRABAJO OT-2481', s9st:'COMPLETA', s9b:'⬇ Descargar PDF',
+  s10n:'¿CON QUÉ?', s10t:'Con herramientas que la empresa <span class="g">ya tenía</span>', s10p:'Sin comprar un sistema nuevo.', s10c:['Listas de SharePoint','Power Apps','Power Automate','Excel','Página web a la medida'],
+  s11t:'¿Tu negocio todavía trabaja <span class="g">en papel</span>?', s11p:'Te muestro cómo se vería en el tuyo, sin compromiso.', s11b:'Escríbeme por WhatsApp', s11e:'Presentación con datos de ejemplo para proteger la información del cliente.'
+ },
+ en:{
+  s1t:'From paper <span class="g">to the phone</span>', s1p:'How a production plant digitized its work orders', s1k:'CASE STUDY · MANUFACTURING',
+  s2n:'BEFORE', s2t:'One sheet of paper for everyone', s2p:'It went from hand to hand, and only one person could fill it out at a time.', s2x:['One person at a time','Lot errors caught late','Handwritten signatures'],
+  s3n:'STEP 1', s3t:'Each operator opens the order <span class="g">on their phone</span>', s3p:'Right from their own weighing station.', s3h:"Today's orders", s3st:'Weighing station 2', s3o:[['WO-2481','Vanilla blend','In progress','b-y'],['WO-2482','Chocolate blend','Pending','b-n'],['WO-2479','Strawberry blend','Done','b-g']],
+  s4n:'STEP 2', s4t:'The system <span class="g">calculates</span> how much to weigh', s4p:'Enter the batch size and every amount fills in automatically.', s4l:'Batch size', s4m:['Whey protein','Cocoa powder','Stevia','Xanthan gum','Vanilla flavor'],
+  s5n:'STEP 3', s5t:'Checks the lot <span class="g">instantly</span>', s5p:"If the lot doesn't match the material, it warns before moving on.", s5ma:'Material', s5lo:'Lot', s5kg:'Weight (kg)', s5bad:'⚠️ Lot L-118 belongs to Whey protein, not Cocoa powder.', s5ok:'✓ Correct lot for Cocoa powder.',
+  s6n:'STEP 4', s6t:'Two signatures, <span class="g">two people</span>', s6p:'Whoever weighs and whoever checks sign with their own PIN.', s6a:'Weighed by', s6b:'Checked by', s6ok:'Signed ✓', s6btn:'Submit',
+  s7n:'STEP 5', s7t:'The supervisor sees it <span class="g">live</span>', s7p:'Several people work at once, without waiting for the paper.', s7w:'WO-2481 · Vanilla blend', s7s:'5 materials · 3 stations', s7pr:'Progress', s7h:['#','Material','Lot','Weighed','Signed'], s7f:'<b>{w}</b> logged {m} · station {e}', s7live:'Work order · live',
+  s8n:'STEP 6', s8t:'Productivity summary <span class="g">on the phone</span>', s8p:'The supervisor reviews the day from anywhere.', s8h:"Today's summary", s8k:[['Orders','8'],['Done','6'],['In progress','2']], s8c:'Lines weighed per operator',
+  s9n:'STEP 7', s9t:'The final order, <span class="g">ready</span>', s9p:'The complete document is generated to print or file.', s9d:'WORK ORDER WO-2481', s9st:'COMPLETE', s9b:'⬇ Download PDF',
+  s10n:'BUILT WITH', s10t:'Tools the company <span class="g">already had</span>', s10p:'No new system had to be purchased.', s10c:['SharePoint lists','Power Apps','Power Automate','Excel','Custom web page'],
+  s11t:'Is your business still running <span class="g">on paper</span>?', s11p:"I'll show you how it would look in yours, no commitment.", s11b:'Message me on WhatsApp', s11e:"Presentation with sample data to protect the client's information."
+ }
+};
+const REQ=[12.50,2.40,0.35,0.18,0.60], LOTS=['L-118','L-207','L-310','L-412','L-509'], WHO=[['AR','#f5b83d',2],['JC','#4ea1ff',1],['MV','#21c07a',3],['LP','#c58cff',2],['AR','#f5b83d',2]];
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), lerp=(a,b,x)=>a+(b-a)*x;
+const out=x=>{x=cl(x);return 1-Math.pow(1-x,3)}, io=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+function pop(e,k,dy=40){ if(!e) return; e.style.opacity=cl(k*1.6); const b=back(k); e.style.transform=`translateY(${(1-b)*dy}px) scale(${0.85+0.15*b})`; }
+const f2=n=>n.toFixed(2);
+const cap=(n,t,p)=>`<div class="cap">${n?`<div class="n">${n}</div>`:''}<h3>${t}</h3>${p?`<p>${p}</p>`:''}</div>`;
+const phone=(inner)=>`<div class="ph"><div class="nt"></div><div class="sc">${inner}</div></div>`;
+const MARK=(c)=>`<svg viewBox="0 0 100 100"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></svg>`;
+document.getElementById('cvlg').innerHTML=MARK('#eef2f8')+'<b>ENSAT</b>';
+
+const SL=[
+ {d:4.5, h:L=>`<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px">
+   <div class="q1" style="font-weight:800;font-size:30px;letter-spacing:6px;color:#f5b83d">${L.s1k}</div>
+   <div class="q2" style="font-weight:900;font-size:110px;line-height:1.05;margin-top:24px">${L.s1t}</div>
+   <div class="q3" style="font-size:40px;color:#9fb0c8;margin-top:30px;line-height:1.3">${L.s1p}</div>
+   <div class="q4" style="display:flex;gap:40px;margin-top:70px;font-size:120px"><span>📄</span><span style="color:#f5b83d">→</span><span>📱</span></div></div>`,
+  a:(e,t)=>{pop(e.querySelector('.q1'),t/.4);pop(e.querySelector('.q2'),(t-.3)/.5,60);pop(e.querySelector('.q3'),(t-.8)/.4);pop(e.querySelector('.q4'),(t-1.3)/.5);}},
+ {d:6, h:L=>`<div class="paper"><div style="font-weight:900;font-size:30px;margin-bottom:30px;color:#3d372b">OT-2481</div>${'<div class="l"></div>'.repeat(14)}</div>
+   ${L.s2x.map((x,i)=>`<div class="xm" style="${['left:40px;top:300px','right:40px;top:470px','left:70px;top:640px'][i]}">✗ ${x}</div>`).join('')}
+   <div class="hand" style="position:absolute;font-size:110px;left:120px;top:180px">🤚</div>${cap(L.s2n,L.s2t,L.s2p)}`,
+  a:(e,t)=>{const p=e.querySelector('.paper');p.style.transform=`translateX(${Math.sin(t*1.6)*90}px) rotate(${Math.sin(t*1.6)*6}deg)`;
+   const h=e.querySelector('.hand');h.style.transform=`translateX(${Math.sin(t*1.6)*90+(Math.sin(t*1.6)>0?640:0)}px)`;
+   e.querySelectorAll('.xm').forEach((x,i)=>pop(x,(t-1.2-i*.9)/.4));pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:6, h:L=>phone(`<div class="bar"><small>${L.s3st}</small><b>${L.s3h}</b></div><div class="bd">${L.s3o.map((o,i)=>`<div class="it o${i}"><div><b>${o[0]}</b><small>${o[1]}</small></div><span class="bdg ${o[3]}">${o[2]}</span></div>`).join('')}</div>`)+`<div class="tap"></div>`+cap(L.s3n,L.s3t,L.s3p),
+  a:(e,t)=>{const ph=e.querySelector('.ph');ph.style.transform=`translateY(${(1-out(t/.6))*300}px)`;
+   e.querySelectorAll('.it').forEach((x,i)=>pop(x,(t-.5-i*.25)/.4,30));
+   const tp=e.querySelector('.tap'),k=cl((t-2.4)/.6);tp.style.left='540px';tp.style.top='370px';tp.style.opacity=t>2.4?1-k:0;tp.style.width=tp.style.height=(30+k*240)+'px';
+   const o0=e.querySelector('.o0');if(t>2.5){o0.style.borderColor='#f5b83d';o0.style.boxShadow='0 0 0 4px rgba(245,184,61,.35)';}pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:6.5, h:L=>phone(`<div class="bar"><small>OT-2481</small><b>${L.s4l}</b></div><div class="bd"><div class="fl"><div class="in2 ok" style="font-size:40px;font-weight:900"><span class="bs">0</span> kg</div></div>
+   ${L.s4m.map((m,i)=>`<div class="it m${i}" style="padding:14px 18px"><span>${m}</span><b class="v">0.00 kg</b></div>`).join('')}</div>`)+cap(L.s4n,L.s4t,L.s4p),
+  a:(e,t)=>{const s='250';e.querySelector('.bs').textContent=s.slice(0,Math.floor(cl((t-.6)/.6)*3))||'0';
+   e.querySelectorAll('.it').forEach((x,i)=>{pop(x,(t-1.4-i*.15)/.35,20);x.querySelector('.v').textContent=f2(REQ[i]*out((t-1.6-i*.15)/1.0))+' kg';});
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:7.5, h:L=>phone(`<div class="bar"><small>OT-2481 · ${L.s3st}</small><b>${L.s4m[1]}</b></div><div class="bd">
+   <div class="fl"><label>${L.s5ma}</label><div class="in2">${L.s4m[1]}</div></div>
+   <div class="fl"><label>${L.s5lo}</label><div class="in2 lo"><span class="lt"></span></div></div>
+   <div class="al bad" style="opacity:0">${L.s5bad}</div><div class="al good" style="opacity:0;display:none">${L.s5ok}</div>
+   <div class="fl"><label>${L.s5kg}</label><div class="in2 kg">⚖️ <span class="kv"></span></div></div></div>`)+cap(L.s5n,L.s5t,L.s5p),
+  a:(e,t)=>{const lt=e.querySelector('.lt'),lo=e.querySelector('.lo'),bad=e.querySelector('.al.bad'),good=e.querySelector('.al.good');
+   let txt='';if(t<3.2)txt='L-118'.slice(0,Math.floor(cl((t-.6)/.6)*5));else txt='L-207'.slice(0,Math.floor(cl((t-3.4)/.6)*5));lt.textContent=txt;
+   const isBad=t>1.3&&t<3.2;lo.className='in2 lo'+(isBad?' bad':(t>4.1?' ok':''));bad.style.opacity=isBad?cl((t-1.3)/.2):0;bad.style.display=t<3.2?'block':'none';
+   if(isBad)bad.style.transform=`translateX(${Math.sin(t*60)*6*cl((1.8-t)/.5)}px)`;
+   good.style.display=t>=3.2?'block':'none';good.style.opacity=cl((t-4.1)/.3);
+   e.querySelector('.kv').textContent=t>4.8?f2(2.41*out((t-4.8)/.8)):'';
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:6, h:L=>phone(`<div class="bar"><small>OT-2481 · ${L.s4m[1]}</small><b>2.41 kg · L-207</b></div><div class="bd">
+   ${[[L.s6a,'AR','#f5b83d'],[L.s6b,'MV','#21c07a']].map((x,i)=>`<div class="it sg${i}" style="flex-direction:column;align-items:stretch"><div style="display:flex;justify-content:space-between;align-items:center"><span><small>${x[0]}</small><b style="font-size:30px">${x[1]}</b></span><span class="av" style="background:${x[2]}">${x[1]}</span></div>
+     <div style="display:flex;gap:12px;margin-top:12px;justify-content:center">${'<i class="pd" style="width:30px;height:30px;border-radius:50%;border:3px solid #c9d0db;display:block"></i>'.repeat(6)}</div><div class="okk" style="text-align:center;color:#1f9d63;font-weight:800;margin-top:10px;opacity:0">${L.s6ok}</div></div>`).join('')}
+   <div class="btn rg">${L.s6btn}</div></div>`)+cap(L.s6n,L.s6t,L.s6p),
+  a:(e,t)=>{[0,1].forEach(i=>{const c=e.querySelector('.sg'+i);pop(c,(t-.4-i*.3)/.4,20);const st=1.0+i*1.6;
+    c.querySelectorAll('.pd').forEach((d,j)=>{const on=t>st+j*.15;d.style.background=on?'#0f1b2d':'transparent';d.style.borderColor=on?'#0f1b2d':'#c9d0db';});
+    const ok=c.querySelector('.okk');ok.style.opacity=cl((t-st-1.0)/.3);if(t>st+1.0)c.style.borderColor='#1f9d63';});
+   const b=e.querySelector('.rg');if(t>4.6){b.style.background='#1f9d63';b.style.transform=`scale(${1-0.05*Math.sin(cl((t-4.6)/.3)*Math.PI)})`;}
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:8, h:L=>`<div class="dk"><div class="tb"><i></i><i></i><i></i><span>${L.s7live}</span></div>
+   <div class="wh"><div><b>${L.s7w}</b><small>${L.s7s}</small></div><div class="mt"><div><span>${L.s7pr}</span><b class="pc">0%</b></div><div class="trk"><i></i></div></div></div>
+   <div class="tbx"><div class="tr2 h">${L.s7h.map(x=>`<span>${x}</span>`).join('')}<span></span></div>
+   ${L.s4m.map((m,i)=>`<div class="tr2 r${i}"><span>${i+1}</span><span>${m}</span><span class="c1">—</span><span class="c2">—</span><span class="c3">—</span><span class="c4"></span></div>`).join('')}</div>
+   <div class="fd"></div></div>`+cap(L.s7n,L.s7t,L.s7p),
+  a:(e,t,L)=>{const dk=e.querySelector('.dk');dk.style.opacity=cl(t/.3);dk.style.transform=`scale(${0.94+0.06*out(t/.5)})`;
+   let n=0;const fd=[];
+   for(let i=0;i<5;i++){const at=1.0+i*1.05,r=e.querySelector('.r'+i),on=t>at;
+    r.querySelector('.c1').textContent=on?LOTS[i]:'—';r.querySelector('.c2').textContent=on?f2(REQ[i])+' kg':'—';
+    r.querySelector('.c3').innerHTML=on?`<span class="av" style="background:${WHO[i][1]};width:40px;height:40px;font-size:16px">${WHO[i][0]}</span>`:'—';
+    r.querySelector('.c4').innerHTML=on?'<span class="bdg b-g">✓</span>':'<span class="bdg b-n">…</span>';
+    r.classList.toggle('fl2',on&&t<at+.8);if(on){n++;fd.unshift(L.s7f.replace('{w}',WHO[i][0]).replace('{m}',L.s4m[i]).replace('{e}',WHO[i][2]));}}
+   const p=Math.round(n/5*100);e.querySelector('.pc').textContent=p+'%';e.querySelector('.trk i').style.width=p+'%';
+   e.querySelector('.fd').innerHTML=fd.slice(0,3).map(x=>`<div>${x}</div>`).join('');
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:6.5, h:L=>phone(`<div class="bar"><small>${L.cvch||''}</small><b>${L.s8h}</b></div><div class="bd"><div class="kp3">${L.s8k.map((k,i)=>`<div class="k${i}"><b>${k[1]}</b><small>${k[0]}</small></div>`).join('')}</div>
+   <div class="it" style="flex-direction:column;align-items:stretch"><small style="font-weight:700">${L.s8c}</small>
+   <svg viewBox="0 0 400 220" style="width:100%;margin-top:10px">${[['AR',150,'#f5b83d'],['MV',120,'#21c07a'],['JC',95,'#4ea1ff'],['LP',70,'#c58cff']].map((b,i)=>`<g><text x="0" y="${40+i*52}" font-size="22" font-weight="700" fill="#0f1b2d">${b[0]}</text><rect class="hb" data-w="${b[1]*1.8}" x="50" y="${20+i*52}" width="0" height="30" rx="8" fill="${b[2]}"/></g>`).join('')}</svg></div></div>`)+cap(L.s8n,L.s8t,L.s8p),
+  a:(e,t)=>{const ph=e.querySelector('.ph');ph.style.transform=`translateY(${(1-out(t/.6))*300}px)`;
+   e.querySelectorAll('.kp3 div').forEach((k,i)=>pop(k,(t-.6-i*.2)/.4,20));
+   e.querySelectorAll('.hb').forEach((r,i)=>r.setAttribute('width',(+r.dataset.w)*out((t-1.6-i*.2)/.8)));
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:5.5, h:L=>`<div class="doc"><div style="display:flex;align-items:center;gap:8px;margin-bottom:24px"><div style="width:48px;height:48px">${MARK('#0f1b2d')}</div><b style="font-size:26px">${L.s9d}</b></div>
+   ${L.s4m.map((m,i)=>`<div class="dl" style="display:flex;justify-content:space-between;font-size:22px;padding:12px 0;border-bottom:1px solid #e1e5ec;opacity:0"><span>${m}</span><span>${LOTS[i]} · ${f2(REQ[i])} kg · ✓</span></div>`).join('')}
+   <div class="stamp">${L.s9st} ✓</div><div class="btn dlb" style="position:absolute;left:36px;right:36px;bottom:30px;opacity:0">${L.s9b}</div></div>`+cap(L.s9n,L.s9t,L.s9p),
+  a:(e,t)=>{const d=e.querySelector('.doc');d.style.transform=`translateY(${(1-back(t/.6))*200}px) rotate(${(1-out(t/.6))*-6}deg)`;
+   e.querySelectorAll('.dl').forEach((x,i)=>{x.style.opacity=cl((t-.6-i*.2)/.3);});
+   const s=e.querySelector('.stamp');s.style.opacity=cl((t-2.0)/.15);s.style.transform=`rotate(-12deg) scale(${t>2?lerp(2,1,out((t-2)/.3)):2})`;
+   pop(e.querySelector('.dlb'),(t-2.6)/.4,20);pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:5.5, h:L=>`<div style="position:absolute;left:50%;top:420px;width:220px;height:220px;margin-left:-110px" class="cg">${MARK('#eef2f8')}</div>
+   ${L.s10c.map((c,i)=>`<div class="chp c${i}" style="${['left:70px;top:200px','right:70px;top:270px','left:60px;top:640px','right:90px;top:700px','left:50%;top:800px;transform:translateX(-50%)'][i]}">${c}</div>`).join('')}`+cap(L.s10n,L.s10t,L.s10p),
+  a:(e,t)=>{e.querySelector('.cg').style.transform=`perspective(700px) rotateY(${(1-out(t/1))*360}deg)`;
+   e.querySelectorAll('.chp').forEach((c,i)=>{c.style.opacity=cl((t-.5-i*.25)/.3);c.style.boxShadow=t>.5+i*.25?'0 0 0 3px rgba(245,184,61,.25)':'none';});
+   pop(e.querySelector('.cap'),(t-.2)/.5);}},
+ {d:6, h:L=>`<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px">
+   <div class="z1" style="font-weight:900;font-size:92px;line-height:1.08">${L.s11t}</div><div class="z2" style="font-size:40px;color:#9fb0c8;margin-top:28px">${L.s11p}</div>
+   <a class="z3" href="https://wa.me/13855745556" target="_blank" rel="noopener" style="margin-top:60px;display:flex;align-items:center;gap:20px;background:#f5b83d;color:#0b1422;text-decoration:none;font-weight:900;font-size:46px;border-radius:999px;padding:28px 52px">📲 ${L.s11b}</a>
+   <div class="z4" style="margin-top:30px;font-size:36px;color:#eef2f8;font-weight:700">+1 (385) 574-5556 · gensat-digital.github.io</div>
+   <div class="z5" style="position:absolute;bottom:70px;left:60px;right:60px;font-size:24px;color:#5f7190">${L.s11e}</div></div>`,
+  a:(e,t)=>{pop(e.querySelector('.z1'),t/.5,60);pop(e.querySelector('.z2'),(t-.4)/.4);pop(e.querySelector('.z3'),(t-.8)/.4);
+   const z=e.querySelector('.z3');if(t>1.3)z.style.transform+=` scale(${1+0.04*Math.sin((t-1.3)*6)})`;pop(e.querySelector('.z4'),(t-1.1)/.4);e.querySelector('.z5').style.opacity=cl((t-1.4)/.4);}}
+];
+const deck=document.getElementById('deck'),cv=document.getElementById('cv'),box=document.getElementById('slides'),segs=document.getElementById('segs');
+let idx=0,lt=0,playing=false,last=null,els=[],curLang=null;
+function build(){const L=Object.assign({},D[LANG],{cvch:T[LANG].cvch});curLang=LANG;
+ box.innerHTML=SL.map((s,i)=>`<div class="sl" data-i="${i}">${s.h(L)}</div>`).join('');els=[...box.children];
+ segs.innerHTML=SL.map((_,i)=>`<i data-i="${i}"><b></b></i>`).join('');
+ segs.querySelectorAll('i').forEach(x=>x.addEventListener('click',ev=>{ev.stopPropagation();go(+x.dataset.i);}));draw();}
+function fit(){const w=deck.clientWidth,h=deck.clientHeight;const s=Math.min(w/1080,h/1350);cv.style.transform=`translate(${(w-1080*s)/2}px,${(h-1350*s)/2}px) scale(${s})`;}
+function draw(){if(curLang!==LANG){build();return;}els.forEach((e,i)=>e.classList.toggle('on',i===idx));SL[idx].a(els[idx],lt,Object.assign({},D[LANG]));
+ segs.querySelectorAll('i b').forEach((b,i)=>b.style.width=(i<idx?100:i===idx?cl(lt/SL[idx].d)*100:0)+'%');}
+function go(i){idx=(i+SL.length)%SL.length;lt=0;draw();}
+function setPlay(p){playing=p;deck.classList.toggle('playing',p);document.getElementById('dpi').innerHTML=p?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l13-8z"/>';last=null;if(p)requestAnimationFrame(tick);}
+function tick(ts){if(!playing)return;if(last!==null){lt+=(ts-last)/1000;if(lt>=SL[idx].d){if(idx===SL.length-1){lt=SL[idx].d;draw();setPlay(false);idx=0;lt=0;return;}idx++;lt=0;}}last=ts;draw();requestAnimationFrame(tick);}
+deck.addEventListener('click',e=>{if(e.target.closest('a'))return;setPlay(!playing);});
+document.getElementById('dplay').addEventListener('click',()=>setPlay(!playing));
+document.getElementById('dprev').addEventListener('click',()=>go(idx-1));
+document.getElementById('dnext').addEventListener('click',()=>go(idx+1));
+document.getElementById('dfull').addEventListener('click',()=>{try{if(document.fullscreenElement)document.exitFullscreen();else (deck.requestFullscreen||deck.webkitRequestFullscreen).call(deck);}catch(_){}} );
+addEventListener('resize',fit);document.addEventListener('fullscreenchange',()=>setTimeout(fit,50));
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{build();},0)));
+build();fit();lt=2.2;draw();
+// Arranca sola cuando se ve en pantalla
+if('IntersectionObserver' in window){const io2=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting&&!deck.dataset.auto){deck.dataset.auto=1;lt=0;setPlay(true);}});},{threshold:.6});io2.observe(deck);}
+window.__deck={go:i=>{idx=i;},set:(i,t)=>{idx=i;lt=t;draw();},SL};
+})();
+
 </script>
 
 </body>
