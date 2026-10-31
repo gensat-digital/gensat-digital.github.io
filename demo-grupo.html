@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo: panel de grupo empresarial · GENSAT</title>
+<meta name="description" content="Ejemplo de panel para un grupo de empresas: ventas, gastos, utilidad y cobros de cada empresa en una sola pantalla, desde el celular.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo: panel de grupo empresarial · GENSAT">
+<meta property="og:description" content="Todas tus empresas en una sola pantalla: ventas, gastos, utilidad y cobros.">
+<meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
+<meta property="og:locale" content="es_LA">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: app móvil con barra superior y selector de periodo; tarjetas por empresa; en computadora, cuadrícula de 2-3 columnas */
+:root{
+  --navy:#0f1b2d; --gold:#f5b83d; --gold-ink:#8a5d00;
+  --bg:#f4f5f8; --card:#ffffff; --ink:#0f1b2d; --muted:#5d6675; --line:#e1e5ec;
+  --ok:#1f9d63; --ok-bg:#e1f4ea; --warn:#b4570f; --warn-bg:#fdf0dc; --bad:#c43c3c; --bad-bg:#fbe7e7; --n-bg:#eef0f4;
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --warn:#f0a35c; --warn-bg:#3a2a12; --bad:#ff7b7b; --bad-bg:#3a1a1e; --n-bg:#1b2a45; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --warn:#f0a35c; --warn-bg:#3a2a12; --bad:#ff7b7b; --bad-bg:#3a1a1e; --n-bg:#1b2a45; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);-webkit-tap-highlight-color:transparent}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+.demo-flag{background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;text-align:center;padding:7px 12px}
+.demo-flag a{color:var(--navy)}
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:12px 16px}
+.top .row{display:flex;align-items:center;gap:10px;max-width:1100px;margin:0 auto}
+.top .mk{width:30px;height:30px;flex:none}
+.top b{font-size:16px}.top small{display:block;color:#b8c0cc;font-size:12px}
+.top .sp{flex:1}
+.who{appearance:none;background:#13213a;border:1px solid #22324f;color:#fff;border-radius:10px;padding:7px 10px;font-size:13px;font-weight:600;max-width:46vw}
+.per{display:flex;gap:6px;max-width:1100px;margin:10px auto 0}
+.per button{flex:1;appearance:none;border:1px solid #22324f;background:transparent;color:#b8c0cc;border-radius:999px;padding:7px 8px;font-size:13px;font-weight:700;cursor:pointer}
+.per button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 30px}
+h2{font-size:19px;margin:4px 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.kpi small{display:block;color:var(--muted);font-size:12.5px;font-weight:600}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;margin-top:2px}
+.dl{font-size:12px;font-weight:700}
+.up{color:var(--ok)}.dn{color:var(--bad)}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:12px;font-size:13.5px;margin-bottom:8px;border:0;width:100%;text-align:left;cursor:pointer}
+.alert.bad{background:var(--bad-bg);color:var(--bad)}.alert.warn{background:var(--warn-bg);color:var(--warn)}.alert.ok{background:var(--ok-bg);color:var(--ok)}
+.alert b{display:block}
+.cos{display:grid;gap:10px}
+.co{appearance:none;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;display:block;border-left:6px solid var(--c)}
+.co .h{display:flex;align-items:center;gap:10px}
+.co .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--n-bg);flex:none}
+.co .h b{font-size:15.5px}.co .h small{display:block;color:var(--muted);font-size:12px}
+.co .h .sp{flex:1}
+.co .m{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.co .m small{display:block;font-size:11.5px;color:var(--muted);font-weight:600}
+.co .m b{font-size:15px;font-variant-numeric:tabular-nums}
+.co svg.sk{width:90px;height:34px}
+.grid2{display:grid;gap:12px;margin-top:12px}
+.chart svg{width:100%;height:auto;display:block}
+.lg{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12.5px;margin-top:8px;color:var(--muted)}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.back{appearance:none;border:0;background:none;color:var(--muted);font-weight:600;padding:4px 0;cursor:pointer;margin-bottom:6px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl td,.tbl th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl th{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.lock{display:flex;gap:10px;align-items:center;background:var(--n-bg);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+.cta{margin-top:16px;background:var(--navy);color:#fff;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta a{background:var(--gold);color:var(--navy);text-decoration:none;font-weight:800;padding:11px 16px;border-radius:12px}
+.src{font-size:12px;color:var(--muted);margin-top:14px;text-align:center}
+@media (min-width:760px){ .cos{grid-template-columns:1fr 1fr} .grid2{grid-template-columns:1.3fr 1fr} }
+@media (min-width:1000px){ .kpis{grid-template-columns:repeat(4,1fr)} .cos{grid-template-columns:repeat(3,1fr)} }
+</style>
+</head>
+<body>
+<div class="demo-flag">Demostración de GENSAT con datos de ejemplo · <a href="https://wa.me/13855745556?text=Hola%2C%20vi%20la%20demo%20del%20panel%20de%20grupo%20de%20GENSAT" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></div>
+<header class="top">
+  <div class="row">
+    <span class="mk" id="mk"></span>
+    <div><b>Grupo Ejemplo</b><small id="today"></small></div>
+    <span class="sp"></span>
+    <select class="who" id="who" aria-label="Ver como"></select>
+  </div>
+  <div class="per" role="group" aria-label="Periodo"><button type="button" data-p="m" class="on">Este mes</button><button type="button" data-p="q">Trimestre</button><button type="button" data-p="y">Año</button></div>
+</header>
+<main id="view"></main>
+
+<script>
+const MARK = c => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></svg>`;
+document.getElementById('mk').innerHTML = MARK('#fff');
+document.getElementById('today').textContent = 'Actualizado hoy · ' + new Date().toLocaleDateString('es', {day:'numeric', month:'long'});
+
+/* ===== Datos de ejemplo (miles de $ por mes, ene–oct) ===== */
+const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct'];
+const COS = [
+  {k:'pvc', n:'PVC · Venta e instalación', e:'🪟', c:'#4e7bea', mgr:'Gerente A',
+   sales:[42,45,48,46,52,55,51,58,60,64], cost:[30,31,34,33,36,38,36,40,41,43], owed:18.4, items:[['Ventanas PVC',28.1],['Puertas PVC',19.6],['Instalaciones',16.3]]},
+  {k:'car', n:'Carpintería', e:'🪚', c:'#c58c4a', mgr:'Gerente B',
+   sales:[24,22,26,25,27,26,24,23,21,19], cost:[17,16,18,18,19,19,18,18,17,16], owed:6.2, items:[['Cocinas',8.4],['Closets',6.1],['Puertas de madera',4.5]]},
+  {k:'sum', n:'Productos y suministros', e:'📦', c:'#21a37a', mgr:'Gerente C',
+   sales:[61,58,63,66,64,70,72,69,74,78], cost:[49,46,50,53,51,55,57,55,58,61], owed:9.8, items:[['Cemento y bloques',31.2],['Ferretería',24.9],['Pinturas',21.9]]},
+  {k:'con', n:'Construcción y estructuras', e:'🏗️', c:'#e0892b', mgr:'Gerente D',
+   sales:[88,92,85,97,104,98,110,115,108,121], cost:[70,74,69,78,82,79,88,93,90,104], owed:46.5, items:[['Galpón industrial',52.0],['Vivienda unifamiliar',41.5],['Estructura metálica',27.5]]},
+  {k:'inm', n:'Inmobiliaria', e:'🏠', c:'#9b6bd8', mgr:'Gerente E',
+   sales:[35,0,48,22,0,61,30,0,55,38], cost:[8,4,11,7,4,13,8,4,12,9], owed:12.0, items:[['Venta apartamento',25.0],['Alquileres',9.0],['Comisiones',4.0]]}
+];
+let period = 'm', viewer = 'all', detail = null;
+const $ = id => document.getElementById(id);
+const fmt = k => '$' + (k >= 100 ? Math.round(k) + 'k' : (Math.round(k*10)/10).toLocaleString('es') + 'k');
+const rng = () => period === 'm' ? [9,10] : period === 'q' ? [7,10] : [0,10];
+const prevRng = () => period === 'm' ? [8,9] : period === 'q' ? [4,7] : null;
+const sum = (a, r) => a.slice(r[0], r[1]).reduce((x,y) => x+y, 0);
+const S = (c, r=rng()) => sum(c.sales, r), C = (c, r=rng()) => sum(c.cost, r), U = (c, r=rng()) => S(c,r) - C(c,r);
+const delta = (c, f) => { const p = prevRng(); if (!p) return null; const a = f(c), b = f(c, p); return b ? Math.round((a-b)/Math.abs(b)*100) : null; };
+const dl = d => d === null ? '' : `<span class="dl ${d>=0?'up':'dn'}">${d>=0?'▲':'▼'} ${Math.abs(d)}%</span>`;
+const pname = {m:'vs. mes anterior', q:'vs. trimestre anterior', y:''}[period];
+function spark(c){ const v = c.sales, mx = Math.max(...v), mn = Math.min(...v); const pts = v.map((x,i) => `${i*10},${30-(x-mn)/(mx-mn||1)*26}`).join(' ');
+  return `<svg class="sk" viewBox="0 0 90 34" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${c.c}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`; }
+
+/* Ver como: dueño o un gerente */
+$('who').innerHTML = `<option value="all">👑 Dueño (todo)</option>` + COS.map(c => `<option value="${c.k}">👤 ${c.mgr} · ${c.n.split(' · ')[0]}</option>`).join('');
+$('who').onchange = e => { viewer = e.target.value; detail = viewer === 'all' ? null : viewer; render(); };
+document.querySelectorAll('.per button').forEach(b => b.onclick = () => { period = b.dataset.p; document.querySelectorAll('.per button').forEach(x => x.classList.toggle('on', x === b)); render(); });
+
+function render(){ detail ? companyView(COS.find(c => c.k === detail)) : groupView(); window.scrollTo({top:0}); }
+
+function groupView(){
+  const tS = COS.reduce((a,c) => a+S(c), 0), tC = COS.reduce((a,c) => a+C(c), 0), tU = tS - tC, tO = COS.reduce((a,c) => a+c.owed, 0);
+  const p = prevRng(), pS = p ? COS.reduce((a,c) => a+S(c,p), 0) : 0, pU = p ? COS.reduce((a,c) => a+U(c,p), 0) : 0;
+  const dS = p ? Math.round((tS-pS)/pS*100) : null, dU = p ? Math.round((tU-pU)/pU*100) : null;
+  const alerts = [];
+  COS.forEach(c => { const d = delta(c, S); if (d !== null && d <= -8) alerts.push(['bad','📉', `${c.n}: ventas bajaron ${Math.abs(d)}%`, `${pname}. Revisar con ${c.mgr}.`, c.k]); });
+  COS.forEach(c => { const m = U(c)/S(c); if (S(c) && m < .15) alerts.push(['warn','⚠️', `${c.n}: margen de ${Math.round(m*100)}%`, 'Los costos están comiendo la utilidad.', c.k]); });
+  COS.filter(c => c.owed > 30).forEach(c => alerts.push(['warn','💸', `${c.n}: ${fmt(c.owed)} por cobrar`, 'Es la empresa con más cuentas pendientes.', c.k]));
+  const best = [...COS].sort((a,b) => (delta(b,S)??0) - (delta(a,S)??0))[0];
+  if (period !== 'y') alerts.splice(Math.min(3,alerts.length),0,['ok','🚀', `${best.n}: la que más creció (▲ ${delta(best,S)}%)`, pname, best.k]);
+  const share = COS.map(c => [c, S(c)]).filter(x => x[1] > 0);
+  // trend chart: stacked bars per month
+  const mx = Math.max(...MONTHS.map((_,i) => COS.reduce((a,c) => a+c.sales[i], 0)));
+  const bars = MONTHS.map((m,i) => { let y = 180, out = ''; COS.forEach(c => { const h = c.sales[i]/mx*160; y -= h; out += `<rect x="${10+i*48}" y="${y}" width="32" height="${h}" fill="${c.c}"/>`; }); return out + `<text x="${26+i*48}" y="198" text-anchor="middle" font-size="12" fill="currentColor" opacity=".65">${m}</text>`; }).join('');
+  // margin by company horizontal bars
+  const mBars = COS.map((c,i) => { const m = S(c) ? U(c)/S(c) : 0; return `<text x="0" y="${22+i*38}" font-size="13" font-weight="600" fill="currentColor">${c.e} ${c.n.split(' · ')[0].split(' y ')[0]}</text><rect x="0" y="${28+i*38}" width="${Math.max(2,m*600)}" height="8" rx="4" fill="${c.c}"/><text x="${Math.max(2,m*600)+8}" y="${36+i*38}" font-size="12" font-weight="700" fill="currentColor">${Math.round(m*100)}%</text>`; }).join('');
+  $('view').innerHTML = `
+    <h2>Así va tu grupo ${period==='m'?'este mes':period==='q'?'este trimestre':'este año'}</h2>
+    <div class="kpis">
+      <div class="card kpi"><small>Ventas del grupo</small><b>${fmt(tS)}</b>${dl(dS)}</div>
+      <div class="card kpi"><small>Gastos</small><b>${fmt(tC)}</b></div>
+      <div class="card kpi"><small>Utilidad</small><b style="color:var(--ok)">${fmt(tU)}</b>${dl(dU)} <span class="muted" style="font-size:12px">${Math.round(tU/tS*100)}% margen</span></div>
+      <div class="card kpi"><small>Por cobrar (todas)</small><b style="color:var(--warn)">${fmt(tO)}</b></div>
+    </div>
+    <h3>🚦 Lo que necesita tu atención</h3>
+    ${alerts.slice(0,4).map(a => `<button type="button" class="alert ${a[0]}" data-co="${a[4]}"><span>${a[1]}</span><span><b>${a[2]}</b>${a[3]}</span></button>`).join('')}
+    <h3 style="margin-top:14px">Tus 5 empresas</h3>
+    <div class="cos">${COS.map(c => `<button type="button" class="co" style="--c:${c.c}" data-co="${c.k}">
+      <div class="h"><span class="ic">${c.e}</span><span><b>${c.n}</b><small>${c.mgr}</small></span><span class="sp"></span>${spark(c)}</div>
+      <div class="m"><div><small>Ventas</small><b>${fmt(S(c))}</b> ${dl(delta(c,S))}</div><div><small>Utilidad</small><b style="color:var(--ok)">${fmt(U(c))}</b></div><div><small>Por cobrar</small><b style="color:var(--warn)">${fmt(c.owed)}</b></div></div></button>`).join('')}</div>
+    <div class="grid2">
+      <div class="card chart"><h3>Ventas del grupo por mes</h3><svg viewBox="0 0 490 205" role="img" aria-label="Ventas por mes y por empresa">${bars}</svg>
+        <div class="lg">${COS.map(c => `<span><i style="background:${c.c}"></i>${c.n.split(' · ')[0]}</span>`).join('')}</div></div>
+      <div class="card chart"><h3>Margen de utilidad por empresa</h3><svg viewBox="0 0 400 200" role="img" aria-label="Margen por empresa">${mBars}</svg></div>
+    </div>
+    <div class="cta"><span><b>Tus 5 cuadros de Excel, en una sola pantalla.</b><br><span style="color:#b8c0cc;font-size:13.5px">Cada gerente ve lo suyo; el dueño lo ve todo. Prueba "Ver como" arriba.</span></span><a href="https://wa.me/13855745556?text=Hola%2C%20vi%20la%20demo%20del%20panel%20de%20grupo%20de%20GENSAT" target="_blank" rel="noopener">Hablemos</a></div>
+    <p class="src">Datos de ejemplo. En la versión real se alimenta de los Excel de cada gerente.</p>`;
+  document.querySelectorAll('[data-co]').forEach(b => b.onclick = () => { detail = b.dataset.co; render(); });
+}
+
+function companyView(c){
+  const r = rng(), months = MONTHS.map((m,i) => [m, c.sales[i], c.cost[i]]);
+  const mx = Math.max(...c.sales);
+  const bars = months.map((m,i) => { const hs = m[1]/mx*150, hc = m[2]/mx*150; const inR = i >= r[0] && i < r[1];
+    return `<rect x="${8+i*48}" y="${170-hs}" width="18" height="${hs}" rx="4" fill="${c.c}" opacity="${inR?1:.45}"/><rect x="${28+i*48}" y="${170-hc}" width="14" height="${hc}" rx="4" fill="#9aa5b6" opacity="${inR?1:.45}"/><text x="${24+i*48}" y="190" text-anchor="middle" font-size="12" fill="currentColor" opacity=".65">${m[0]}</text>`; }).join('');
+  const own = viewer !== 'all';
+  $('view').innerHTML = `
+    ${own ? `<div class="lock">🔒 <span>Estás viendo como <b>${c.mgr}</b>: solo ves <b>${c.n}</b>. El dueño ve las 5 empresas.</span></div>` : `<button type="button" class="back" id="bk">← Todas las empresas</button>`}
+    <h2>${c.e} ${c.n}</h2>
+    <div class="kpis">
+      <div class="card kpi"><small>Ventas</small><b>${fmt(S(c))}</b>${dl(delta(c,S))}</div>
+      <div class="card kpi"><small>Gastos</small><b>${fmt(C(c))}</b>${dl(delta(c,C))}</div>
+      <div class="card kpi"><small>Utilidad</small><b style="color:var(--ok)">${fmt(U(c))}</b><span class="muted" style="font-size:12px">${S(c)?Math.round(U(c)/S(c)*100):0}% margen</span></div>
+      <div class="card kpi"><small>Por cobrar</small><b style="color:var(--warn)">${fmt(c.owed)}</b></div>
+    </div>
+    <div class="grid2" style="margin-top:0">
+      <div class="card chart"><h3>Ventas vs. gastos por mes</h3><svg viewBox="0 0 490 200" role="img" aria-label="Ventas y gastos por mes">${bars}</svg>
+        <div class="lg"><span><i style="background:${c.c}"></i>Ventas</span><span><i style="background:#9aa5b6"></i>Gastos</span></div></div>
+      <div class="card"><h3>Lo que más vende (este mes)</h3><table class="tbl"><thead><tr><th>Producto / servicio</th><th class="r">Ventas</th></tr></thead><tbody>${c.items.map(it => `<tr><td>${it[0]}</td><td class="r">${fmt(it[1])}</td></tr>`).join('')}</tbody></table>
+        <p class="muted" style="font-size:12.5px;margin:10px 0 0">Responsable: ${c.mgr}</p></div>
+    </div>
+    <p class="src">Datos de ejemplo · Demostración de GENSAT</p>`;
+  if (!own) $('bk').onclick = () => { detail = null; render(); };
+}
+render();
+</script>
+</body>
+</html>
