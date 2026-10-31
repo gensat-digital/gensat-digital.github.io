@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo: sistema para contratistas · GENSAT</title>
+<meta name="description" content="Ejemplo de sistema para contratistas de construcción: presupuestos, aprobaciones, avance de obra con fotos, informes, facturas, cobros y utilidad, desde el celular.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo: sistema para contratistas · GENSAT">
+<meta property="og:description" content="Presupuestos, obras, fotos, informes, facturas y cobros en un solo lugar, desde el celular.">
+<meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
+<meta property="og:locale" content="es_LA">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: app móvil (barra inferior de pestañas). En computadora se centra como app ancha con la barra de pestañas a la izquierda. */
+:root{
+  --navy:#0f1b2d; --navy2:#13213a; --gold:#f5b83d; --gold-ink:#8a5d00;
+  --bg:#f4f5f8; --card:#ffffff; --ink:#0f1b2d; --muted:#5d6675; --line:#e1e5ec;
+  --ok:#1f9d63; --ok-bg:#e1f4ea; --warn:#b4570f; --warn-bg:#fdf0dc; --bad:#c43c3c; --bad-bg:#fbe7e7; --info:#2f5bd3; --info-bg:#e4ebfb; --n-bg:#eef0f4;
+  --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --warn:#f0a35c; --warn-bg:#3a2a12; --bad:#ff7b7b; --bad-bg:#3a1a1e; --info:#8fa9ff; --info-bg:#1b2a52; --n-bg:#1b2a45; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --warn:#f0a35c; --warn-bg:#3a2a12; --bad:#ff7b7b; --bad-bg:#3a1a1e; --info:#8fa9ff; --info-bg:#1b2a52; --n-bg:#1b2a45; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+.demo-flag{background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;text-align:center;padding:7px 12px}
+.demo-flag a{color:var(--navy)}
+
+/* Login */
+#login{min-height:calc(100dvh - 33px);display:grid;place-items:center;padding:24px 16px;background:var(--navy);color:#fff}
+.lg-card{width:100%;max-width:380px;text-align:center}
+.lg-mark{width:84px;height:84px;margin:0 auto 10px}
+.lg-card h1{font-size:26px;margin:4px 0 2px}
+.lg-card p{color:#b8c0cc;margin:0 0 22px;font-size:14px}
+.lg-f{text-align:left;margin-bottom:12px}
+.lg-f label{display:block;font-size:12.5px;font-weight:600;color:#b8c0cc;margin-bottom:5px}
+.lg-f div{background:#13213a;border:1px solid #22324f;border-radius:12px;padding:12px 14px;color:#eef1f6;font-weight:600}
+.lg-btn{width:100%;margin-top:6px;appearance:none;border:0;background:var(--gold);color:var(--navy);font-weight:800;font-size:16px;padding:14px;border-radius:12px;cursor:pointer}
+.lg-note{margin-top:16px;font-size:12.5px;color:#8d97a8}
+
+/* App shell */
+#app{max-width:1100px;margin:0 auto;padding-bottom:84px}
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+.top .mk{width:30px;height:30px;flex:none}
+.top b{font-size:16px}
+.top small{display:block;color:#b8c0cc;font-size:12px}
+.top .sp{flex:1}
+.top .av{width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:13px}
+main{padding:14px 16px}
+h2{font-size:19px;margin:6px 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.kpi small{display:block;color:var(--muted);font-size:12.5px;font-weight:600}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi span{font-size:12px}
+.grid2{display:grid;gap:12px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:12px;font-size:13.5px;margin-bottom:8px;cursor:pointer;border:0;width:100%;text-align:left}
+.alert.bad{background:var(--bad-bg);color:var(--bad)}
+.alert.warn{background:var(--warn-bg);color:var(--warn)}
+.alert b{display:block}
+.pipe{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.pstage{flex:1 0 96px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;appearance:none}
+.pstage .e{font-size:20px}
+.pstage b{display:block;font-size:20px}
+.pstage small{display:block;font-size:11.5px;color:var(--muted);line-height:1.25}
+.pstage.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,184,61,.3)}
+.chart svg{width:100%;height:auto;display:block}
+.list{display:flex;flex-direction:column;gap:9px}
+.job{appearance:none;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 13px;cursor:pointer;display:block}
+.job .r1{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.job b{font-size:14.5px}
+.job small{display:block;color:var(--muted);font-size:12.5px}
+.job .r2{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:10px}
+.bdg{font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.b-n{background:var(--n-bg);color:var(--muted)}.b-i{background:var(--info-bg);color:var(--info)}.b-w{background:var(--warn-bg);color:var(--warn)}.b-o{background:var(--ok-bg);color:var(--ok)}.b-b{background:var(--bad-bg);color:var(--bad)}
+.trk{height:8px;background:var(--line);border-radius:4px;overflow:hidden;flex:1}
+.trk i{display:block;height:100%;background:var(--ok);border-radius:4px}
+.num{font-variant-numeric:tabular-nums;font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:2px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+:root[data-theme="dark"] .chip.on{background:var(--gold);color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.on{background:var(--gold);color:var(--navy)}}
+
+/* Detail */
+.back{appearance:none;border:0;background:none;color:var(--muted);font-weight:600;padding:4px 0;cursor:pointer;margin-bottom:6px}
+.steps{display:flex;gap:0;margin:12px 0 4px;overflow-x:auto}
+.st{flex:1 0 64px;text-align:center;position:relative;font-size:11px;color:var(--muted)}
+.st i{display:grid;place-items:center;width:30px;height:30px;margin:0 auto 4px;border-radius:50%;background:var(--n-bg);font-style:normal;font-size:14px;position:relative;z-index:1}
+.st::before{content:"";position:absolute;top:14px;left:-50%;width:100%;height:3px;background:var(--line)}
+.st:first-child::before{display:none}
+.st.done i{background:var(--ok);color:#fff}.st.done::before{background:var(--ok)}
+.st.cur i{background:var(--gold);color:var(--navy);box-shadow:0 0 0 4px rgba(245,184,61,.3)}
+.st.cur{color:var(--ink);font-weight:700}
+.money{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.money div{background:var(--bg);border-radius:12px;padding:10px}
+.money small{display:block;font-size:11.5px;color:var(--muted);font-weight:600}
+.money b{font-size:16px;font-variant-numeric:tabular-nums}
+.bvr{margin:6px 0 2px;font-size:12.5px}
+.bvr .trk{height:12px;margin-top:5px}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ph{aspect-ratio:1;border-radius:12px;overflow:hidden;position:relative;background:var(--n-bg);display:grid;place-items:center;font-size:30px}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph small{position:absolute;left:6px;bottom:6px;background:rgba(15,27,45,.8);color:#fff;font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 6px}
+.ph.add{border:2px dashed var(--line);background:transparent;cursor:pointer;color:var(--muted);font-size:13px;font-weight:600;text-align:center;line-height:1.2}
+.ph.add input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px;font-weight:700;cursor:pointer;background:var(--navy);color:#fff;text-align:center}
+.btn.g{background:var(--gold);color:var(--navy)}
+.btn.o{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.pay{display:flex;justify-content:space-between;font-size:13.5px;padding:8px 0;border-bottom:1px solid var(--line)}
+.pay:last-child{border:0}
+.tl{font-size:13px}
+.tl div{display:flex;gap:10px;padding:5px 0}
+.tl span{color:var(--muted);min-width:64px;font-variant-numeric:tabular-nums}
+
+/* Form */
+.fld{margin-bottom:11px}
+.fld label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.fld input,.fld select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);font:500 15px var(--font)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lines .ln{display:grid;grid-template-columns:1fr 70px 80px;gap:6px;margin-bottom:6px}
+.lines input{padding:9px 10px;font-size:14px}
+.total{display:flex;justify-content:space-between;font-weight:800;font-size:17px;padding:10px 0;border-top:2px solid var(--line);margin-top:6px}
+
+/* Bottom nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav.tabs button{flex:1;appearance:none;border:0;background:none;padding:6px 2px;border-radius:12px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs button span{font-size:20px;line-height:1}
+nav.tabs button.on{color:var(--gold-ink);background:var(--warn-bg)}
+nav.tabs .plus span{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-size:26px;font-weight:800;margin-top:-16px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+
+/* Modal (report) */
+.mod{position:fixed;inset:0;z-index:50;background:rgba(8,14,26,.6);display:grid;place-items:center;padding:16px}
+.doc{background:#fff;color:#0f1b2d;width:100%;max-width:560px;max-height:88dvh;overflow:auto;border-radius:14px;padding:22px}
+.doc h4{margin:0;font-size:18px}
+.doc .dh{display:flex;align-items:center;gap:10px;border-bottom:3px solid #f5b83d;padding-bottom:10px;margin-bottom:12px}
+.doc .dh svg{width:40px;height:40px}
+.doc table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+.doc td,.doc th{padding:7px 6px;border-bottom:1px solid #e1e5ec;text-align:left}
+.doc td.r,.doc th.r{text-align:right}
+.doc .phs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.doc .phs div{aspect-ratio:4/3;background:#eef0f4;border-radius:8px;display:grid;place-items:center;font-size:24px;overflow:hidden;position:relative}
+.doc .phs img{width:100%;height:100%;object-fit:cover}
+.doc .phs small{position:absolute;bottom:4px;left:4px;background:rgba(15,27,45,.8);color:#fff;font-size:10px;border-radius:5px;padding:1px 5px}
+.doc .sig{display:flex;justify-content:space-between;margin-top:22px;font-size:12px;color:#5d6675}
+.doc .sig div{border-top:1px solid #0f1b2d;padding-top:4px;width:44%}
+.doc .acts{position:sticky;bottom:-22px;background:#fff;padding:12px 0 2px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:12px;font-size:13.5px;font-weight:600;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100vw - 32px)}
+.cta{margin-top:16px;background:var(--navy);color:#fff;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta a{background:var(--gold);color:var(--navy);text-decoration:none;font-weight:800;padding:11px 16px;border-radius:12px}
+
+@media (min-width:900px){
+  #app{padding-bottom:20px;display:grid;grid-template-columns:200px 1fr;gap:0}
+  .top{grid-column:1/-1}
+  nav.tabs{position:sticky;top:64px;align-self:start;flex-direction:column;border:0;background:transparent;padding:14px 8px;gap:4px}
+  nav.tabs button{flex-direction:row;justify-content:flex-start;gap:10px;font-size:14px;padding:10px 12px}
+  nav.tabs .plus span{width:28px;height:28px;font-size:20px;margin:0;box-shadow:none}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .grid2{grid-template-columns:1.3fr 1fr}
+  .toast{bottom:24px}
+}
+@media print{
+  body *{visibility:hidden}
+  .doc,.doc *{visibility:visible}
+  .mod{position:absolute;inset:0;background:none;display:block;padding:0}
+  .doc{max-height:none;box-shadow:none;border-radius:0}
+  .doc .acts{display:none}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Demostración de GENSAT con datos de ejemplo · <a href="https://wa.me/13855745556?text=Hola%2C%20vi%20la%20demo%20para%20contratistas%20de%20GENSAT" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></div>
+
+<section id="login">
+  <div class="lg-card">
+    <div class="lg-mark" id="lgm"></div>
+    <h1>Mi Constructora</h1>
+    <p>Sistema de trabajos, presupuestos y cobros</p>
+    <div class="lg-f"><label>Usuario</label><div>demo@miconstructora</div></div>
+    <div class="lg-f"><label>Acceso</label><div>Código de un solo uso enviado a tu correo</div></div>
+    <button class="lg-btn" id="enter" type="button">Entrar a la demostración</button>
+    <div class="lg-note">En la versión real solo entran los correos que el dueño autorice, con un código que llega al correo. Esta demo no pide ni guarda datos.</div>
+  </div>
+</section>
+
+<div id="app" hidden>
+  <header class="top">
+    <span class="mk" id="mk"></span>
+    <div><b>Mi Constructora</b><small id="today"></small></div>
+    <span class="sp"></span>
+    <span class="av" title="Usuario de demostración">MC</span>
+  </header>
+  <nav class="tabs" aria-label="Secciones">
+    <button type="button" data-tab="home" class="on"><span>📊</span>Panel</button>
+    <button type="button" data-tab="jobs"><span>🏗️</span>Trabajos</button>
+    <button type="button" data-tab="new" class="plus"><span>+</span>Nuevo</button>
+    <button type="button" data-tab="money"><span>💵</span>Cobros</button>
+    <button type="button" data-tab="cons"><span>📐</span>Consultoría</button>
+  </nav>
+  <main id="view"></main>
+</div>
+
+<div class="mod" id="mod" hidden><div class="doc" id="doc"></div></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const MARK = c => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></svg>`;
+document.getElementById('lgm').innerHTML = MARK('#fff');
+document.getElementById('mk').innerHTML = MARK('#fff');
+
+/* ===== Datos de ejemplo ===== */
+const STAGES = [
+  {k:'sol', n:'Solicitud', e:'📝', c:'b-n'},
+  {k:'pre', n:'Presupuesto enviado', e:'💲', c:'b-i'},
+  {k:'apr', n:'Aprobado', e:'✅', c:'b-i'},
+  {k:'obr', n:'En obra', e:'🏗️', c:'b-w'},
+  {k:'inf', n:'Informe enviado', e:'📸', c:'b-w'},
+  {k:'fac', n:'Facturado', e:'🧾', c:'b-w'},
+  {k:'pag', n:'Pagado', e:'💵', c:'b-o'}
+];
+const SI = k => STAGES.findIndex(s => s.k === k);
+let JOBS = [
+  {id:'T-101', t:'Reparación de techo', p:'Capilla Norte', st:'pag', bud:8400, cost:6150, adv:100, days:0, ph:3, pays:[['12 sep','Pago total',8400]]},
+  {id:'T-102', t:'Pintura exterior', p:'Capilla Centro', st:'fac', bud:5200, cost:3900, adv:100, days:38, ph:3, pays:[]},
+  {id:'T-103', t:'Cambio de alfombra del salón', p:'Capilla Sur', st:'obr', bud:12800, cost:8200, adv:70, days:0, ph:2, pays:[]},
+  {id:'T-104', t:'Aire acondicionado', p:'Centro de estaca', st:'obr', bud:18500, cost:14900, adv:55, days:0, ph:2, pays:[]},
+  {id:'T-105', t:'Baños accesibles', p:'Capilla Este', st:'apr', bud:9700, cost:0, adv:0, days:0, ph:0, pays:[]},
+  {id:'T-106', t:'Repavimentar estacionamiento', p:'Capilla Oeste', st:'pre', bud:22000, cost:0, adv:0, days:12, ph:0, pays:[]},
+  {id:'T-107', t:'Puertas de seguridad', p:'Capilla Norte', st:'pre', bud:6300, cost:0, adv:0, days:3, ph:0, pays:[]},
+  {id:'T-108', t:'Iluminación LED', p:'Capilla Centro', st:'sol', bud:0, cost:0, adv:0, days:2, ph:0, pays:[]},
+  {id:'T-109', t:'Impermeabilización', p:'Capilla Sur', st:'inf', bud:7600, cost:5450, adv:100, days:4, ph:3, pays:[]},
+  {id:'T-110', t:'Cerca perimetral', p:'Capilla Este', st:'pag', bud:11200, cost:8300, adv:100, days:0, ph:3, pays:[['28 ago','Pago total',11200]]}
+];
+const CONS = [
+  {id:'C-201', t:'Plan de remodelación', p:'Cliente privado · Oficinas', fee:4500, paid:2250, adv:60, next:'Entrega de planos · 8 nov'},
+  {id:'C-202', t:'Supervisión de obra', p:'Cliente privado · Local comercial', fee:6000, paid:1800, adv:30, next:'Visita de inspección · 4 nov'},
+  {id:'C-203', t:'Estudio de costos', p:'Cliente privado · Vivienda', fee:1800, paid:1800, adv:100, next:'Terminado'}
+];
+const SALES = [['Ene',14],['Feb',18],['Mar',16],['Abr',22],['May',19],['Jun',26],['Jul',21],['Ago',29],['Sep',24],['Oct',31]];
+const PHOTO_E = ['🧱','🔨','✨'], PHOTO_L = ['Antes','Durante','Después'];
+const userPhotos = {};
+
+/* ===== Utilidades ===== */
+const $ = id => document.getElementById(id);
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const st = j => STAGES[SI(j.st)];
+const bdg = j => `<span class="bdg ${st(j).c}">${st(j).e} ${st(j).n}</span>`;
+const profit = j => j.bud - j.cost;
+const paid = j => j.pays.reduce((a,p) => a + p[2], 0);
+function toast(t){ const e = $('toast'); e.textContent = t; e.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => e.hidden = true, 2600); }
+$('today').textContent = new Date().toLocaleDateString('es', {weekday:'long', day:'numeric', month:'long'});
+
+/* ===== Vistas ===== */
+let tab = 'home', filter = 'all';
+function go(t, arg){ tab = t; document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === t || (t === 'job' && b.dataset.tab === 'jobs')));
+  ({home, jobs, job, new: newJob, money: cobros, cons})[t](arg); window.scrollTo({top:0}); }
+document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => { if (b.dataset.tab === 'jobs') filter = 'all'; go(b.dataset.tab); }));
+
+function home(){
+  const waiting = JOBS.filter(j => j.st === 'pre');
+  const inWork = JOBS.filter(j => j.st === 'obr');
+  const owed = JOBS.filter(j => ['inf','fac'].includes(j.st));
+  const done = JOBS.filter(j => j.st === 'pag');
+  const util = done.reduce((a,j) => a + profit(j), 0), billed = done.reduce((a,j) => a + j.bud, 0);
+  const alerts = [];
+  JOBS.filter(j => j.st === 'fac' && j.days > 30).forEach(j => alerts.push(['bad','💸',`${j.id} · factura con ${j.days} días sin pagar`, `${j.t} · ${money(j.bud)}`, j.id]));
+  JOBS.filter(j => j.st === 'obr' && j.cost / j.bud > j.adv / 100 + .15).forEach(j => alerts.push(['bad','⚠️',`${j.id} · gasto por encima del avance`, `Lleva ${Math.round(j.cost/j.bud*100)}% del presupuesto gastado y ${j.adv}% de avance`, j.id]));
+  JOBS.filter(j => j.st === 'pre' && j.days > 10).forEach(j => alerts.push(['warn','⏳',`${j.id} · presupuesto sin respuesta hace ${j.days} días`, `${j.t} · ${money(j.bud)}`, j.id]));
+  const max = Math.max(...SALES.map(s => s[1]));
+  $('view').innerHTML = `
+    <h2>Hola 👋 Así va tu empresa hoy</h2>
+    <div class="kpis">
+      <div class="card kpi"><small>Esperando aprobación</small><b>${money(waiting.reduce((a,j)=>a+j.bud,0))}</b><span class="muted">${waiting.length} presupuestos</span></div>
+      <div class="card kpi"><small>En obra</small><b>${inWork.length} trabajos</b><span class="muted">${money(inWork.reduce((a,j)=>a+j.bud,0))} en contratos</span></div>
+      <div class="card kpi"><small>Por cobrar</small><b style="color:var(--warn)">${money(owed.reduce((a,j)=>a+j.bud-paid(j),0))}</b><span class="muted">${owed.length} trabajos terminados</span></div>
+      <div class="card kpi"><small>Utilidad (trabajos pagados)</small><b style="color:var(--ok)">${money(util)}</b><span class="muted">${billed ? Math.round(util/billed*100) : 0}% de margen</span></div>
+    </div>
+    ${alerts.length ? `<h3>🚦 Alertas</h3>${alerts.map(a => `<button type="button" class="alert ${a[0]}" data-job="${a[4]}"><span>${a[1]}</span><span><b>${a[2]}</b>${a[3]}</span></button>`).join('')}` : ''}
+    <h3 style="margin-top:12px">Tus trabajos por etapa</h3>
+    <div class="pipe">${STAGES.map(s => `<button type="button" class="pstage" data-stage="${s.k}"><div class="e">${s.e}</div><b>${JOBS.filter(j => j.st === s.k).length}</b><small>${s.n}</small></button>`).join('')}</div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card chart"><h3>Ventas por mes (miles de $)</h3>
+        <svg viewBox="0 0 500 210" role="img" aria-label="Ventas por mes">${SALES.map((s,i) => { const h = s[1]/max*150; return `<rect x="${12+i*49}" y="${170-h}" width="32" height="${h}" rx="6" fill="${i===SALES.length-1?'#f5b83d':'#4e7bea'}"/><text x="${28+i*49}" y="${163-h}" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">${s[1]}</text><text x="${28+i*49}" y="192" text-anchor="middle" font-size="12" fill="currentColor" opacity=".65">${s[0]}</text>`; }).join('')}</svg></div>
+      <div class="card"><h3>Avance de obras</h3>${inWork.map(j => `<button type="button" class="job" data-job="${j.id}" style="border:0;padding:8px 0"><div class="r1"><span><b>${j.t}</b><small>${j.p}</small></span><span class="num">${j.adv}%</span></div><div class="r2"><span class="trk"><i style="width:${j.adv}%"></i></span></div></button>`).join('')}</div>
+    </div>
+    <div class="cta"><span><b>¿Te imaginas esto con tus datos?</b><br><span style="color:#b8c0cc;font-size:13.5px">Esta es una demostración de GENSAT.</span></span><a href="https://wa.me/13855745556?text=Hola%2C%20vi%20la%20demo%20para%20contratistas%20de%20GENSAT" target="_blank" rel="noopener">Hablemos</a></div>`;
+  document.querySelectorAll('[data-job]').forEach(b => b.addEventListener('click', () => go('job', b.dataset.job)));
+  document.querySelectorAll('[data-stage]').forEach(b => b.addEventListener('click', () => { filter = b.dataset.stage; go('jobs'); }));
+}
+
+function jobs(){
+  const list = JOBS.filter(j => filter === 'all' || j.st === filter);
+  $('view').innerHTML = `<h2>Trabajos</h2>
+    <div class="chips"><button type="button" class="chip ${filter==='all'?'on':''}" data-f="all">Todos (${JOBS.length})</button>${STAGES.map(s => `<button type="button" class="chip ${filter===s.k?'on':''}" data-f="${s.k}">${s.e} ${s.n}</button>`).join('')}</div>
+    <div class="list">${list.length ? list.map(j => `<button type="button" class="job" data-job="${j.id}"><div class="r1"><span><b>${j.t}</b><small>${j.id} · ${j.p}</small></span>${bdg(j)}</div>
+      <div class="r2"><span class="num">${j.bud ? money(j.bud) : 'Sin presupuesto'}</span>${['obr'].includes(j.st) ? `<span class="trk" style="max-width:120px"><i style="width:${j.adv}%"></i></span><span class="num">${j.adv}%</span>` : (j.st==='pag' ? `<span class="muted" style="font-size:12.5px">Utilidad <b style="color:var(--ok)">${money(profit(j))}</b></span>` : '')}</div></button>`).join('') : '<p class="muted">No hay trabajos en esta etapa.</p>'}</div>`;
+  document.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { filter = b.dataset.f; jobs(); }));
+  document.querySelectorAll('[data-job]').forEach(b => b.addEventListener('click', () => go('job', b.dataset.job)));
+}
+
+function photoTiles(j){
+  const up = userPhotos[j.id] || [];
+  let tiles = '';
+  for (let i = 0; i < j.ph; i++) tiles += `<div class="ph">${PHOTO_E[i]}<small>${PHOTO_L[i]}</small></div>`;
+  up.forEach(u => tiles += `<div class="ph"><img src="${u}" alt="Foto de la obra"><small>Nueva</small></div>`);
+  return tiles;
+}
+function job(id){
+  const j = JOBS.find(x => x.id === id), i = SI(j.st);
+  const pct = j.bud ? Math.round(j.cost / j.bud * 100) : 0;
+  const nextLabel = {sol:'Enviar presupuesto', pre:'Marcar aprobado', apr:'Iniciar obra', obr:'Terminar y enviar informe', inf:'Registrar factura', fac:'Registrar pago'}[j.st];
+  $('view').innerHTML = `<button type="button" class="back" id="bk">← Trabajos</button>
+    <div class="card">
+      <div class="r1" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><span><h2 style="margin:0">${j.t}</h2><span class="muted">${j.id} · ${j.p}</span></span>${bdg(j)}</div>
+      <div class="steps">${STAGES.map((s,k) => `<div class="st ${k<i?'done':(k===i?'cur':'')}"><i>${k<i?'✓':s.e}</i>${s.n}</div>`).join('')}</div>
+      <div class="money"><div><small>Presupuesto</small><b>${j.bud?money(j.bud):'—'}</b></div><div><small>Gastado</small><b>${money(j.cost)}</b></div><div><small>Utilidad estimada</small><b style="color:var(--ok)">${j.bud?money(profit(j)):'—'}</b></div></div>
+      ${j.bud ? `<div class="bvr">Gastado vs. presupuesto: <b>${pct}%</b>${j.st==='obr'?` · Avance de obra: <b>${j.adv}%</b>`:''}<div class="trk"><i style="width:${Math.min(100,pct)}%;background:${pct>j.adv+15&&j.st==='obr'?'var(--bad)':'var(--ok)'}"></i></div></div>` : ''}
+      ${nextLabel ? `<div class="acts"><button type="button" class="btn g" id="adv">${nextLabel} →</button><button type="button" class="btn o" id="pdf">${['sol','pre','apr'].includes(j.st)?'📄 Ver presupuesto':'📸 Ver informe'}</button></div>` : `<div class="acts"><button type="button" class="btn o" id="pdf" style="grid-column:1/-1">📸 Ver informe final</button></div>`}
+    </div>
+    <div class="card" style="margin-top:12px"><h3>📸 Fotos de la obra</h3>
+      <div class="photos">${photoTiles(j)}<label class="ph add">＋<br>Tomar o subir foto<input type="file" accept="image/*" capture="environment" id="up"></label></div>
+      <p class="muted" style="font-size:12.5px;margin:8px 0 0">Desde la obra, con la cámara del celular. Las fotos van directo al informe.</p></div>
+    <div class="card" style="margin-top:12px"><h3>💵 Pagos</h3>${j.pays.length ? j.pays.map(p => `<div class="pay"><span>${p[0]} · ${p[1]}</span><b class="num">${money(p[2])}</b></div>`).join('') : '<p class="muted" style="margin:0">Sin pagos registrados todavía.</p>'}
+      ${j.bud && j.st!=='pag' && ['inf','fac'].includes(j.st) ? `<div class="pay"><span>Pendiente por cobrar</span><b class="num" style="color:var(--warn)">${money(j.bud-paid(j))}</b></div>` : ''}</div>`;
+  $('bk').onclick = () => go('jobs');
+  if ($('adv')) $('adv').onclick = () => {
+    if (j.st === 'sol'){ j.bud = 4800; j.days = 0; }
+    if (j.st === 'apr'){ j.adv = 10; j.cost = 600; }
+    if (j.st === 'obr'){ j.adv = 100; j.cost = Math.round(j.bud * 0.72); j.ph = Math.max(j.ph, 3); }
+    if (j.st === 'fac'){ j.pays.push([new Date().toLocaleDateString('es',{day:'numeric',month:'short'}), 'Pago total', j.bud - paid(j)]); }
+    j.st = STAGES[i+1].k; j.days = 0;
+    toast(`${j.id} pasó a: ${st(j).n} ${st(j).e}`); job(id);
+  };
+  $('pdf').onclick = () => report(j);
+  $('up').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { (userPhotos[j.id] = userPhotos[j.id] || []).push(r.result); toast('Foto agregada al trabajo ✓'); job(id); }; r.readAsDataURL(f); };
+}
+
+function report(j){
+  const isBudget = ['sol','pre','apr'].includes(j.st);
+  const items = j.bud ? [['Materiales', .48], ['Mano de obra', .37], ['Equipos y transporte', .08], ['Imprevistos', .07]] : [];
+  const up = userPhotos[j.id] || [];
+  const phs = [...Array(Math.max(j.ph,0)).keys()].map(i => `<div>${PHOTO_E[i]}<small>${PHOTO_L[i]}</small></div>`).join('') + up.map(u => `<div><img src="${u}" alt=""><small>Nueva</small></div>`).join('');
+  $('doc').innerHTML = `<div class="dh">${MARK('#0f1b2d')}<div><h4>${isBudget ? 'PRESUPUESTO' : (j.adv < 100 ? 'INFORME DE AVANCE DE OBRA' : 'INFORME DE TRABAJO TERMINADO')}</h4><small>Mi Constructora · ${j.id} · ${new Date().toLocaleDateString('es')}</small></div></div>
+    <p style="margin:0 0 4px"><b>Trabajo:</b> ${j.t}</p><p style="margin:0 0 10px"><b>Lugar:</b> ${j.p}</p>
+    ${items.length ? `<table><thead><tr><th>Concepto</th><th class="r">Monto</th></tr></thead><tbody>${items.map(it => `<tr><td>${it[0]}</td><td class="r">${money(j.bud*it[1])}</td></tr>`).join('')}<tr><th>Total</th><th class="r">${money(j.bud)}</th></tr></tbody></table>` : '<p>Presupuesto pendiente de elaborar.</p>'}
+    ${!isBudget ? `<p style="margin:12px 0 4px"><b>Registro fotográfico</b></p><div class="phs">${phs || '<div>📷</div>'}</div>
+    <p style="font-size:13px;margin:8px 0">${j.adv < 100 ? `Avance de obra: ${j.adv}%. Los trabajos siguen según lo aprobado en el presupuesto.` : 'Trabajo terminado al 100%. Se realizaron las reparaciones aprobadas según el presupuesto, con materiales de primera calidad.'}</p>` : '<p style="font-size:13px">Validez de la oferta: 30 días. Tiempo estimado de ejecución: 2 a 3 semanas.</p>'}
+    <div class="sig"><div>Contratista</div><div>Recibido por</div></div>
+    <div class="acts"><button type="button" class="btn o" id="cls">Cerrar</button><button type="button" class="btn g" id="prt">⬇ Guardar PDF</button></div>`;
+  $('mod').hidden = false;
+  $('cls').onclick = () => $('mod').hidden = true;
+  $('prt').onclick = () => window.print();
+}
+$('mod').addEventListener('click', e => { if (e.target.id === 'mod') $('mod').hidden = true; });
+
+function newJob(){
+  $('view').innerHTML = `<h2>Nuevo trabajo</h2>
+    <form class="card" id="nf">
+      <div class="fld"><label for="n-t">¿Qué se va a hacer?</label><input id="n-t" required placeholder="Ej. Reparar canaletas"></div>
+      <div class="row2"><div class="fld"><label for="n-p">Lugar</label><select id="n-p"><option>Capilla Norte</option><option>Capilla Centro</option><option>Capilla Sur</option><option>Capilla Este</option><option>Capilla Oeste</option><option>Centro de estaca</option></select></div>
+      <div class="fld"><label for="n-m">Margen deseado</label><select id="n-m"><option value="0.25">25%</option><option value="0.3" selected>30%</option><option value="0.35">35%</option></select></div></div>
+      <h3 style="margin-top:6px">Costos</h3>
+      <div class="lines" id="lines">
+        <div class="ln muted" style="font-size:12px;font-weight:600"><span>Concepto</span><span>Cant.</span><span>Costo c/u</span></div>
+        <div class="ln"><input value="Materiales" aria-label="Concepto"><input value="1" inputmode="decimal" aria-label="Cantidad"><input value="1200" inputmode="decimal" aria-label="Costo"></div>
+        <div class="ln"><input value="Mano de obra (días)" aria-label="Concepto"><input value="4" inputmode="decimal" aria-label="Cantidad"><input value="260" inputmode="decimal" aria-label="Costo"></div>
+        <div class="ln"><input value="Transporte" aria-label="Concepto"><input value="1" inputmode="decimal" aria-label="Cantidad"><input value="150" inputmode="decimal" aria-label="Costo"></div>
+      </div>
+      <button type="button" class="btn o" id="addl" style="width:100%;margin-top:4px">+ Agregar línea</button>
+      <div class="total"><span>Costo</span><span id="tc">$0</span></div>
+      <div class="total" style="border:0;padding-top:0;color:var(--ok)"><span>Precio a presupuestar</span><span id="tp">$0</span></div>
+      <button type="submit" class="btn g" style="width:100%">Guardar y crear presupuesto</button>
+    </form>`;
+  const calc = () => { let c = 0; document.querySelectorAll('#lines .ln').forEach((l,i) => { if (!i) return; const v = l.querySelectorAll('input'); c += (parseFloat(v[1].value)||0) * (parseFloat(v[2].value)||0); });
+    const m = parseFloat($('n-m').value); $('tc').textContent = money(c); $('tp').textContent = money(c / (1 - m)); return [c, c/(1-m)]; };
+  $('nf').addEventListener('input', calc); calc();
+  $('addl').onclick = () => { $('lines').insertAdjacentHTML('beforeend', '<div class="ln"><input placeholder="Concepto" aria-label="Concepto"><input value="1" inputmode="decimal" aria-label="Cantidad"><input value="0" inputmode="decimal" aria-label="Costo"></div>'); };
+  $('nf').onsubmit = e => { e.preventDefault(); const [c, p] = calc(); const id = 'T-' + (111 + JOBS.length - 10);
+    JOBS.unshift({id, t: $('n-t').value || 'Trabajo nuevo', p: $('n-p').value, st:'pre', bud: Math.round(p), cost:0, adv:0, days:0, ph:0, pays:[], estCost: c});
+    toast(`${id} creado · presupuesto de ${money(p)} listo para enviar`); go('job', id); };
+}
+
+function cobros(){
+  const owed = JOBS.filter(j => ['inf','fac'].includes(j.st)).sort((a,b) => b.days - a.days);
+  const paidJ = JOBS.filter(j => j.st === 'pag');
+  const consOwed = CONS.reduce((a,c) => a + c.fee - c.paid, 0);
+  $('view').innerHTML = `<h2>Cobros</h2>
+    <div class="kpis">
+      <div class="card kpi"><small>Por cobrar · obras</small><b style="color:var(--warn)">${money(owed.reduce((a,j)=>a+j.bud-paid(j),0))}</b></div>
+      <div class="card kpi"><small>Por cobrar · consultoría</small><b style="color:var(--warn)">${money(consOwed)}</b></div>
+      <div class="card kpi"><small>Cobrado (obras)</small><b style="color:var(--ok)">${money(paidJ.reduce((a,j)=>a+paid(j),0))}</b></div>
+      <div class="card kpi"><small>Días promedio para cobrar</small><b>21</b><span class="muted">en los últimos 6 meses</span></div>
+    </div>
+    <h3>Pendientes, del más atrasado al más reciente</h3>
+    <div class="list">${owed.map(j => `<button type="button" class="job" data-job="${j.id}"><div class="r1"><span><b>${j.t}</b><small>${j.id} · ${j.p}</small></span><span class="bdg ${j.days>30?'b-b':'b-w'}">${j.days} días</span></div><div class="r2">${bdg(j)}<span class="num">${money(j.bud-paid(j))}</span></div></button>`).join('')}</div>`;
+  document.querySelectorAll('[data-job]').forEach(b => b.addEventListener('click', () => go('job', b.dataset.job)));
+}
+
+function cons(){
+  $('view').innerHTML = `<h2>Consultoría de proyectos</h2>
+    <div class="list">${CONS.map(c => `<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><span><b>${c.t}</b><br><small class="muted">${c.id} · ${c.p}</small></span><span class="bdg ${c.adv===100?'b-o':'b-w'}">${c.adv===100?'Terminado':'En curso'}</span></div>
+      <div style="display:flex;gap:10px;align-items:center;margin:10px 0 6px"><span class="trk"><i style="width:${c.adv}%"></i></span><b class="num">${c.adv}%</b></div>
+      <div class="money" style="margin:6px 0"><div><small>Honorarios</small><b>${money(c.fee)}</b></div><div><small>Cobrado</small><b style="color:var(--ok)">${money(c.paid)}</b></div><div><small>Pendiente</small><b style="color:var(--warn)">${money(c.fee-c.paid)}</b></div></div>
+      <small class="muted">📅 ${c.next}</small></div>`).join('')}</div>`;
+}
+
+$('enter').addEventListener('click', () => { $('login').hidden = true; $('app').hidden = false; go('home'); });
+</script>
+</body>
+</html>
