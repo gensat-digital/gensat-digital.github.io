@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demo: presupuestos desde el celular · GENSAT</title>
+<meta name="description" content="Arma un presupuesto de obra desde el celular, descárgalo en PDF y envíalo por correo. Demostración de GENSAT.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" type="image/svg+xml" href="img/gensat-simbolo.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo: presupuestos desde el celular · GENSAT">
+<meta property="og:description" content="Arma el presupuesto en el teléfono, sale en PDF y lo envías por correo.">
+<meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
+<meta property="og:locale" content="es_LA">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: app móvil en 3 pasos (Cliente, Partidas, Enviar) con barra fija abajo que muestra el total; en computadora se centra a 560px */
+:root{
+  --navy:#0f1b2d; --gold:#f5b83d; --gold-ink:#8a5d00;
+  --bg:#f4f5f8; --card:#ffffff; --ink:#0f1b2d; --muted:#5d6675; --line:#e1e5ec;
+  --ok:#1f9d63; --ok-bg:#e1f4ea; --n-bg:#eef0f4; --font:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --n-bg:#1b2a45; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0b1422; --card:#13213a; --ink:#eef1f6; --muted:#a3adbd; --line:#22324f; --gold-ink:#f5b83d; --ok:#4cc98d; --ok-bg:#123a2a; --n-bg:#1b2a45; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+.demo-flag{background:var(--gold);color:var(--navy);font-size:12.5px;font-weight:700;text-align:center;padding:7px 12px}
+.demo-flag a{color:var(--navy)}
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:12px 16px}
+.top .row{display:flex;align-items:center;gap:10px;max-width:560px;margin:0 auto}
+.top .mk{width:30px;height:30px;flex:none}
+.top b{font-size:16px}.top small{display:block;color:#b8c0cc;font-size:12px}
+.steps{display:flex;gap:6px;max-width:560px;margin:10px auto 0}
+.steps button{flex:1;appearance:none;border:1px solid #22324f;background:transparent;color:#b8c0cc;border-radius:999px;padding:7px 6px;font-size:13px;font-weight:700;cursor:pointer}
+.steps button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.steps button.done{color:#fff}
+main{max-width:560px;margin:0 auto;padding:14px 16px 120px}
+h2{font-size:19px;margin:4px 0 4px}
+.lead{color:var(--muted);margin:0 0 12px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.fld{margin-bottom:11px}
+.fld label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.fld input,.fld select,.fld textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);font-size:15px}
+.fld textarea{min-height:70px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cats{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:2px}
+.cat{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+.cat.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cat.on{background:var(--gold);color:var(--navy)}}
+:root[data-theme="dark"] .cat.on{background:var(--gold);color:var(--navy)}
+.it{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.it:last-child{border:0}
+.it .e{width:40px;height:40px;border-radius:11px;background:var(--n-bg);display:grid;place-items:center;font-size:20px;flex:none}
+.it .t{flex:1;min-width:0}
+.it .t b{display:block;font-size:14.5px}
+.it .t small{color:var(--muted);font-size:12.5px}
+.qty{display:flex;align-items:center;gap:4px;flex:none}
+.qty button{appearance:none;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:18px;font-weight:700;cursor:pointer;line-height:1}
+.qty button.add{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.qty input{width:52px;text-align:center;padding:7px 4px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-weight:700;font-variant-numeric:tabular-nums}
+.custom{display:grid;grid-template-columns:1fr 64px 84px auto;gap:6px;align-items:end}
+.custom input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.btn{appearance:none;border:0;border-radius:12px;padding:13px 14px;font-weight:800;cursor:pointer;background:var(--navy);color:#fff;text-align:center;font-size:15px}
+.btn.g{background:var(--gold);color:var(--navy)}
+.btn.o{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.w{width:100%}
+.sum .r{display:flex;justify-content:space-between;padding:6px 0;font-variant-numeric:tabular-nums}
+.sum .r.t{font-size:20px;font-weight:800;border-top:2px solid var(--line);margin-top:6px;padding-top:10px}
+.lines .ln{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--line)}
+.lines .ln:last-child{border:0}
+.lines .ln span:last-child{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.foot .row{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.foot .tot{flex:1}
+.foot small{display:block;color:var(--muted);font-size:12px}
+.foot b{font-size:21px;font-variant-numeric:tabular-nums}
+.acts{display:grid;gap:8px}
+.ok{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:11px 12px;font-size:13.5px;font-weight:600;margin-bottom:12px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:12px;font-size:13.5px;font-weight:600;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100vw - 32px);text-align:center}
+.mod{position:fixed;inset:0;z-index:50;background:rgba(8,14,26,.65);display:grid;place-items:center;padding:14px}
+.paper{background:#fff;color:#0f1b2d;width:100%;max-width:520px;max-height:84dvh;overflow:auto;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.paper .ph{background:#0f1b2d;color:#fff;padding:18px 20px;display:flex;align-items:center;gap:12px}
+.paper .ph svg{width:44px;height:44px}
+.paper .ph b{font-size:18px;display:block}.paper .ph small{color:#c9d0db;font-size:12px}
+.paper .pb{padding:16px 20px;font-size:13px}
+.paper table{width:100%;border-collapse:collapse;margin:10px 0}
+.paper th,.paper td{padding:7px 4px;border-bottom:1px solid #e1e5ec;text-align:left;font-size:12.5px}
+.paper th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5d6675}
+.paper .r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.paper .tt td{font-weight:800;font-size:15px;border-top:2px solid #0f1b2d;border-bottom:0}
+.paper .bar{position:sticky;bottom:0;background:#fff;padding:12px 20px;display:flex;gap:8px;border-top:1px solid #e1e5ec}
+.paper .bar .btn{flex:1}
+.saved .s{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.saved .s:last-child{border:0}
+.saved .s small{display:block;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="demo-flag">Demostración de GENSAT con datos de ejemplo · <a href="https://wa.me/13855745556?text=Hola%2C%20vi%20la%20demo%20de%20presupuestos%20de%20GENSAT" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></div>
+<header class="top">
+  <div class="row"><span class="mk" id="mk"></span><div><b>Presupuesto nuevo</b><small id="qno"></small></div></div>
+  <div class="steps" role="tablist"><button type="button" data-s="1" class="on">1 · Cliente</button><button type="button" data-s="2">2 · Partidas</button><button type="button" data-s="3">3 · Enviar</button></div>
+</header>
+<main>
+  <section id="s1">
+    <h2>¿Para quién es?</h2>
+    <p class="lead">Llénalo desde la obra o desde donde estés.</p>
+    <div class="card">
+      <div class="fld"><label for="c-name">Cliente</label><input id="c-name" value="Capilla Centro · Mantenimiento" autocomplete="off"></div>
+      <div class="fld"><label for="c-mail">Correo del cliente</label><input id="c-mail" type="email" value="cliente@ejemplo.com" autocomplete="off"></div>
+      <div class="fld"><label for="c-job">Trabajo</label><input id="c-job" value="Reparación de techo y pintura del salón" autocomplete="off"></div>
+      <div class="row2">
+        <div class="fld"><label for="c-days">Tiempo estimado</label><select id="c-days"><option>1 semana</option><option selected>2 semanas</option><option>3 semanas</option><option>1 mes</option></select></div>
+        <div class="fld"><label for="c-val">Válido por</label><select id="c-val"><option>15 días</option><option selected>30 días</option><option>60 días</option></select></div>
+      </div>
+    </div>
+    <button type="button" class="btn g w" data-go="2">Siguiente: agregar partidas →</button>
+  </section>
+
+  <section id="s2" hidden>
+    <h2>Partidas</h2>
+    <p class="lead">Toca <b>+</b> para agregar. Los precios salen de tu lista y los puedes cambiar.</p>
+    <div class="cats" id="cats"></div>
+    <div class="card" id="items"></div>
+    <div class="card">
+      <b style="font-size:14px">Agregar otra partida</b>
+      <div class="custom" style="margin-top:8px">
+        <div><label class="lead" style="font-size:11.5px;margin:0" for="x-n">Descripción</label><input id="x-n" placeholder="Ej. Canaletas"></div>
+        <div><label class="lead" style="font-size:11.5px;margin:0" for="x-q">Cant.</label><input id="x-q" value="1" inputmode="decimal"></div>
+        <div><label class="lead" style="font-size:11.5px;margin:0" for="x-p">Precio</label><input id="x-p" placeholder="$0" inputmode="decimal"></div>
+        <button type="button" class="btn g" id="x-add" aria-label="Agregar partida">+</button>
+      </div>
+    </div>
+    <button type="button" class="btn g w" data-go="3">Siguiente: revisar y enviar →</button>
+  </section>
+
+  <section id="s3" hidden>
+    <h2>Revisa y envía</h2>
+    <p class="lead" id="s3l"></p>
+    <div class="card"><div class="lines" id="lines"></div></div>
+    <div class="card sum">
+      <div class="row2">
+        <div class="fld"><label for="o-ind">Gastos generales</label><select id="o-ind"><option value="0">0%</option><option value="0.05">5%</option><option value="0.1" selected>10%</option><option value="0.15">15%</option></select></div>
+        <div class="fld"><label for="o-tax">Impuesto</label><select id="o-tax"><option value="0" selected>No aplica</option><option value="0.0725">7.25%</option></select></div>
+      </div>
+      <div class="r"><span>Subtotal</span><span id="v-sub"></span></div>
+      <div class="r"><span>Gastos generales</span><span id="v-ind"></span></div>
+      <div class="r" id="r-tax"><span>Impuesto</span><span id="v-tax"></span></div>
+      <div class="r t"><span>Total</span><span id="v-tot"></span></div>
+    </div>
+    <div class="card"><div class="fld" style="margin:0"><label for="o-note">Nota para el cliente</label><textarea id="o-note">Incluye materiales, mano de obra y limpieza al terminar. Garantía de 6 meses en mano de obra.</textarea></div></div>
+    <div class="acts">
+      <button type="button" class="btn o" id="b-prev">👁️ Ver cómo queda el PDF</button>
+      <button type="button" class="btn" id="b-pdf">⬇ Descargar PDF</button>
+      <button type="button" class="btn g" id="b-mail">✉️ Enviar por correo</button>
+    </div>
+    <div class="card saved" id="saved" style="margin-top:12px" hidden><b style="font-size:14px">Presupuestos guardados en este teléfono</b><div id="savedL"></div></div>
+  </section>
+</main>
+<div class="foot"><div class="row"><div class="tot"><small id="f-n">0 partidas</small><b id="f-t">$0.00</b></div><button type="button" class="btn g" id="f-go">Siguiente →</button></div></div>
+<div class="mod" id="mod" hidden><div class="paper" id="paper"></div></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const MARK = c => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></svg>`;
+const $ = id => document.getElementById(id);
+$('mk').innerHTML = MARK('#fff');
+const QNO = 'P-' + String(new Date().getFullYear()).slice(2) + String(new Date().getMonth()+1).padStart(2,'0') + '-0' + (40 + new Date().getDate());
+$('qno').textContent = QNO + ' · Mi Constructora';
+
+/* Lista de precios de ejemplo */
+const CATS = {mat:'🧱 Materiales', mo:'👷 Mano de obra', eq:'🚚 Equipos y transporte'};
+const CAT = [
+  {id:1, c:'mat', e:'🧱', n:'Cemento', u:'saco', p:12.50},
+  {id:2, c:'mat', e:'🟫', n:'Lámina de techo', u:'pieza', p:24.00},
+  {id:3, c:'mat', e:'🛡️', n:'Impermeabilizante', u:'cubeta', p:95.00},
+  {id:4, c:'mat', e:'🎨', n:'Pintura interior', u:'galón', p:38.00},
+  {id:5, c:'mat', e:'🔩', n:'Tornillería y anclajes', u:'lote', p:45.00},
+  {id:6, c:'mat', e:'🪵', n:'Madera para estructura', u:'pieza', p:16.00},
+  {id:7, c:'mo', e:'👷', n:'Maestro de obra', u:'día', p:220.00},
+  {id:8, c:'mo', e:'🧑‍🔧', n:'Ayudante', u:'día', p:140.00},
+  {id:9, c:'mo', e:'🖌️', n:'Pintor', u:'día', p:180.00},
+  {id:10, c:'eq', e:'🚚', n:'Transporte de material', u:'viaje', p:65.00},
+  {id:11, c:'eq', e:'🪜', n:'Andamio', u:'semana', p:120.00},
+  {id:12, c:'eq', e:'🗑️', n:'Retiro de escombros', u:'viaje', p:90.00}
+];
+let qty = {2:18, 3:4, 4:6, 5:1, 7:5, 8:5, 9:3, 10:2, 11:1};
+let custom = [], curCat = 'mat', step = 1;
+const money = n => '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const toast = t => { const e = $('toast'); e.textContent = t; e.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => e.hidden = true, 2800); };
+
+function lines(){
+  const l = CAT.filter(x => qty[x.id] > 0).map(x => ({n:x.n, u:x.u, q:qty[x.id], p:x.p, c:x.c}));
+  return l.concat(custom.map(x => ({...x, c:'otro'})));
+}
+function totals(){
+  const L = lines(), sub = L.reduce((a,x) => a + x.q*x.p, 0);
+  const ind = sub * parseFloat($('o-ind').value), tax = (sub+ind) * parseFloat($('o-tax').value);
+  return {L, sub, ind, tax, tot: sub+ind+tax};
+}
+function drawItems(){
+  $('cats').innerHTML = Object.entries(CATS).map(([k,v]) => `<button type="button" class="cat ${k===curCat?'on':''}" data-c="${k}">${v}</button>`).join('');
+  $('cats').querySelectorAll('.cat').forEach(b => b.onclick = () => { curCat = b.dataset.c; drawItems(); });
+  $('items').innerHTML = CAT.filter(x => x.c === curCat).map(x => `<div class="it"><span class="e">${x.e}</span><span class="t"><b>${x.n}</b><small>${money(x.p)} / ${x.u}</small></span>
+    <span class="qty"><button type="button" data-d="${x.id}" aria-label="Quitar uno">−</button><input data-q="${x.id}" value="${qty[x.id]||0}" inputmode="decimal" aria-label="Cantidad de ${x.n}"><button type="button" class="add" data-a="${x.id}" aria-label="Agregar uno">+</button></span></div>`).join('');
+  $('items').querySelectorAll('[data-a]').forEach(b => b.onclick = () => { qty[b.dataset.a] = (qty[b.dataset.a]||0) + 1; drawItems(); });
+  $('items').querySelectorAll('[data-d]').forEach(b => b.onclick = () => { qty[b.dataset.d] = Math.max(0, (qty[b.dataset.d]||0) - 1); drawItems(); });
+  $('items').querySelectorAll('[data-q]').forEach(i => i.onchange = () => { qty[i.dataset.q] = Math.max(0, parseFloat(i.value.replace(',','.'))||0); drawItems(); });
+  foot();
+}
+function foot(){ const t = totals(); $('f-n').textContent = `${t.L.length} partidas · total`; $('f-t').textContent = money(t.tot);
+  $('f-go').textContent = step < 3 ? 'Siguiente →' : '✉️ Enviar'; }
+function drawSummary(){
+  const t = totals();
+  $('s3l').textContent = `${$('c-job').value} · para ${$('c-name').value}`;
+  $('lines').innerHTML = t.L.map(x => `<div class="ln"><span>${x.n} <span style="color:var(--muted)">· ${x.q} ${x.u} × ${money(x.p)}</span></span><span>${money(x.q*x.p)}</span></div>`).join('') || '<p class="lead">Todavía no hay partidas.</p>';
+  $('v-sub').textContent = money(t.sub); $('v-ind').textContent = money(t.ind); $('v-tax').textContent = money(t.tax); $('r-tax').hidden = !t.tax; $('v-tot').textContent = money(t.tot);
+  foot(); drawSaved();
+}
+function go(s){ step = s; [1,2,3].forEach(i => $('s'+i).hidden = i !== s);
+  document.querySelectorAll('.steps button').forEach(b => { const n = +b.dataset.s; b.classList.toggle('on', n === s); b.classList.toggle('done', n < s); });
+  if (s === 2) drawItems(); if (s === 3) drawSummary(); foot(); window.scrollTo({top:0}); }
+document.querySelectorAll('.steps button').forEach(b => b.onclick = () => go(+b.dataset.s));
+document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(+b.dataset.go));
+$('f-go').onclick = () => step < 3 ? go(step+1) : sendMail();
+['o-ind','o-tax'].forEach(id => $(id).onchange = drawSummary);
+$('x-add').onclick = () => { const n = $('x-n').value.trim(), q = parseFloat($('x-q').value.replace(',','.'))||1, p = parseFloat($('x-p').value.replace(',','.').replace('$',''))||0;
+  if (!n || !p) return toast('Escribe la descripción y el precio');
+  custom.push({n, u:'und', q, p}); $('x-n').value=''; $('x-p').value=''; $('x-q').value='1'; toast(`"${n}" agregado ✓`); foot(); };
+
+/* ===== PDF (generado en el teléfono, sin internet) ===== */
+const W_ = {' ':278,'$':556,',':278,'.':278,'-':333,'/':278,':':278,'%':889,'(':333,')':333,'×':584,'·':278};
+function tw(s, size, bold){ let w = 0; for (const ch of s){ if (/[0-9]/.test(ch)) w += 556; else if (W_[ch]) w += W_[ch];
+  else if (/[A-ZÁÉÍÓÚÑ]/.test(ch)) w += bold ? 700 : 667; else if (/[mwMW]/.test(ch)) w += 833; else if (/[iljtfr]/.test(ch)) w += 280; else w += bold ? 590 : 540; } return w * size / 1000; }
+function esc(s){ let o = ''; for (const ch of s){ const c = ch.charCodeAt(0); const map = {'á':225,'é':233,'í':237,'ó':243,'ú':250,'ñ':241,'Á':193,'É':201,'Í':205,'Ó':211,'Ú':218,'Ñ':209,'ü':252,'·':183,'×':215,'¿':191,'¡':161,'°':176};
+  if (ch === '(' || ch === ')' || ch === '\\') o += '\\' + ch; else if (map[ch]) o += '\\' + map[ch].toString(8); else if (c < 127) o += ch; else o += '?'; } return o; }
+function wrap(s, max, size){ const out = []; let line = ''; s.split(/\s+/).forEach(w => { const t = line ? line + ' ' + w : w; if (tw(t, size) > max && line){ out.push(line); line = w; } else line = t; }); if (line) out.push(line); return out; }
+function buildPDF(){
+  const t = totals(), W = 612, H = 792, ops = [];
+  const rect = (x,y,w,h,rgb) => ops.push(`${rgb} rg ${x} ${H-y-h} ${w} ${h} re f`);
+  const text = (s,x,y,size,bold,rgb='0.059 0.106 0.176',align) => { if (align === 'r') x -= tw(s,size,bold); ops.push(`BT /${bold?'F2':'F1'} ${size} Tf ${rgb} rg ${x.toFixed(2)} ${(H-y).toFixed(2)} Td (${esc(s)}) Tj ET`); };
+  const line = (x1,y,x2,rgb='0.88 0.9 0.93',w=0.8) => ops.push(`${rgb} RG ${w} w ${x1} ${H-y} m ${x2} ${H-y} l S`);
+  // encabezado
+  rect(0,0,W,96,'0.059 0.106 0.176');
+  rect(40,30,36,36,'0.961 0.722 0.239'); text('MC',47,54,14,true,'0.059 0.106 0.176');
+  text('Mi Constructora',88,46,18,true,'1 1 1'); text('Construcción · Mantenimiento · Remodelación',88,64,9.5,false,'0.79 0.82 0.86');
+  text('PRESUPUESTO',W-40,46,18,true,'0.961 0.722 0.239','r'); text(QNO,W-40,64,10,false,'1 1 1','r');
+  // datos
+  const d = new Date().toLocaleDateString('es',{day:'numeric',month:'short',year:'numeric'});
+  text('CLIENTE',40,124,8.5,true,'0.36 0.4 0.46'); text($('c-name').value,40,139,11.5,true); text($('c-mail').value,40,154,10,false,'0.36 0.4 0.46');
+  text('FECHA',360,124,8.5,true,'0.36 0.4 0.46'); text(d,360,139,11,false);
+  text('VÁLIDO POR',480,124,8.5,true,'0.36 0.4 0.46'); text($('c-val').value,480,139,11,false);
+  text('TRABAJO',40,180,8.5,true,'0.36 0.4 0.46'); text($('c-job').value,40,195,12,true);
+  text('Tiempo estimado: ' + $('c-days').value,40,210,10,false,'0.36 0.4 0.46');
+  // tabla
+  let y = 236; rect(40,y,W-80,22,'0.933 0.941 0.957');
+  text('DESCRIPCIÓN',48,y+15,8.5,true,'0.36 0.4 0.46'); text('CANT.',380,y+15,8.5,true,'0.36 0.4 0.46','r'); text('PRECIO',470,y+15,8.5,true,'0.36 0.4 0.46','r'); text('IMPORTE',W-48,y+15,8.5,true,'0.36 0.4 0.46','r');
+  y += 22;
+  const groups = [['mat','Materiales'],['mo','Mano de obra'],['eq','Equipos y transporte'],['otro','Otros']];
+  groups.forEach(([k,lab]) => { const L = t.L.filter(x => x.c === k); if (!L.length) return;
+    y += 18; text(lab.toUpperCase(),48,y,8.5,true,'0.54 0.36 0'); y += 4;
+    L.forEach(x => { y += 17; text(x.n,48,y,10,false); text(`${x.q} ${x.u}`,380,y,10,false,undefined,'r'); text(money(x.p),470,y,10,false,undefined,'r'); text(money(x.q*x.p),W-48,y,10,true,undefined,'r'); y += 6; line(40,y,W-40); });
+  });
+  y += 22; const tx = 400;
+  text('Subtotal',tx,y,10.5,false); text(money(t.sub),W-48,y,10.5,false,undefined,'r'); y += 17;
+  text('Gastos generales',tx,y,10.5,false); text(money(t.ind),W-48,y,10.5,false,undefined,'r');
+  if (t.tax){ y += 17; text('Impuesto',tx,y,10.5,false); text(money(t.tax),W-48,y,10.5,false,undefined,'r'); }
+  y += 12; rect(tx-10,y,W-40-(tx-10),30,'0.059 0.106 0.176'); text('TOTAL',tx,y+20,12,true,'0.961 0.722 0.239'); text(money(t.tot),W-48,y+20,13,true,'1 1 1','r');
+  // nota
+  y += 56; text('NOTAS',40,y,8.5,true,'0.36 0.4 0.46'); wrap($('o-note').value, W-80, 10).forEach(l => { y += 14; text(l,40,y,10,false); });
+  // firmas
+  const fy = Math.max(y + 60, 690); line(40,fy,250,'0.059 0.106 0.176',0.8); line(W-250,fy,W-40,'0.059 0.106 0.176',0.8);
+  text('Mi Constructora',40,fy+14,9.5,false,'0.36 0.4 0.46'); text('Aprobado por el cliente',W-250,fy+14,9.5,false,'0.36 0.4 0.46');
+  text('Presupuesto de ejemplo generado con GENSAT · gensat-digital.github.io',W/2 - tw('Presupuesto de ejemplo generado con GENSAT · gensat-digital.github.io',8)/2,770,8,false,'0.55 0.6 0.66');
+  // ensamblar el PDF
+  const content = ops.join('\n'); const objs = [];
+  objs.push('<< /Type /Catalog /Pages 2 0 R >>');
+  objs.push('<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  objs.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>`);
+  objs.push('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+  objs.push('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  objs.push(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`);
+  let pdf = '%PDF-1.4\n', offs = [];
+  objs.forEach((o,i) => { offs.push(pdf.length); pdf += `${i+1} 0 obj\n${o}\nendobj\n`; });
+  const xref = pdf.length; pdf += `xref\n0 ${objs.length+1}\n0000000000 65535 f \n` + offs.map(o => String(o).padStart(10,'0') + ' 00000 n \n').join('') + `trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+  const bytes = new Uint8Array(pdf.length); for (let i = 0; i < pdf.length; i++) bytes[i] = pdf.charCodeAt(i) & 255;
+  return new Blob([bytes], {type:'application/pdf'});
+}
+const fname = () => `Presupuesto_${QNO}.pdf`;
+function save(){ try { const k = 'gensat-presupuestos'; const a = JSON.parse(localStorage.getItem(k) || '[]'); const t = totals();
+  const i = a.findIndex(x => x.no === QNO); const r = {no:QNO, c:$('c-name').value, j:$('c-job').value, t:t.tot, d:new Date().toLocaleDateString('es')};
+  if (i >= 0) a[i] = r; else a.unshift(r); localStorage.setItem(k, JSON.stringify(a.slice(0,10))); } catch(_) {} drawSaved(); }
+function drawSaved(){ let a = []; try { a = JSON.parse(localStorage.getItem('gensat-presupuestos') || '[]'); } catch(_) {}
+  $('saved').hidden = !a.length; $('savedL').innerHTML = a.map(x => `<div class="s"><span><b>${x.no}</b><small>${x.c} · ${x.d}</small></span><b>${money(x.t)}</b></div>`).join(''); }
+function download(){ const b = buildPDF(), u = URL.createObjectURL(b), a = document.createElement('a'); a.href = u; a.download = fname(); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); save(); toast('PDF descargado ✓'); }
+async function sendMail(){
+  const b = buildPDF(), file = new File([b], fname(), {type:'application/pdf'}); save();
+  const subj = `Presupuesto ${QNO} · ${$('c-job').value}`, body = `Hola,\n\nAdjunto el presupuesto para: ${$('c-job').value}.\nTotal: ${money(totals().tot)}\nVálido por ${$('c-val').value}.\n\nQuedo atento a cualquier pregunta.\n\nMi Constructora`;
+  if (navigator.canShare && navigator.canShare({files:[file]})){
+    try { await navigator.share({files:[file], title:subj, text:body}); toast('Listo ✓ Escoge tu app de correo'); return; } catch(e){ if (e.name === 'AbortError') return; }
+  }
+  download(); location.href = `mailto:${encodeURIComponent($('c-mail').value)}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body + '\n\n(Adjunta el PDF que se acaba de descargar)')}`;
+}
+function preview(){
+  const t = totals();
+  const groups = [['mat','Materiales'],['mo','Mano de obra'],['eq','Equipos y transporte'],['otro','Otros']];
+  $('paper').innerHTML = `<div class="ph"><span style="width:40px;height:40px;border-radius:8px;background:#f5b83d;color:#0f1b2d;display:grid;place-items:center;font-weight:800">MC</span><div style="flex:1"><b>Mi Constructora</b><small>Construcción · Mantenimiento · Remodelación</small></div><div style="text-align:right"><b style="color:#f5b83d">PRESUPUESTO</b><small>${QNO}</small></div></div>
+    <div class="pb"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><small style="color:#5d6675;font-weight:700">CLIENTE</small><br><b>${$('c-name').value}</b><br><span style="color:#5d6675">${$('c-mail').value}</span></div><div style="text-align:right"><small style="color:#5d6675;font-weight:700">VÁLIDO POR</small><br>${$('c-val').value}</div></div>
+    <p style="margin:12px 0 0"><b>${$('c-job').value}</b><br><span style="color:#5d6675">Tiempo estimado: ${$('c-days').value}</span></p>
+    <table><thead><tr><th>Descripción</th><th class="r">Cant.</th><th class="r">Importe</th></tr></thead><tbody>
+    ${groups.map(([k,lab]) => { const L = t.L.filter(x => x.c === k); return L.length ? `<tr><td colspan="3" style="color:#8a5d00;font-weight:700;font-size:11px">${lab.toUpperCase()}</td></tr>` + L.map(x => `<tr><td>${x.n}<br><span style="color:#5d6675;font-size:11px">${money(x.p)} / ${x.u}</span></td><td class="r">${x.q} ${x.u}</td><td class="r">${money(x.q*x.p)}</td></tr>`).join('') : ''; }).join('')}
+    <tr><td colspan="2">Subtotal</td><td class="r">${money(t.sub)}</td></tr><tr><td colspan="2">Gastos generales</td><td class="r">${money(t.ind)}</td></tr>${t.tax?`<tr><td colspan="2">Impuesto</td><td class="r">${money(t.tax)}</td></tr>`:''}
+    <tr class="tt"><td colspan="2">TOTAL</td><td class="r">${money(t.tot)}</td></tr></tbody></table>
+    <p style="color:#5d6675;margin:6px 0 0">${$('o-note').value}</p></div>
+    <div class="bar"><button type="button" class="btn o" id="p-x">Cerrar</button><button type="button" class="btn g" id="p-m">✉️ Enviar</button></div>`;
+  $('mod').hidden = false; $('p-x').onclick = () => $('mod').hidden = true; $('p-m').onclick = () => { $('mod').hidden = true; sendMail(); };
+}
+$('mod').onclick = e => { if (e.target.id === 'mod') $('mod').hidden = true; };
+$('b-prev').onclick = preview; $('b-pdf').onclick = download; $('b-mail').onclick = sendMail;
+foot();
+</script>
+</body>
+</html>
