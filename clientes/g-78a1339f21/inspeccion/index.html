@@ -37,7 +37,7 @@ textarea.in{min-height:84px;resize:none;overflow:hidden;line-height:1.4}
 .tt{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;font-weight:700;margin-top:4px}
 .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
 .bar .in2{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px}.bar .sum{flex:1;min-width:0}.bar small{display:block;color:var(--mut);font-size:12px}.bar b{font-size:19px;font-variant-numeric:tabular-nums}
-.note{color:var(--mut);font-size:13px}
+.note{color:var(--mut);font-size:13px}.pill{display:inline-block;background:#fbf1d9;color:#9a6a00;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:650;vertical-align:1px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:50;max-width:90vw;text-align:center}
 .demo{background:var(--ink);color:#fff;text-align:center;font-size:11.5px;font-weight:600;padding:5px 12px}
 .pdoc{width:816px;background:#fff;color:#111;padding:40px 48px;font:13px/1.35 Calibri,Carlito,Arial,sans-serif}
@@ -97,7 +97,8 @@ function draw(){const y=scrollY;
   <div class="g3"><label class="f"><span>Unidad</span><select class="in" data-i="${i}" data-k="u">${UN.map(u=>`<option ${x.u===u?'selected':''}>${u}</option>`).join('')}</select></label><label class="f"><span>Cantidad</span><input class="in" data-i="${i}" data-k="q" type="number" inputmode="decimal" value="${esc(x.q)}"></label><label class="f"><span>Precio unit. $</span><input class="in" data-i="${i}" data-k="pu" type="number" inputmode="decimal" value="${esc(x.pu)}"></label></div>
   <div class="tt"><span>Total del trabajo</span><span id="it${i}">${money((+x.q||0)*(+x.pu||0))}</span></div></div>`).join('')}
  <button type="button" class="btn w" id="add" style="margin-top:12px">＋ Agregar otro trabajo</button>
- <p class="note">Todo se guarda en este teléfono mientras escribe. Cuando termine, toque "Enviar a AG": se crea un PDF con sus fotos y precios para mandarlo por WhatsApp.</p></div>
+ <p class="note">Todo se guarda en este teléfono mientras escribe. Cuando termine, toque "Enviar a AG": se crea un PDF con sus fotos y precios para mandarlo por WhatsApp.</p>
+ <div class="card" style="margin-top:12px;border-style:dashed"><p style="margin:0 0 4px;font-weight:650">Enviar directo a AG <span class="pill">Versión final</span></p><p class="note" style="margin:0 0 10px">En la versión final la propuesta llegará sola a la app de AG, sin WhatsApp. En esta demo todavía no funciona.</p><button type="button" class="btn w" id="direct" aria-describedby="dnote">Enviar directo a AG</button><p class="note" id="dnote" style="margin:6px 0 0"></p></div></div>
  <div class="bar"><div class="in2"><div class="sum"><small>Total de su propuesta</small><b id="tot">${money(total())}</b></div><button type="button" class="btn pri" id="send">Enviar a AG</button></div></div>`;
  scrollTo(0,y);
  document.querySelectorAll('[data-s]').forEach(e=>e.oninput=()=>{S[e.dataset.s]=e.value;save();});
@@ -106,7 +107,7 @@ function draw(){const y=scrollY;
  document.querySelectorAll('[data-rf]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.rf.split('|');S.items[+i].f.splice(+j,1);save();draw();});
  document.querySelectorAll('[data-up]').forEach(inp=>inp.onchange=async()=>{const x=S.items[+inp.dataset.up];toast('Procesando fotos…');for(const fl of inp.files){const s=await shrink(fl);if(s)x.f.push(s);}save();draw();});
  $('add').onclick=()=>{S.items.push({d:'',u:'M2',q:'',pu:'',f:[]});save();draw();const t=document.querySelectorAll('[data-k=d]');t[t.length-1].focus();};
- $('send').onclick=send;const fit=e=>{e.style.height='auto';e.style.height=(e.scrollHeight+2)+'px';};document.querySelectorAll('textarea').forEach(e=>{fit(e);e.addEventListener('input',()=>fit(e));});}
+ $('send').onclick=send;$('direct').onclick=()=>{$('dnote').textContent='Esta opción se activará en la versión final. Por ahora use "Enviar a AG" para mandar el PDF por WhatsApp.';toast('Disponible en la versión final');};const fit=e=>{e.style.height='auto';e.style.height=(e.scrollHeight+2)+'px';};document.querySelectorAll('textarea').forEach(e=>{fit(e);e.addEventListener('input',()=>fit(e));});}
 function pdoc(){return `<div class="pdoc"><div class="h"><div><h3>PROPUESTA DE SUBCONTRATISTA</h3><div>Inspección ${esc(A.n)} · ${esc(A.of||'')} · ${esc(A.cap)}</div></div><img src="${AGPNG}" width="600" height="403" alt=""></div>
  <div class="m"><div><b>Para:</b> Productos y Suministros AG, C.A.</div><div><b>Fecha:</b> ${new Date().toLocaleDateString('es-VE')}</div><div><b>De:</b> ${esc(S.nom)}</div><div><b>Teléfono:</b> ${esc(S.tel)}</div>${S.dias?`<div><b>Tiempo de ejecución:</b> ${esc(S.dias)} días</div>`:''}</div>
  ${S.hall?`<p><b>Lo que encontró:</b> ${esc(S.hall)}</p>`:''}
