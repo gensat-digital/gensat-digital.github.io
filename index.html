@@ -192,10 +192,30 @@ footer .logo b{font-size:28px;color:#fff}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .steps li{flex-direction:column;padding:20px}
 }
+
+/* Revisión con las reglas de interfaz de Vercel (nov 2026) */
+html{-webkit-tap-highlight-color:rgba(245,184,61,.25)}
+a,button{touch-action:manipulation}
+main:focus{outline:none}
+.skip{position:absolute;left:12px;top:-60px;z-index:60;background:var(--gold);color:var(--navy);font-weight:700;padding:12px 16px;border-radius:10px;text-decoration:none;transition:top .2s ease}
+.skip:focus{top:12px}
+section[id]{scroll-margin-top:16px}
+.lang button{min-height:36px;min-width:44px}
+@media (pointer:coarse){.lang button{min-height:44px}.copy{min-height:40px;padding-inline:14px}}
+.copy:hover{border-color:var(--ink)}
+.fx .gl{animation-iteration-count:3}
+.fx .orb{animation-iteration-count:2}
+.fab::before{animation-iteration-count:3}
+.btn:active,.fab:active{transform:scale(.98)}
+.btn{transition:border-color .2s ease,transform .15s ease}
+.fab:hover{box-shadow:0 14px 34px rgba(15,27,45,.38)}
 @media (prefers-reduced-motion: reduce){.fx .gl,.fx .orb,.fab::before{animation:none}.reveal{opacity:1;transform:none}.hero h1 .ch{opacity:1;transform:none;filter:none;animation:none!important}}
 </style>
 
-<div class="intro" id="intro" role="dialog" aria-label="Bienvenida a GENSAT">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Bienvenida a GENSAT">
   <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   <div class="grid" aria-hidden="true"></div>
   <div class="gwrap" id="gwrap" aria-hidden="true">
@@ -212,29 +232,27 @@ footer .logo b{font-size:28px;color:#fff}
       <g class="gfull"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="#fff"/><rect x="42" y="49" width="8" height="24" fill="#fff"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></g>
     </svg>
   </div>
-  <div class="iname">GENSAT</div>
+  <div class="iname" translate="no">GENSAT</div>
   <div class="isub" data-i18n="isub">SOLUCIONES DIGITALES PARA TU NEGOCIO</div>
-  <div class="irot" aria-live="polite"><span id="rot"></span><span class="cur"></span></div>
+  <div class="irot" aria-hidden="true"><span id="rot"></span><span class="cur"></span></div>
   <button class="ienter" id="ienter" type="button" data-i18n="ienter">ENTRAR</button>
   <div class="ihint" data-i18n="ihint">Con música · puedes silenciarla abajo</div>
 </div>
-<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
+<a class="fab" id="fab" target="_blank" rel="noopener"></a>
 <button class="snd" id="snd" type="button" aria-label="Silenciar música" hidden><span class="bars"><i></i><i></i><i></i></span></button>
 
-</head>
-<body>
 <header class="hero band">
   <div class="fx" aria-hidden="true"><div class="gl"></div><div class="orb o1"></div><div class="orb o2"></div></div>
   <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   <div class="in">
-    <div class="logo" aria-label="GENSAT"><span id="mark-top"></span><b>ENSAT</b></div>
+    <div class="logo" aria-label="GENSAT" translate="no"><span id="mark-top"></span><b>ENSAT</b></div>
     <div class="tag" data-i18n="tag">SOLUCIONES DIGITALES · AUTOMATIZACIÓN</div>
     <h1 data-i18n="h1">Herramientas digitales hechas a la medida de tu negocio</h1>
     <p data-i18n="hp">Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.</p>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
   <div class="band"><nav class="in links" id="links" aria-label="Enlaces de GENSAT"></nav></div>
 
   <section class="band" id="proyecto">
@@ -244,15 +262,15 @@ footer .logo b{font-size:28px;color:#fff}
       <p class="lead" data-i18n="pl">Para el celular y para la computadora, según lo que necesite cada negocio.</p>
       <div class="projs">
       <a class="proj tilt reveal" id="proj-link" target="_blank" rel="noopener">
-        <img src="img/proyecto-salon.jpg" alt="Tres pantallas de la página del salón Stylos Evieth: bienvenida, enlaces y reservas" loading="lazy">
+        <img src="img/proyecto-salon.jpg" alt="Tres pantallas de la página del salón Stylos Evieth: bienvenida, enlaces y reservas" width="1200" height="760" loading="lazy" decoding="async">
         <div><b data-i18n="s1t">Salón de belleza · Página con reservas</b><small data-i18n="s1d">Sus clientas ven los trabajos, eligen día y hora, y la cita le llega directo a su WhatsApp.</small><em data-i18n="s1c">Ver la página funcionando →</em></div>
       </a>
       <a class="proj tilt reveal" id="case-link" href="caso-manufactura.html">
-        <img src="img/proyecto-manufactura.jpg" alt="Demostración: celular del operador registrando un material y computadora del supervisor con la orden de trabajo al 100%" loading="lazy">
+        <img src="img/proyecto-manufactura.jpg" alt="Demostración: celular del operador registrando un material y computadora del supervisor con la orden de trabajo al 100%" width="1200" height="760" loading="lazy" decoding="async">
         <div><b data-i18n="s2t">Planta de manufactura · Captura desde el celular</b><small data-i18n="s2d">Varios operadores registran al mismo tiempo desde su celular y el supervisor ve el avance en la computadora.</small><em data-i18n="s2c">Probar la demostración →</em></div>
       </a>
       <a class="proj tilt reveal" id="drv-link" href="demo-choferes.html">
-        <img src="img/proyecto-choferes.jpg" alt="Demostración de app para choferes: celular del chofer confirmando una entrega y mapa del despachador" loading="lazy">
+        <img src="img/proyecto-choferes.jpg" alt="Demostración de app para choferes: celular del chofer confirmando una entrega y mapa del despachador" width="1200" height="760" loading="lazy" decoding="async">
         <div><b data-i18n="s3t">App para choferes · Entregas en vivo</b><small data-i18n="s3d">El chofer marca cada entrega con foto y firma, y el despachador lo sigue en el mapa desde la computadora.</small><em data-i18n="s3c">Probar la demostración →</em></div>
       </a>
       </div>
@@ -291,7 +309,7 @@ footer .logo b{font-size:28px;color:#fff}
 
 <footer class="band">
   <div class="in" style="display:flex;flex-direction:column;align-items:center;gap:10px">
-    <div class="logo" aria-label="GENSAT"><span id="mark-foot"></span><b>ENSAT</b></div>
+    <div class="logo" aria-label="GENSAT" translate="no"><span id="mark-foot"></span><b>ENSAT</b></div>
     <span id="foot-mail"></span>
     <span data-i18n="foot">© 2026 GENSAT LLC · Soluciones digitales</span>
   </div>
@@ -311,7 +329,7 @@ const GENSAT = {
 /* ===== Textos en español e inglés ===== */
 const T = {
  es: {
-  isub:'SOLUCIONES DIGITALES PARA TU NEGOCIO', ienter:'ENTRAR', fab:'Escríbeme', ihint:'Con música · puedes silenciarla abajo',
+  isub:'SOLUCIONES DIGITALES PARA TU NEGOCIO', ienter:'ENTRAR', fab:'Escríbeme', skip:'Saltar al contenido', ihint:'Con música · puedes silenciarla abajo',
   rot:['Páginas web','Análisis de datos','Seguimiento de pedidos','Automatización'],
   tag:'SOLUCIONES DIGITALES · AUTOMATIZACIÓN', h1:'Herramientas digitales hechas a la medida de tu negocio',
   hp:'Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.',
@@ -331,7 +349,7 @@ const T = {
   foot:'© 2026 GENSAT LLC · Soluciones digitales', mute:'Silenciar música', unmute:'Activar música'
  },
  en: {
-  isub:'DIGITAL SOLUTIONS FOR YOUR BUSINESS', ienter:'ENTER', fab:'Message me', ihint:'With music · you can mute it below',
+  isub:'DIGITAL SOLUTIONS FOR YOUR BUSINESS', ienter:'ENTER', fab:'Message me', skip:'Skip to content', ihint:'With music · you can mute it below',
   rot:['Websites','Data analysis','Order tracking','Automation'],
   tag:'DIGITAL SOLUTIONS · AUTOMATION', h1:'Digital tools built around your business',
   hp:'Websites, data and automation. In English or Spanish, without the jargon.',
@@ -376,11 +394,12 @@ let LANG = (() => {
     else { del = false; w = (w + 1) % words.length; setTimeout(tick, 250); }
   }
   setTimeout(tick, reduce ? 0 : 2900);
+  setTimeout(() => { try { document.getElementById('ienter').focus({preventScroll:true}); } catch(_){} }, reduce ? 0 : 3300);
   document.getElementById('ienter').addEventListener('click', () => {
     gw.classList.remove('pum'); void gw.offsetWidth; gw.classList.add('pum');
     startMusic();
     setTimeout(() => { intro.classList.add('out'); document.body.style.overflow = ''; playH1(); }, 420);
-    setTimeout(() => { intro.hidden = true; }, 1150);
+    setTimeout(() => { intro.hidden = true; document.getElementById('main').focus({preventScroll:true}); }, 1150);
   });
 })();
 
@@ -435,7 +454,7 @@ const mark = (c) => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 
 document.getElementById('mark-top').innerHTML = mark('#fff');
 document.getElementById('mark-foot').innerHTML = mark('#fff');
 
-const I = {
+const I0 = {
   wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1.1 2.8.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>',
   web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>',
   grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
@@ -449,6 +468,9 @@ const I = {
   social:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><rect x="3" y="5" width="18" height="13" rx="2.5"/><path d="m10 9 5 2.5-5 2.5z" fill="'+GOLD+'"/><path d="M8 21h8"/></svg>',
   page:'<svg viewBox="0 0 24 24" fill="none" stroke="'+GOLD+'" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h10"/></svg>'
 };
+
+/* Íconos decorativos: ocultos para lectores de pantalla */
+const I = Object.fromEntries(Object.entries(I0).map(([k,v]) => [k, v.replace('<svg ', '<svg aria-hidden="true" focusable="false" ')]));
 
 function btn({icon, title, sub, href, main, soon, extra}){
   const el = document.createElement(href ? 'a' : 'div');
@@ -468,7 +490,7 @@ function render(){
     btn({icon:'grid', title:t.svc, sub:t.svcSub, href:'#servicios'}),
     btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram}),
     btn({icon:'xl', title:t.xl, sub:t.xlSub, soon:t.soon}),
-    btn({icon:'mail', title:t.mail, sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail">' + t.copy + '</button>'})
+    btn({icon:'mail', title:t.mail, sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail" aria-live="polite">' + t.copy + '</button>'})
   );
   document.getElementById('copy-mail').addEventListener('click', e => {
     e.preventDefault(); e.stopPropagation();
@@ -482,7 +504,7 @@ function render(){
   document.getElementById('case-link').href = 'caso-manufactura.html' + (LANG === 'en' ? '?lang=en' : '');
   document.getElementById('drv-link').href = 'demo-choferes.html' + (LANG === 'en' ? '?lang=en' : '');
   const snd = document.getElementById('snd'); snd.setAttribute('aria-label', snd.classList.contains('muted') ? t.unmute : t.mute);
-  const fab = document.getElementById('fab'); fab.href = waHref; fab.innerHTML = I.wa + '<span>' + t.fab + '</span>';
+  const fab = document.getElementById('fab'); fab.href = waHref; fab.setAttribute('aria-label', t.wa); fab.innerHTML = I.wa + '<span>' + t.fab + '</span>';
   splitH1(); watchReveal();
 }
 /* Título que aparece letra por letra (la última palabra clave en dorado) */
@@ -514,7 +536,7 @@ if (matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(pref
   document.addEventListener('pointerout', e => { const c = e.target.closest && e.target.closest('.tilt'); if (c && !c.contains(e.relatedTarget)) c.style.transform = ''; });
 }
 /* Botón flotante de WhatsApp: aparece al pasar los botones principales */
-addEventListener('scroll', () => { const l = document.getElementById('links').getBoundingClientRect(); document.getElementById('fab').classList.toggle('show', l.bottom < 0); }, {passive:true});
+if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => document.getElementById('fab').classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(document.getElementById('links'));
 function setLang(l){ LANG = l; try { localStorage.setItem('gensat-lang', l); } catch(_) {} render(); }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 document.getElementById('proj-link').href = GENSAT.proyecto;
