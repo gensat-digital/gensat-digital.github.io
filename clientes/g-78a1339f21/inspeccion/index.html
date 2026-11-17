@@ -28,7 +28,7 @@ h2{font-size:16px;margin:22px 0 8px}
 .kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:14px;margin-bottom:12px}.kv dt{color:var(--mut)}.kv dd{margin:0}
 .it{margin-top:12px}.ih{display:flex;align-items:center;gap:8px;margin-bottom:8px}.ih b{flex:1}
 .f{display:block;margin-bottom:10px}.f span{display:block;font-size:13px;font-weight:600;color:#3a3a3c;margin-bottom:4px}
-textarea.in{min-height:84px;resize:vertical;line-height:1.4}
+textarea.in{min-height:84px;resize:none;overflow:hidden;line-height:1.4}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .ph{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.ph .th{position:relative;width:96px;height:96px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}.ph .th button{position:absolute;top:4px;right:4px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:14px}
@@ -106,7 +106,7 @@ function draw(){const y=scrollY;
  document.querySelectorAll('[data-rf]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.rf.split('|');S.items[+i].f.splice(+j,1);save();draw();});
  document.querySelectorAll('[data-up]').forEach(inp=>inp.onchange=async()=>{const x=S.items[+inp.dataset.up];toast('Procesando fotos…');for(const fl of inp.files){const s=await shrink(fl);if(s)x.f.push(s);}save();draw();});
  $('add').onclick=()=>{S.items.push({d:'',u:'M2',q:'',pu:'',f:[]});save();draw();const t=document.querySelectorAll('[data-k=d]');t[t.length-1].focus();};
- $('send').onclick=send;}
+ $('send').onclick=send;const fit=e=>{e.style.height='auto';e.style.height=(e.scrollHeight+2)+'px';};document.querySelectorAll('textarea').forEach(e=>{fit(e);e.addEventListener('input',()=>fit(e));});}
 function pdoc(){return `<div class="pdoc"><div class="h"><div><h3>PROPUESTA DE SUBCONTRATISTA</h3><div>Inspección ${esc(A.n)} · ${esc(A.of||'')} · ${esc(A.cap)}</div></div><img src="${AGPNG}" width="600" height="403" alt=""></div>
  <div class="m"><div><b>Para:</b> Productos y Suministros AG, C.A.</div><div><b>Fecha:</b> ${new Date().toLocaleDateString('es-VE')}</div><div><b>De:</b> ${esc(S.nom)}</div><div><b>Teléfono:</b> ${esc(S.tel)}</div>${S.dias?`<div><b>Tiempo de ejecución:</b> ${esc(S.dias)} días</div>`:''}</div>
  ${S.hall?`<p><b>Lo que encontró:</b> ${esc(S.hall)}</p>`:''}
