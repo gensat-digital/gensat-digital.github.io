@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+:root{--navy:#0f1b2d;--navy2:#16294a;--gold:#f5b83d;--ink:#fff;--muted:#a9b8d0}
+*{box-sizing:border-box}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--navy);font-family:Inter,"Noto Color Emoji",sans-serif;color:var(--ink)}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1200px 900px at 50% 35%,#1b3460 0%,var(--navy) 70%)}
+.grid{position:absolute;left:-20%;right:-20%;bottom:0;height:900px;background-image:linear-gradient(rgba(255,255,255,.06) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.06) 2px,transparent 2px);background-size:120px 120px;transform:perspective(700px) rotateX(60deg);transform-origin:bottom}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 80px;text-align:center}
+h1{font-size:92px;line-height:1.08;font-weight:800;margin:0;letter-spacing:-.01em}
+h1 .g{color:var(--gold)}
+h2{font-size:70px;line-height:1.1;font-weight:800;margin:0}
+.emoji{font-size:220px;line-height:1;margin-bottom:40px}
+/* libreta */
+.note{width:740px;height:480px;background:#fffdf3;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative;margin-top:60px;padding:70px 60px 0 110px;text-align:left;color:#23324d;font-family:"DejaVu Sans Mono",monospace;font-size:52px;line-height:96px;white-space:nowrap;background-image:repeating-linear-gradient(#fffdf3 0 94px,#c9d6ee 94px 96px)}
+.note:before{content:"";position:absolute;left:80px;top:0;bottom:0;width:4px;background:#f0a0a0}
+.note .q{color:#d9534f}
+/* papeles */
+.papers{position:relative;width:900px;height:620px;margin-top:40px}
+.paper{position:absolute;width:400px;padding:40px 36px;background:#fffdf3;color:#23324d;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45);text-align:left}
+.paper b{display:block;font-size:54px;margin-bottom:18px}
+.paper span{display:block;font-family:"DejaVu Sans Mono",monospace;font-size:38px;line-height:1.5;color:#55627a}
+.verdict{margin-top:50px;font-size:72px;font-weight:800;background:#d9534f;padding:24px 44px;border-radius:22px}
+/* telefono */
+.phone{width:600px;height:960px;border-radius:70px;background:#0a1322;border:14px solid #2a3b5c;box-shadow:0 40px 100px rgba(0,0,0,.6);margin-top:50px;padding:60px 34px;position:relative}
+.phone .top{font-size:34px;color:var(--muted);text-align:left;margin-bottom:26px;font-weight:600}
+.card{background:#fff;color:var(--navy);border-radius:28px;padding:26px 30px;margin-bottom:22px;text-align:left;display:flex;justify-content:space-between;align-items:center}
+.card small{font-size:32px;color:#5a6780;font-weight:600}
+.card b{font-size:52px;font-weight:800}
+.card.gold b{color:#c98a0b}
+.chart{display:flex;align-items:flex-end;gap:22px;height:230px;background:#fff;border-radius:28px;padding:28px 30px}
+.chart i{flex:1;background:#2a4b85;border-radius:10px 10px 0 0;height:0}
+.chart i.hi{background:var(--gold)}
+/* CTA */
+.logo{display:inline-flex;align-items:flex-end;gap:8px}
+.logo svg{width:230px;height:230px;margin-bottom:-21px}
+.logo b{font-weight:800;font-size:160px;letter-spacing:.1em;line-height:.78;padding-bottom:6px}
+.wa{margin-top:110px;background:var(--gold);color:var(--navy);font-weight:800;font-size:54px;padding:34px 56px;border-radius:999px;white-space:nowrap;display:flex;align-items:center;gap:24px}
+.wa svg{width:76px;height:76px}
+.num{margin-top:40px;font-size:62px;font-weight:800}
+.web{margin-top:22px;font-size:44px;color:var(--muted);font-weight:600}
+/* subtítulos */
+#cap{position:absolute;left:60px;right:60px;bottom:250px;text-align:center;font-size:58px;font-weight:800;line-height:1.25}
+#cap span{background:rgba(5,10,20,.72);padding:10px 22px;border-radius:16px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#cap .on{color:var(--gold)}
+</style></head>
+<body><div id="stage"><div class="grid"></div><div id="scenes"></div><div id="cap"></div></div>
+<script>
+const NAVY='#0f1b2d',GOLD='#f5b83d';
+/* Logo oficial de GENSAT (idéntico al del sitio: no modificar) */
+const mark=(c)=>`<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
+const WA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1.1 2.8.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg>';
+
+const S=window.SPEC; // lo inyecta render.js
+const clamp=(x)=>Math.max(0,Math.min(1,x));
+const ease=(x)=>{x=clamp(x);return 1-Math.pow(1-x,3)};
+const back=(x)=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const pop=(el,t,t0,d=.45)=>{const k=back((t-t0)/d);el.style.opacity=clamp((t-t0)/.2);el.style.transform=`scale(${.6+.4*k})`};
+const rise=(el,t,t0,d=.5)=>{const k=ease((t-t0)/d);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*80}px)`};
+
+const sc=document.getElementById('scenes');
+sc.innerHTML=`
+<div class="scene" id="s1"><div class="emoji" id="e1">${S.hook.emoji}</div><h1 id="h1">${S.hook.title}</h1>
+  <div class="note" id="note"><div>${S.hook.note1}</div><div class="q" id="nq">${S.hook.note2}</div></div></div>
+<div class="scene" id="s2"><h2 id="h2">${S.problem.title}</h2><div class="papers">
+  ${S.problem.items.map((p,i)=>`<div class="paper" id="p${i}" style="left:${i?470:30}px;top:${i?160:20}px"><b>${p.label}</b>${p.lines.map(l=>`<span>${l}</span>`).join('')}</div>`).join('')}
+  </div><div class="verdict" id="vd">${S.problem.verdict.text}</div></div>
+<div class="scene" id="s3"><h2 id="h3">${S.solution.title}</h2><div class="phone">
+  <div class="top">${S.solution.panel}</div>
+  ${S.solution.cards.map((c,i)=>`<div class="card ${i==0?'gold':''}" id="c${i}"><small>${c.label}</small><b>${c.value}</b></div>`).join('')}
+  <div class="chart" id="ch">${S.solution.bars.map((b,i)=>`<i class="${i==S.solution.bars.length-1?'hi':''}" data-h="${b}"></i>`).join('')}</div></div></div>
+<div class="scene" id="s4"><div class="logo" id="lg" translate="no"><span>${mark('#fff')}</span><b>ENSAT</b></div>
+  <div class="wa" id="wa">${WA}<span>${S.cta.button}</span></div><div class="num" id="num">+1 (385) 574-5556</div><div class="web" id="web">gensat-digital.github.io</div></div>`;
+
+const $=id=>document.getElementById(id);
+const scenes=[['s1',0,S.problem.t],['s2',S.problem.t,S.solution.t],['s3',S.solution.t,S.cta.t],['s4',S.cta.t,999]];
+function render(t){
+  for(const [id,a,b] of scenes){const el=$(id);const vis=t>=a-.001&&t<b;el.style.display=vis?'flex':'none';
+    if(vis){const k=ease((t-a)/.35);el.style.opacity=k;}}
+  // escena 1
+  pop($('e1'),t,0.05);rise($('h1'),t,0.15);rise($('note'),t,.6,.6);
+  $('nq').style.opacity=clamp((t-S.hook.qT)/.2);$('nq').style.transform=`rotate(${Math.sin(t*14)*4}deg)`;
+  // escena 2
+  rise($('h2'),t,S.problem.t);
+  S.problem.items.forEach((p,i)=>{const el=$('p'+i);const k=back((t-p.t)/.5);el.style.opacity=clamp((t-p.t)/.2);el.style.transform=`translateY(${(1-k)*-300}px) rotate(${(i?6:-7)+(t>S.problem.verdict.t?Math.sin(t*30)*2:0)}deg)`});
+  pop($('vd'),t,S.problem.verdict.t);
+  // escena 3
+  rise($('h3'),t,S.solution.t);
+  S.solution.cards.forEach((c,i)=>{const el=$('c'+i);const k=ease((t-c.t)/.45);el.style.opacity=k;el.style.transform=`translateX(${(1-k)*-120}px)`});
+  [...$('ch').children].forEach((b,i)=>{b.style.height=(ease((t-S.solution.chartT-i*.08)/.6)*b.dataset.h)+'%'});
+  // escena 4
+  pop($('lg'),t,S.cta.t,.6);rise($('wa'),t,S.cta.t+.5);rise($('num'),t,S.cta.t+.8);rise($('web'),t,S.cta.t+1);
+  const pulse=t>S.cta.t+1.2?1+Math.sin((t-S.cta.t)*6)*.03:1;$('wa').style.transform+=` scale(${pulse})`;
+  // subtítulos: frase actual, palabra dicha en dorado
+  const ph=S.phrases.find(p=>t>=p.s&&t<p.e+.25);
+  $('cap').innerHTML=ph?'<span>'+ph.words.map(w=>`<b class="${t>=w.s?'on':''}" style="font-weight:800">${w.w}</b>`).join(' ')+'</span>':'';
+}
+window.render=render;
+</script></body></html>

@@ -1,0 +1,4 @@
+{"hook":{"emoji":"📱😵","title":"¿Se te <span class='g'>pierden</span> los pedidos en WhatsApp?","note1":"87 sin leer 📩","note2":"¿y el pedido? 🤔","qT":"@mensajes"},
+ "problem":{"t":"@uno","title":"Uno por audio… otro por foto","items":[{"label":"🎤 Audio","lines":["“mándame 3…”","¿3 de qué?","0:47 min"],"t":"@audio"},{"label":"📷 Foto","lines":["foto borrosa","¿talla?","¿dirección?"],"t":"@foto"}],"verdict":{"text":"Cliente esperando ⏳","t":"@cliente"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, cada pedido anotado","panel":"Pedidos · hoy","cards":[{"label":"Pedido #104 · Listo","value":"✅","t":"@pedido"},{"label":"Pedido #105 · En camino","value":"🚚","t":"@estado"},{"label":"Pedido #106 · Nuevo","value":"🆕","t":"@fecha"}],"bars":[30,45,40,60,72,88],"chartT":"@celular"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}

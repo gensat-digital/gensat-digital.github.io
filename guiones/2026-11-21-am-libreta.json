@@ -1,0 +1,5 @@
+{"hook":{"emoji":"📒😅","title":"¿Todavía sumas <span class='g'>1 + 1</span> en libreta?","note1":"1 + 1 = ","note2":"¿¿3?? 🤔","qT":1.5},
+ "problem":{"t":2.8,"title":"Ventas por un lado… cobros por otro","items":[{"label":"Ventas","lines":["lun $120","mar $85 (?)","mié ???"],"t":2.84},{"label":"Cobros","lines":["Juan debe…","¿Ana pagó?","$$ ???"],"t":4.05}],"verdict":{"text":"Fin de mes: nada cuadra ❌","t":6.44}},
+ "solution":{"t":7.55,"title":"Con <span style='color:#f5b83d'>GENSAT</span>, todo en un solo panel","panel":"Mi negocio · hoy","cards":[{"label":"Ventas de hoy","value":"$1,240","t":9.23},{"label":"Cobros pendientes","value":"$380","t":9.98},{"label":"Pedidos","value":"12","t":10.77}],"bars":[35,50,42,68,58,90],"chartT":11.5},
+ "cta":{"t":13.75,"button":"Escríbeme por WhatsApp"},
+ "dur":18.0}
