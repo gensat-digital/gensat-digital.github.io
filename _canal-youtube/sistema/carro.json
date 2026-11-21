@@ -1,0 +1,9 @@
+{"tag":"DINERO EN USA · EN ESPAÑOL","handle":"@PlataClaraUSA1","accent":[46,204,113],
+"scenes":[
+{"text":"Un carro de $30,000 financiado. ¿Cuánto pagas en total?","size":80,"say":"Un carro de treinta mil dólares, financiado. ¿Cuánto crees que terminas pagando? Elige una opción antes de seguir."},
+{"text":"Elige tu respuesta:","size":64,"options":["A)  $33,000","B)  $37,000","C)  Más de $42,000"],"say":"¿Treinta y tres mil? ¿Treinta y siete mil? ¿O más de cuarenta y dos mil?"},
+{"num":"72","text":"meses al 12 % de interés","size":72,"say":"Con un doce por ciento de interés, a setenta y dos meses..."},
+{"num":"$587","count":true,"text":"al mes, durante 6 años","size":72,"say":"pagas unos quinientos ochenta y siete dólares al mes, durante seis años."},
+{"num":"$42,239","count":true,"text":"en total","size":72,"bar":0.71,"sub":"Más de USD 12,000 son solo intereses.","say":"En total, cuarenta y dos mil doscientos. Más de doce mil son solo intereses. La respuesta era la C."},
+{"text":"¿Le atinaste? Comenta A, B o C","size":80,"sub":"Información educativa, no es asesoría financiera.","say":"¿Le atinaste? Comenta la letra que elegiste. Y antes de comprar, mejora tu crédito y compara tasas."}
+]}

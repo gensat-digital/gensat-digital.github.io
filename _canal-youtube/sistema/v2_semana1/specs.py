@@ -1,0 +1,66 @@
+import json, shutil
+T="DINERO EN USA · EN ESPAÑOL"; H="@PlataClaraUSA1"; END="Información educativa, no es asesoría financiera."
+def S(sc,acc=[46,204,113]): return {"tag":T,"handle":H,"accent":acc,"scenes":sc}
+def c(say,text=None,size=76,**k):
+    d={"say":say,"size":size}
+    if text: d["text"]=text
+    d.update(k); return d
+V={
+"s02":S([c("¿Se puede tener crédito en Estados Unidos sin número de seguro social? Piensa: ¿sí o no?","¿Puedes tener crédito sin seguro social?",80),
+ c("¿Sí, con ITIN? ¿O es imposible? La respuesta es: sí se puede. Así.","¿Tú qué crees?",64,options=["A)  Sí, con ITIN","B)  No, es imposible"]),
+ c("Primero, saca tu ITIN. Es un número del IRS, y se pide con el formulario W siete.","se pide con el formulario W-7 del IRS",70,num="ITIN"),
+ c("Segundo, pide una tarjeta asegurada. Dejas un depósito, por ejemplo trescientos dólares, y ese es tu límite.","de depósito = $300 de límite",70,num="$300",count=True,bar=0.3),
+ c("Tercero, úsala poco y págala completa cada mes. En unos meses ya tienes historial de crédito.","Úsala poco y págala completa cada mes",80),
+ c("Las cooperativas de crédito suelen aceptar el ITIN. ¿Ya tienes el tuyo? Comenta sí o no.","¿Ya tienes tu ITIN? Comenta SÍ o NO",80,sub=END)]),
+"s03":S([c("Te ofrecen veinticinco dólares la hora. ¿Qué te conviene más: W dos o diez noventa y nueve? Elige.","Te ofrecen $25 la hora. ¿W-2 o 1099?",80),
+ c("¿W dos? ¿Diez noventa y nueve? ¿O da igual?","Elige tu respuesta:",64,options=["A)  W-2","B)  1099","C)  Da igual"]),
+ c("Con W dos, tú pagas siete punto sesenta y cinco por ciento de seguro social y medicare, y tu patrón paga la otra mitad.","con W-2: tu patrón paga la otra mitad",70,num="7.65%"),
+ c("Con diez noventa y nueve, pagas tú solo el quince punto tres por ciento, además de tu impuesto sobre la renta.","con 1099: lo pagas todo tú",70,num="15.3%"),
+ c("Así que con el mismo pago por hora, te conviene más el W dos. La respuesta era la A. Si es diez noventa y nueve, pide entre quince y veinte por ciento más.","Con el mismo pago, gana el W-2",80,sub="Si es 1099, pide entre 15 y 20 % más."),
+ c("¿Tú trabajas con W dos o con diez noventa y nueve? Déjalo en los comentarios.","¿Tú eres W-2 o 1099? Comenta",80,sub=END)]),
+"s04":S([c("Hay algo muy común que hace que un banco te cierre la cuenta. ¿Adivinas cuál?","Esto puede hacer que el banco te cierre la cuenta",78),
+ c("¿Depositar efectivo en partes? ¿Usar mucho la tarjeta? ¿O tener poco dinero?","Elige tu respuesta:",64,options=["A)  Depositar efectivo en partes","B)  Usar mucho la tarjeta","C)  Tener poco dinero"]),
+ c("La respuesta es la A. Partir depósitos de efectivo para no llegar a diez mil dólares se ve sospechoso, y hasta puede ser delito, aunque el dinero sea legal.","partir depósitos para no llegar a esto es una alerta",66,num="$10,000",count=True),
+ c("Mejor deposítalo todo junto y guarda tus comprobantes.","Mejor deposita todo junto y guarda tus comprobantes",80),
+ c("Otras causas comunes: sobregiros sin pagar, datos que no coinciden con tus documentos, y cuentas que pasan meses sin movimiento.","Otras causas comunes:",64,options=["Sobregiros sin pagar","Datos que no coinciden","Meses sin movimiento"]),
+ c("¿A ti te ha pasado? Cuéntalo en los comentarios.","¿Te ha pasado? Cuéntalo en los comentarios",80,sub=END)]),
+"s05":S([c("Te llega este mensaje: hola mamá, este es mi número nuevo, necesito dinero urgente. ¿Es estafa?","\"Hola mamá, este es mi número nuevo. Necesito dinero urgente.\"",74),
+ c("¿Es estafa? ¿O puede ser real?","¿Tú qué crees?",64,options=["A)  Es estafa","B)  Puede ser real"]),
+ c("Trátalo como estafa hasta comprobarlo. Llama al número de siempre antes de mandar un solo dólar.","Llama al número de siempre antes de mandar nada",80),
+ c("Y cuidado con estas cuatro, que también llegan por WhatsApp:","estafas más que llegan por WhatsApp",72,num="4"),
+ c("trabajos que te pagan por dar likes, falsos avisos del IRS, premios que nunca jugaste, e inversiones con ganancias seguras.",None,options=["Te pagan por dar likes","Falso aviso del IRS","Premios que no jugaste","Inversiones \"seguras\""]),
+ c("Si es urgente y suena demasiado bueno, es estafa. Comparte este video con tu familia.","Compártelo con tu familia",84,sub="Si es urgente y suena muy bueno, es estafa.")],acc=[231,76,60]),
+"s06":S([c("Si ganas dos mil ochocientos dólares al mes, ¿cuánto deberías ahorrar? Elige.","Ganas $2,800 al mes. ¿Cuánto deberías ahorrar?",80),
+ c("¿Cien? ¿Doscientos ochenta? ¿O quinientos sesenta?","Elige tu respuesta:",64,options=["A)  $100","B)  $280","C)  $560"]),
+ c("Con la regla cincuenta, treinta, veinte: mil cuatrocientos para lo necesario: renta, comida y transporte.","50 % para lo necesario",72,num="$1,400",count=True,bar=0.5),
+ c("Ochocientos cuarenta para tus gustos y salidas.","30 % para tus gustos",72,num="$840",count=True,bar=0.3),
+ c("Y quinientos sesenta para ahorrar o pagar deudas. La respuesta era la C.","20 % para ahorro o deudas",72,num="$560",count=True,bar=0.2),
+ c("Si tu renta se come más de la mitad, recorta de los gustos, no del ahorro. ¿Tú cuánto ahorras? Comenta.","¿Cuánto ahorras tú? Comenta",80,sub=END)]),
+"s08":S([c("Si dejas un depósito de doscientos dólares en una tarjeta asegurada, ¿cuál es tu límite?","Dejas $200 en una tarjeta asegurada. ¿Cuál es tu límite?",78),
+ c("¿Doscientos? ¿Quinientos? ¿O mil?","Elige tu respuesta:",64,options=["A)  $200","B)  $500","C)  $1,000"]),
+ c("La respuesta es la A. Tu depósito es tu límite, y te lo devuelven al cerrarla o al subir de nivel.","tu depósito es tu límite",72,num="$200",count=True,sub="Te lo devuelven al cerrarla o al subir de nivel."),
+ c("Antes de sacarla, confirma que reporte a los tres burós: Equifax, Experian y TransUnion.","burós: Equifax, Experian y TransUnion",70,num="3"),
+ c("Úsala solo para algo pequeño, como el teléfono, y págala completa cada mes.","Úsala para algo pequeño y págala completa",80),
+ c("En seis a doce meses, muchos bancos te dan una tarjeta normal. ¿Ya tienes la tuya? Comenta.","meses para subir a una tarjeta normal",70,num="6–12",sub=END)]),
+"s09":S([c("Vas a mandar trescientos dólares a tu familia. ¿Cuál app sale más barata?","Mandas $300. ¿Cuál app sale más barata?",80),
+ c("¿La que cobra cero de comisión con un cambio de diecisiete veinte? ¿O la que cobra cuatro dólares con un cambio de diecisiete sesenta?","Elige tu respuesta:",64,options=["A)  Comisión $0, cambio 17.20","B)  Comisión $4, cambio 17.60"],sub="Tipos de cambio de ejemplo."),
+ c("Con la A, tu familia recibe cinco mil ciento sesenta pesos.","pesos con la app A",72,num="5,160",count=True),
+ c("Con la B, aunque cobra comisión, recibe cinco mil doscientos nueve. La respuesta era la B.","pesos con la app B",72,num="5,209",count=True),
+ c("Lo que importa es cuánto recibe tu familia al final, no si el envío es gratis.","Compara cuánto RECIBE tu familia, no la comisión",78),
+ c("¿A qué país mandas dinero tú? Cuéntame en los comentarios.","¿A qué país mandas dinero? Comenta",80,sub=END)]),
+"s10":S([c("¿Cuánto dinero deberías tener guardado para emergencias? Elige.","¿Cuánto deberías tener ahorrado para emergencias?",80),
+ c("¿Un mes de gastos? ¿De tres a seis meses? ¿O un año?","Elige tu respuesta:",64,options=["A)  1 mes de gastos","B)  3 a 6 meses","C)  1 año"]),
+ c("La respuesta es la B: de tres a seis meses de tus gastos básicos.","meses de tus gastos básicos",72,num="3–6"),
+ c("Pero no empieces por ahí. Primero junta quinientos dólares. Eso ya te salva de muchas emergencias.","tu primera meta",72,num="$500",count=True,bar=0.25),
+ c("Programa una transferencia automática el mismo día que te pagan, aunque sean veinte dólares.","Ahorra automático el día que te pagan",80,sub="Aunque sean $20."),
+ c("Y guárdalo en una cuenta aparte, para no gastarlo. ¿Cuánto llevas tú? Comenta.","¿Cuánto llevas ahorrado? Comenta",80,sub=END)]),
+"s11":S([c("Tu empresa te puede regalar mil doscientos dólares al año, y mucha gente no lo usa. ¿Sabes cómo?","Tu empresa te puede regalar $1,200 al año",80),
+ c("¿Pidiendo un aumento? ¿Con el match del cuatro cero uno ka? ¿O con horas extra?","¿Cómo?",64,options=["A)  Pidiendo un aumento","B)  Con el match del 401(k)","C)  Con horas extra"]),
+ c("La respuesta es la B. Muchas empresas ponen dinero extra cuando tú ahorras para tu retiro. Eso se llama match.","tu empresa pone dinero cuando tú ahorras",70,num="401(k)"),
+ c("Ejemplo: ganas cuarenta mil al año y pones el seis por ciento, dos mil cuatrocientos.","Ganas $40,000 y pones el 6 %: $2,400",72,num="6%"),
+ c("Si tu empresa pone el cincuenta por ciento de eso, te regala mil doscientos más.","si tu empresa pone el 50 %",72,num="+$1,200",count=True,bar=0.5),
+ c("Pregunta en recursos humanos cuánto es el match de tu empresa. ¿Tu trabajo lo tiene? Comenta.","Pregunta en recursos humanos cuánto es tu match",78,sub=END)]),
+}
+for k,v in V.items(): json.dump(v,open(f"semana1/{k}.json","w"),ensure_ascii=False,indent=1)
+shutil.copy("carro.json","semana1/s07.json")
+print(sum(len(s["say"]) for v in V.values() for s in v["scenes"]))
