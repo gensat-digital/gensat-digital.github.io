@@ -43,11 +43,11 @@ import unicodedata, sys as _sys
 _sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import icons
 def norm(x): return "".join(ch for ch in unicodedata.normalize("NFD",x.lower()) if unicodedata.category(ch)!="Mn" and ch.isalnum())
 BMAP={norm(k):v for k,v in spec.get("broll",{}).items()}
+cand=[{"t":sc["t0"]+0.15,"icon":sc["icon"],"scene":i} for i,sc in enumerate(spec["scenes"]) if sc.get("icon")]
+cand+=[{"t":w["s"],"icon":BMAP[norm(w["w"])],"scene":w["scene"]} for w in words if norm(w["w"]) in BMAP and not spec["scenes"][w["scene"]].get("nobroll")]
 events=[]
-for w in words:
-    ic=BMAP.get(norm(w["w"]))
-    if ic and (not events or events[-1]["icon"]!=ic) and not spec["scenes"][w["scene"]].get("nobroll"):
-        events.append({"t":w["s"],"icon":ic,"scene":w["scene"]})
+for e in sorted(cand,key=lambda e:e["t"]):
+    if not events or events[-1]["icon"]!=e["icon"] or events[-1]["scene"]!=e["scene"]: events.append(e)
 ICON_IMG={}
 # 3) audio
 sil=f"{work}/sil.wav"; subprocess.run(["ffmpeg","-y","-loglevel","error","-f","lavfi","-i","anullsrc=r=44100:cl=mono","-t",str(GAP),sil],check=True)
@@ -135,7 +135,7 @@ for n in range(N):
     ev=None
     for e in events:
         if e["t"]<=t: ev=e
-    if ev and t-ev["t"]<4.5 and spec["scenes"][ev["scene"]] is sc:
+    if ev and spec["scenes"][ev["scene"]] is sc:
         if ev["icon"] not in ICON_IMG: ICON_IMG[ev["icon"]]=icons.get(ev["icon"],ACC)
         a=back((t-ev["t"])/0.35); sz=max(2,int(380*min(a,1.15)))
         ic=ICON_IMG[ev["icon"]].resize((sz,sz)); bob=int(8*__import__("math").sin((t-ev["t"])*3))

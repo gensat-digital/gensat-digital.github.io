@@ -1,0 +1,64 @@
+{
+ "tag": "DINERO EN USA · EN ESPAÑOL",
+ "handle": "@PlataClaraUSA1",
+ "accent": [
+  46,
+  204,
+  113
+ ],
+ "scenes": [
+  {
+   "say": "Tres pasos para empezar tu crédito desde cero, con una tarjeta asegurada.",
+   "size": 74,
+   "text": "pasos para empezar tu crédito desde cero",
+   "num": "3",
+   "icon": "gauge"
+  },
+  {
+   "say": "Uno: dejas un depósito, por ejemplo doscientos dólares, y ese es tu límite. Te lo devuelven al cerrarla o al subir de nivel.",
+   "size": 74,
+   "text": "Deja un depósito: $200 = $200 de límite",
+   "num": "1",
+   "icon": "cash"
+  },
+  {
+   "say": "Dos: confirma que reporte a los tres burós: Equifax, Experian y TransUnion.",
+   "size": 70,
+   "text": "Que reporte a Equifax, Experian y TransUnion",
+   "num": "2",
+   "icon": "bureaus"
+  },
+  {
+   "say": "Tres: úsala solo para algo pequeño, como el teléfono, y págala completa cada mes.",
+   "size": 76,
+   "text": "Úsala poco y págala completa cada mes",
+   "num": "3",
+   "icon": "card"
+  },
+  {
+   "say": "En seis a doce meses, muchos bancos te dan una tarjeta normal.",
+   "size": 72,
+   "text": "meses para subir a una tarjeta normal",
+   "num": "6–12",
+   "icon": "calendar"
+  },
+  {
+   "say": "¿En qué paso vas tú? Comenta.",
+   "size": 80,
+   "text": "¿En qué paso vas? Comenta 1, 2 o 3",
+   "sub": "Información educativa, no es asesoría financiera."
+  }
+ ],
+ "broll": {
+  "crédito": "gauge",
+  "tarjeta": "card",
+  "asegurada": "lock",
+  "depósito": "cash",
+  "límite": "card",
+  "burós": "bureaus",
+  "teléfono": "phone",
+  "mes": "calendar",
+  "bancos": "bank",
+  "normal": "card_up"
+ }
+}

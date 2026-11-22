@@ -1,0 +1,61 @@
+{
+ "tag": "DINERO EN USA · EN ESPAÑOL",
+ "handle": "@PlataClaraUSA1",
+ "accent": [
+  46,
+  204,
+  113
+ ],
+ "scenes": [
+  {
+   "say": "Mandar dinero con envío gratis te puede salir más caro. Mira este ejemplo con trescientos dólares.",
+   "size": 82,
+   "text": "El envío \"gratis\" te puede salir más caro",
+   "icon": "phone"
+  },
+  {
+   "say": "La app A no cobra comisión y paga diecisiete veinte. La app B cobra cuatro dólares, pero paga diecisiete sesenta.",
+   "size": 64,
+   "text": "Mandas $300:",
+   "options": [
+    "App A: $0 de comisión, cambio 17.20",
+    "App B: $4 de comisión, cambio 17.60"
+   ],
+   "sub": "Tipos de cambio de ejemplo."
+  },
+  {
+   "say": "Con la A, tu familia recibe cinco mil ciento sesenta pesos.",
+   "size": 76,
+   "text": "pesos con la app A",
+   "num": "5,160",
+   "count": true,
+   "icon": "cash"
+  },
+  {
+   "say": "Con la B, recibe cinco mil doscientos nueve. Gana la que cobra comisión.",
+   "size": 76,
+   "text": "pesos con la app B",
+   "num": "5,209",
+   "count": true,
+   "icon": "cash"
+  },
+  {
+   "say": "Compara siempre cuánto recibe tu familia al final.",
+   "size": 76,
+   "text": "Compara cuánto RECIBE tu familia, no la comisión",
+   "icon": "piggy"
+  },
+  {
+   "say": "¿A qué país mandas tú? Comenta.",
+   "size": 80,
+   "text": "¿A qué país mandas dinero? Comenta",
+   "sub": "Información educativa, no es asesoría financiera."
+  }
+ ],
+ "broll": {
+  "dinero": "cash",
+  "gratis": "phone",
+  "pesos": "cash",
+  "familia": "piggy"
+ }
+}

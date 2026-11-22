@@ -1,0 +1,63 @@
+{
+ "tag": "DINERO EN USA · EN ESPAÑOL",
+ "handle": "@PlataClaraUSA1",
+ "accent": [
+  46,
+  204,
+  113
+ ],
+ "scenes": [
+  {
+   "say": "Mil doscientos dólares al año que tu empresa te puede regalar, y mucha gente no los cobra.",
+   "size": 72,
+   "text": "al año que tu empresa te puede regalar",
+   "num": "+$1,200",
+   "count": true,
+   "icon": "cash"
+  },
+  {
+   "say": "Se llama el match del cuatro cero uno ka. Tu empresa pone dinero cuando tú ahorras para tu retiro.",
+   "size": 68,
+   "text": "El \"match\": tu empresa pone dinero cuando tú ahorras",
+   "num": "401(k)",
+   "icon": "piggy"
+  },
+  {
+   "say": "Ejemplo: ganas cuarenta mil al año y pones el seis por ciento, dos mil cuatrocientos.",
+   "size": 72,
+   "text": "pones el 6 % de un sueldo de $40,000",
+   "num": "$2,400",
+   "count": true,
+   "icon": "cash"
+  },
+  {
+   "say": "Si tu empresa pone el cincuenta por ciento de eso, te regala mil doscientos más.",
+   "size": 76,
+   "text": "si tu empresa pone el 50 %",
+   "num": "+$1,200",
+   "count": true,
+   "bar": 0.5,
+   "icon": "cash"
+  },
+  {
+   "say": "Pregunta en recursos humanos cuánto es el match de tu empresa.",
+   "size": 76,
+   "text": "Pregunta en recursos humanos cuánto es tu match",
+   "icon": "bank"
+  },
+  {
+   "say": "¿Tu trabajo lo tiene? Comenta sí o no.",
+   "size": 80,
+   "text": "¿Tu trabajo lo tiene? Comenta SÍ o NO",
+   "sub": "Información educativa, no es asesoría financiera."
+  }
+ ],
+ "broll": {
+  "empresa": "bank",
+  "retiro": "piggy",
+  "ahorras": "piggy",
+  "regala": "cash",
+  "regalar": "cash",
+  "match": "piggy"
+ }
+}
