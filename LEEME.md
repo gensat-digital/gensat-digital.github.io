@@ -26,6 +26,7 @@ Esta rama **no es la web**. Solo guarda los videos que se publican en Instagram 
 
 ## Publicación (Metricool, marca "Gensat ", id 7555771, zona America/Denver)
 - 2 por día: 7:30 AM y 6:30 PM, Instagram (REEL) + Facebook (REEL).
-- `autoPublish: false`: Yeison recibe el aviso en la app de Metricool y aprueba cada uno.
+- `autoPublish: true`: se publican solos a su hora. (Con `false`, Instagram NO se publica: Metricool solo manda un aviso para terminarlo a mano. Así pasó el 21 de noviembre.)
+- Vista previa: al terminar, se le envían a Yeison los 2 MP4 con SendUserFile, para que pueda pedir cambios o quitarlos antes de la hora.
 - Video: `https://raw.githubusercontent.com/gensat-digital/gensat-digital.github.io/videos/reels/<archivo>.mp4`
 - `instagramData.isAiGenerated: true` (la voz es generada con IA).
