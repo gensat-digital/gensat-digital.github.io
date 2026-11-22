@@ -18,3 +18,4 @@ Nota: el 21 de noviembre los dos salieron en Facebook a su hora. En Instagram se
 - Lunes: la semana organizada desde el celular
 - Choferes que reportan entregas desde el teléfono
 - Presupuestos que se hacen en 2 minutos
+- (Yeison en cámara, con su voz) "Uno se enoja con Claude…": le pedí editar un video y salía mal porque se me olvidó darle el video original. Lección: si le das a la IA la información correcta, te da buenos resultados. Empieza y termina con la misma frase.

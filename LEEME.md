@@ -23,6 +23,7 @@ Esta rama **no es la web**. Solo guarda los videos que se publican en Instagram 
 - Precios en dólares (USD). Datos siempre de ejemplo, nunca de clientes reales. Nunca mencionar Nutrix.
 - Nada de café (ni la palabra ni el emoji ☕).
 - No repetir un tema de los últimos 14 días (ver `temas.md`).
+- Si un video necesita un archivo original de Yeison (su video, su foto, su audio) y no lo tienes: detente y pídeselo. No lo busques en internet, no grabes su pantalla y no lo reemplaces con IA (Higgsfield u otra) sin preguntarle.
 
 ## Publicación (Metricool, marca "Gensat ", id 7555771, zona America/Denver)
 - 2 por día: 7:30 AM y 6:30 PM, Instagram (REEL) + Facebook (REEL).
