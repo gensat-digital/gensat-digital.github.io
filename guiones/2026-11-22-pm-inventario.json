@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🌙📦","title":"Domingo en la noche… ¿cuánto <span class='g'>material</span> queda?","note1":"Cemento: ¿5? ¿8?","note2":"Tubos: ni idea 🤔","qT":"@material"},
+ "problem":{"t":"@si","title":"A contar a la bodega…","items":[{"label":"📦 Bodega","lines":["cemento ¿?","tubos ¿?","pintura ¿?"],"t":"@contar"},{"label":"⏰ Lunes","lines":["falta material","la obra espera","otra vuelta 🚗"],"t":"@bodega"}],"verdict":{"text":"Ya vas tarde ⏰","t":"@tarde"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, tu inventario en el celular","panel":"Inventario · hoy","cards":[{"label":"Cemento (sacos)","value":"8","t":"@inventario"},{"label":"Tubos PVC","value":"24","t":"@celular"},{"label":"⚠️ Pintura: se acaba","value":"2","t":"@alertas"}],"bars":[80,72,60,50,35,15],"chartT":"@acabando"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}

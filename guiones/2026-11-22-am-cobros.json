@@ -1,0 +1,4 @@
+{"hook":{"emoji":"📓🤔","title":"¿Quién me <span class='g'>debe</span>? ¿Ya pagó?","note1":"Juan: $40 ¿?","note2":"¿ya pagó? 🤷","qT":"@cuánto"},
+ "problem":{"t":"@si","title":"Cuaderno… y memoria","items":[{"label":"📓 Cuaderno","lines":["Ana $25","Luis ¿$60?","Pedro $30 (?)"],"t":"@cuaderno"},{"label":"🧠 Memoria","lines":["¿era el lunes?","¿o el martes?","ni idea…"],"t":"@memoria"}],"verdict":{"text":"Ese dinero no vuelve 💸","t":"@dinero"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, cobras sin perseguir","panel":"Cobros · pendientes","cards":[{"label":"Ana · hace 12 días","value":"$25","t":"@quién"},{"label":"Luis · hace 5 días","value":"$60","t":"@cuánto"},{"label":"Recordatorio enviado","value":"✅","t":"@recordatorio"}],"bars":[70,55,48,40,30,18],"chartT":"@toque"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
