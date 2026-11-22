@@ -38,6 +38,17 @@ for w in words:
     cur.append(w)
     if re.search(r"[.,:;?!]$",w["w"]): chunks.append(cur); cur=[]
 if cur: chunks.append(cur)
+# 2b) B-roll: cuando la voz dice una palabra clave, aparece su ilustracion
+import unicodedata, sys as _sys
+_sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import icons
+def norm(x): return "".join(ch for ch in unicodedata.normalize("NFD",x.lower()) if unicodedata.category(ch)!="Mn" and ch.isalnum())
+BMAP={norm(k):v for k,v in spec.get("broll",{}).items()}
+events=[]
+for w in words:
+    ic=BMAP.get(norm(w["w"]))
+    if ic and (not events or events[-1]["icon"]!=ic) and not spec["scenes"][w["scene"]].get("nobroll"):
+        events.append({"t":w["s"],"icon":ic,"scene":w["scene"]})
+ICON_IMG={}
 # 3) audio
 sil=f"{work}/sil.wav"; subprocess.run(["ffmpeg","-y","-loglevel","error","-f","lavfi","-i","anullsrc=r=44100:cl=mono","-t",str(GAP),sil],check=True)
 # cada mp3 se pasa a wav primero (el concat directo de mp3 perdia el final)
@@ -49,7 +60,7 @@ raw=f"{work}/raw.wav"; subprocess.run(["ffmpeg","-y","-loglevel","error",*ins,"-
 print("voz",round(dur(raw),2),"esperado",round(total,2))
 voz=f"{work}/voz.wav"; subprocess.run(["ffmpeg","-y","-loglevel","error","-i",raw,"-af","loudnorm=I=-15:TP=-1.5","-ar","44100",voz],check=True)
 # efectos: whoosh al cambiar de escena, pop cuando aparece un numero
-fx=[(sc["t0"],"whoosh") for sc in spec["scenes"][1:]]+[(sc["t0"]+0.05,"pop") for sc in spec["scenes"] if sc.get("num") or sc.get("options")]
+fx=[(sc["t0"],"whoosh") for sc in spec["scenes"][1:]]+[(e["t"],"pop") for e in events if not any(abs(e["t"]-sc["t0"])<0.3 for sc in spec["scenes"])]+[(sc["t0"]+0.05,"pop") for sc in spec["scenes"] if sc.get("num") or sc.get("options")]
 music=spec.get("music",f"{A}/musica1.mp3")
 inputs=["-i",voz,"-stream_loop","-1","-i",music]; flt=[f"[1]atrim=0:{total},afade=t=in:d=0.8,afade=t=out:st={total-1.8}:d=1.8,volume=0.33[m]","[0]asplit[v][sc]","[m][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=400[md]"]
 mix=["[v]","[md]"]
@@ -121,14 +132,23 @@ for n in range(N):
     if sc.get("sub"):
         a=ease((lt-0.6)/0.4)
         for l in wrap(d,sc["sub"],f(R,46),W-140): d.text((70,1480),l,font=f(R,46),fill=mix(BG,GR,a))
+    ev=None
+    for e in events:
+        if e["t"]<=t: ev=e
+    if ev and t-ev["t"]<4.5 and spec["scenes"][ev["scene"]] is sc:
+        if ev["icon"] not in ICON_IMG: ICON_IMG[ev["icon"]]=icons.get(ev["icon"],ACC)
+        a=back((t-ev["t"])/0.35); sz=max(2,int(380*min(a,1.15)))
+        ic=ICON_IMG[ev["icon"]].resize((sz,sz)); bob=int(8*__import__("math").sin((t-ev["t"])*3))
+        im.paste(ic,(W//2-sz//2,1035-sz//2+bob),ic)
     # subtitulos palabra por palabra
     ch=next((c for c in chunks if c[0]["s"]-0.05<=t<=c[-1]["e"]+0.25),None)
     if ch:
         fs=f(B,82); line=" ".join(w["w"] for w in ch); GAPW=26
         while d.textlength(line,font=fs)+GAPW*len(ch)>W-140 and fs.size>50: fs=f(B,fs.size-4)
         x=(W-d.textlength(line,font=fs)-GAPW*(len(ch)-1))/2; cy=1270
+        cur=[w for w in ch if w["s"]<=t]; cur=cur[-1] if cur else None
         for w in ch:
-            ww=d.textlength(w["w"],font=fs); act=w["s"]<=t<=w["e"]+0.08
+            ww=d.textlength(w["w"],font=fs); act=w is cur
             if act: d.rounded_rectangle([x-12,cy-8,x+ww+12,cy+fs.size+18],18,fill=ACC)
             d.text((x,cy),w["w"],font=fs,fill=BG if act else WH); x+=ww+d.textlength(" ",font=fs)+GAPW
     d.text((70,H-170),spec["handle"],font=f(B,44),fill=WH)
