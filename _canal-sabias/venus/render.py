@@ -157,6 +157,11 @@ for n in range(N):
                 d.text((x,y),w["w"],font=f,fill=(40,30,80))
             else: d.text((x,y),w["w"],font=f,fill="white",stroke_width=8,stroke_fill=(40,30,80))
             x+=ww+gap
+    # marca de agua que cambia de lugar cada 4 s (dificil de recortar)
+    WMP=[(60,140),(700,1450),(60,1450),(680,140),(380,860)]
+    wx,wy=WMP[int(t//4)%len(WMP)]
+    wl=Image.new("RGBA",(W,H),(0,0,0,0)); ImageDraw.Draw(wl).text((wx,wy),"@SabiasQueUSA",font=F(40,"SemiBold"),fill=(255,255,255,95),stroke_width=3,stroke_fill=(40,30,80,70))
+    im=Image.alpha_composite(im.convert("RGBA"),wl)
     # zoom al cambiar de escena
     z=1+0.04*(1-ease(lt/0.3)) if i>0 else 1
     if z>1.001:
