@@ -1,0 +1,4 @@
+{"hook":{"emoji":"⏰😰","title":"Lunes… y piden un <span class='g'>presupuesto</span> para hoy","note1":"Cliente: ¿para hoy?","note2":"¿a qué hora? 😰","qT":"@presupuesto"},
+ "problem":{"t":"@otra","title":"¿Otra vez a mano?","items":[{"label":"🧱 Materiales","lines":["cemento ¿$?","bloques ¿$?","arena ¿$?"],"t":"@materiales"},{"label":"👷 Mano de obra","lines":["3 días × ¿$?","ayudante ¿?","🧮 …"],"t":"@calculadora"}],"verdict":{"text":"Se fue la mañana ⏳","t":"@mañana"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, presupuesto en 2 minutos","panel":"Presupuesto #0128","cards":[{"label":"Materiales","value":"$1,180","t":"@armas"},{"label":"Mano de obra","value":"$640","t":"@celular"},{"label":"📄 PDF enviado","value":"✅","t":"@pdf"}],"bars":[20,35,50,65,80,95],"chartT":"@minutos"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}

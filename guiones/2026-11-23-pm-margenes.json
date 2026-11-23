@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🏷️📈","title":"Mismos precios… <span class='g'>costos</span> más altos","note1":"Precio 2025: $10","note2":"Costo 2026: $9 😬","qT":"@costos"},
+ "problem":{"t":"@si","title":"¿Vendes más… y ganas menos?","items":[{"label":"📈 Ventas","lines":["+20 % 🎉","más pedidos","más trabajo"],"t":"@vendiendo"},{"label":"💵 Ganancia","lines":["-35 % 😟","¿y el dinero?","¿dónde está?"],"t":"@ganando"}],"verdict":{"text":"Vendes más, ganas menos ❌","t":"@menos"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, sabes cuánto ganas","panel":"Margen por producto","cards":[{"label":"Producto A","value":"38%","t":"@costo"},{"label":"Producto B","value":"22%","t":"@ganancia"},{"label":"⚠️ Producto C","value":"4%","t":"@producto"}],"bars":[90,70,55,40,25,10],"chartT":"@claro"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
