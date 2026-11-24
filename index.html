@@ -13,6 +13,7 @@
 <meta property="og:image" content="https://gensat-digital.github.io/img/og.jpg">
 <meta property="og:locale" content="es_LA">
 <meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.classList.add("js")</script>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +45,6 @@ a{color:inherit}
 .logo{display:inline-flex;align-items:flex-end;gap:3px}
 .logo svg{width:76px;height:76px;margin-bottom:-7px}
 .logo b{font-weight:800;font-size:53px;letter-spacing:.1em;line-height:.78;padding-bottom:2px}
-.tag{font-size:10px;letter-spacing:.22em;color:#b8c0cc;font-weight:500}
 .hero h1{margin:10px 0 0;font-size:24px;line-height:1.25;font-weight:600;text-wrap:balance}
 .hero p{margin:0;color:#c9d0db;font-size:15px;max-width:34ch}
 
@@ -63,14 +63,12 @@ a{color:inherit}
 .btn.main .t small{color:var(--navy);opacity:.75}
 .btn.main .ar{color:var(--navy)}
 .btn.off{opacity:.6;cursor:default}
-.soon{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--navy);color:var(--gold);padding:4px 8px;border-radius:20px;white-space:nowrap}
 .copy{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 12px var(--font);padding:7px 10px;border-radius:8px;cursor:pointer}
 
 /* Secciones */
 section{padding-block:26px}
 h2{margin:0 0 4px;font-size:21px;font-weight:700;text-wrap:balance}
 .lead{margin:0 0 16px;color:var(--muted);font-size:15px}
-.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--gold-ink);margin-bottom:6px}
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .svc div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .svc div:last-child:nth-child(odd){grid-column:span 2}
@@ -93,56 +91,14 @@ h2{margin:0 0 4px;font-size:21px;font-weight:700;text-wrap:balance}
 footer{background:var(--navy);color:#b8c0cc;padding-block:26px;text-align:center;font-size:13px;margin-top:20px}
 footer .logo svg{width:40px;height:40px;margin-bottom:-4px}
 footer .logo b{font-size:28px;color:#fff}
+.foot-links a{display:inline-flex;align-items:center;min-height:44px;padding-inline:4px;color:#fff;text-underline-offset:3px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 
-/* ===== Entrada animada ===== */
-.intro{position:fixed;inset:0;z-index:50;background:radial-gradient(ellipse at 50% 42%,#1b2d52 0%,#0f1b2d 62%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;
-  padding:max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));overflow:hidden;transition:opacity .7s ease, transform .7s ease}
-.intro.out{opacity:0;transform:scale(1.04);pointer-events:none}
-.intro .grid{position:absolute;inset:-50%;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;transform:perspective(600px) rotateX(55deg) translateY(10%);opacity:0;animation:gridIn 1.6s ease .2s forwards}
-@keyframes gridIn{to{opacity:1}}
-.gwrap{position:relative;width:min(210px,52vw);aspect-ratio:1}
-.gwrap svg{width:100%;height:100%;overflow:visible}
-.gpart{transform-box:fill-box;transform-origin:center;opacity:0;animation:fly 1s cubic-bezier(.2,.9,.25,1) forwards}
-.p1{--x:140px;--y:-160px;--r:70deg;animation-delay:.25s}
-.p2{--x:-180px;--y:-40px;--r:-90deg;animation-delay:.4s}
-.p3{--x:-60px;--y:190px;--r:60deg;animation-delay:.55s}
-.p4{--x:200px;--y:40px;--r:0deg;animation-delay:.7s}
-.p5{--x:0px;--y:160px;--r:0deg;animation-delay:.85s}
-.p6{--x:0px;--y:190px;--r:0deg;animation-delay:.95s}
-.p7{--x:0px;--y:220px;--r:0deg;animation-delay:1.05s}
-.p8{--x:220px;--y:-220px;--r:0deg;animation-delay:1.15s}
-@keyframes fly{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.6)}60%{opacity:1}100%{opacity:1;transform:none}}
-.gfull{opacity:0}.gwrap.solid .gfull{opacity:1}.gwrap.solid .gpart{visibility:hidden}
-.gwrap.pum svg{animation:pum .55s cubic-bezier(.3,1.6,.5,1)}
-@keyframes pum{0%{transform:scale(1)}35%{transform:scale(1.14)}100%{transform:scale(1)}}
-.ring{position:absolute;left:50%;top:50%;width:100%;aspect-ratio:1;border-radius:50%;border:2px solid var(--gold);transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none}
-.gwrap.pum .ring{animation:ring 1s ease-out}
-@keyframes ring{0%{opacity:.9;transform:translate(-50%,-50%) scale(.7)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.1)}}
-.flash{position:absolute;left:50%;top:50%;width:160%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,184,61,.45),transparent 60%);transform:translate(-50%,-50%);opacity:0;pointer-events:none}
-.gwrap.pum .flash{animation:flash .9s ease-out}
-@keyframes flash{0%{opacity:1}100%{opacity:0}}
-.iname{font-weight:800;font-size:clamp(30px,8vw,46px);letter-spacing:.32em;padding-left:.32em;opacity:0;animation:nameIn .9s ease 2.15s forwards}
-@keyframes nameIn{from{opacity:0;letter-spacing:.8em}to{opacity:1;letter-spacing:.32em}}
-.isub{font-size:13px;letter-spacing:.24em;color:#b8c0cc;opacity:0;animation:fadeIn .6s ease 2.6s forwards}
-.irot{height:30px;font-size:21px;font-weight:600;color:var(--gold);opacity:0;animation:fadeIn .6s ease 2.8s forwards;display:flex;align-items:center;gap:2px}
-.irot .cur{width:2px;height:22px;background:var(--gold);animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-@keyframes fadeIn{to{opacity:1}}
-.ienter{appearance:none;margin-top:14px;border:1.5px solid var(--gold);background:transparent;color:#fff;font:600 14px var(--font);letter-spacing:.3em;padding:15px 44px 15px 50px;border-radius:40px;cursor:pointer;opacity:0;animation:fadeIn .6s ease 3.2s forwards;transition:background .25s,color .25s}
-.ienter:hover{background:var(--gold);color:var(--navy)}
-.ihint{font-size:12px;color:#8e98a8;opacity:0;animation:fadeIn .6s ease 3.5s forwards}
-.snd{position:fixed;z-index:40;right:max(16px, calc(env(safe-area-inset-right, 0px) + 12px));bottom:calc(env(safe-area-inset-bottom, 0px) + 16px);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(15,27,45,.15)}
-.snd .bars{display:flex;gap:3px;align-items:flex-end;height:16px}
-.snd .bars i{width:3px;background:var(--gold);height:30%;animation:eq 1s ease-in-out infinite}
-.snd .bars i:nth-child(2){animation-delay:.2s}.snd .bars i:nth-child(3){animation-delay:.4s}
-.snd.muted .bars i{animation:none;height:20%;background:var(--muted)}
-@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+/* Selector de idioma */
 .lang{position:absolute;top:max(14px, env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));z-index:5;display:flex;border:1px solid rgba(255,255,255,.35);border-radius:20px;overflow:hidden}
-.lang button{appearance:none;border:0;background:transparent;color:#c9d0db;font:600 12px var(--font);letter-spacing:.08em;padding:7px 11px;cursor:pointer}
+.lang button{appearance:none;border:0;background:transparent;color:#c9d0db;font:600 13px var(--font);padding:8px 12px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
 .hero{position:relative}
-@media (prefers-reduced-motion: reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important}}
 
 /* ===== Mejoras de diseño (nov 2026) — el logo NO cambia ===== */
 .in.wide{max-width:1080px}
@@ -157,12 +113,12 @@ footer .logo b{font-size:28px;color:#fff}
 @keyframes orb1{to{transform:translate(55vw,90px)}}
 @keyframes orb2{to{transform:translate(-50vw,-60px)}}
 .hero h1 .w{display:inline-block;white-space:nowrap}
-.hero h1 .ch{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(4px)}
+.hero h1 .ch{display:inline-block}
+.js .hero h1 .ch{opacity:0;transform:translateY(.45em);filter:blur(4px)}
 .hero h1.go .ch{animation:chIn .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*22ms)}
 @keyframes chIn{to{opacity:1;transform:none;filter:none}}
-.hero h1 .ch.g{color:var(--gold)}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
-.reveal.vis{opacity:1;transform:none}
+.reveal{transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.js .reveal:not(.vis){opacity:0;transform:translateY(18px)}
 .tilt{transform-style:preserve-3d;transition:transform .25s ease,box-shadow .25s ease,border-color .25s;position:relative}
 .tilt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(245,184,61,.16),transparent 60%);opacity:0;transition:opacity .25s}
 @media (hover:hover){.tilt:hover{box-shadow:0 18px 40px rgba(15,27,45,.16);border-color:var(--gold)}.tilt:hover::after{opacity:1}}
@@ -170,12 +126,11 @@ footer .logo b{font-size:28px;color:#fff}
 .svc div svg{transition:transform .3s ease}
 @media (hover:hover){.svc div:hover svg{transform:scale(1.15) rotate(-6deg)}}
 .projs{display:flex;flex-direction:column;gap:12px}
-.fab{position:fixed;z-index:39;right:max(16px, calc(env(safe-area-inset-right, 0px) + 12px));bottom:calc(env(safe-area-inset-bottom, 0px) + 16px);display:flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:13px 18px;border-radius:40px;box-shadow:0 10px 28px rgba(15,27,45,.28);transform:translateY(120px);opacity:0;transition:transform .4s cubic-bezier(.2,.9,.3,1.2),opacity .3s}
-.fab.show{transform:none;opacity:1}
+.fab{position:fixed;z-index:39;right:max(16px, calc(env(safe-area-inset-right, 0px) + 12px));bottom:calc(env(safe-area-inset-bottom, 0px) + 16px);display:flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:13px 18px;border-radius:40px;box-shadow:0 10px 28px rgba(15,27,45,.28);transition:transform .4s cubic-bezier(.2,.9,.3,1.2),opacity .3s}
+.js .fab:not(.show){transform:translateY(120px);opacity:0;pointer-events:none}
 .fab svg{width:22px;height:22px}
 .fab::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--gold);animation:fabPulse 2.4s ease-out infinite}
 @keyframes fabPulse{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
-.snd{transition:bottom .35s ease}.fab.show + .snd{bottom:calc(env(safe-area-inset-bottom, 0px) + 80px)}
 .xl{flex-wrap:wrap}.xl>div{flex:1 1 200px;min-width:0}
 @media (min-width:900px){
   .hero{padding-block:84px 70px}
@@ -184,7 +139,7 @@ footer .logo b{font-size:28px;color:#fff}
   section{padding-block:44px}
   h2{font-size:30px}
   .lead{font-size:16px;max-width:60ch}
-  .projs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .projs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
   .projs .proj{display:flex;flex-direction:column}
   .svc{grid-template-columns:repeat(3,1fr);gap:16px}
   .svc div{padding:20px}
@@ -200,8 +155,8 @@ main:focus{outline:none}
 .skip{position:absolute;left:12px;top:-60px;z-index:60;background:var(--gold);color:var(--navy);font-weight:700;padding:12px 16px;border-radius:10px;text-decoration:none;transition:top .2s ease}
 .skip:focus{top:12px}
 section[id]{scroll-margin-top:16px}
-.lang button{min-height:36px;min-width:44px}
-@media (pointer:coarse){.lang button{min-height:44px}.copy{min-height:40px;padding-inline:14px}}
+.lang button{min-height:44px;min-width:48px}
+.copy{min-height:44px;padding-inline:14px}
 .copy:hover{border-color:var(--ink)}
 .fx .gl{animation-iteration-count:3}
 .fx .orb{animation-iteration-count:2}
@@ -215,40 +170,15 @@ section[id]{scroll-margin-top:16px}
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
-<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Bienvenida a GENSAT">
-  <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
-  <div class="grid" aria-hidden="true"></div>
-  <div class="gwrap" id="gwrap" aria-hidden="true">
-    <div class="flash"></div><div class="ring"></div>
-    <svg viewBox="0 0 100 100">
-      <path class="gpart p1" d="M80 27 A37 37 0 0 0 21.66 26.22" fill="none" stroke="#fff" stroke-width="12"/>
-      <path class="gpart p2" d="M21.66 26.22 A37 37 0 0 0 32.92 82.82" fill="none" stroke="#fff" stroke-width="12"/>
-      <path class="gpart p3" d="M32.92 82.82 A37 37 0 0 0 87 60" fill="none" stroke="#fff" stroke-width="12"/>
-      <path class="gpart p4" d="M93 60 L62 60" fill="none" stroke="#fff" stroke-width="12"/>
-      <rect class="gpart p5" x="30" y="58" width="8" height="15" fill="#fff"/>
-      <rect class="gpart p6" x="42" y="49" width="8" height="24" fill="#fff"/>
-      <rect class="gpart p7" x="54" y="38" width="8" height="35" fill="#f5b83d"/>
-      <circle class="gpart p8" cx="86" cy="18" r="7" fill="#f5b83d"/>
-      <g class="gfull"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="#fff"/><rect x="42" y="49" width="8" height="24" fill="#fff"/><rect x="54" y="38" width="8" height="35" fill="#f5b83d"/><circle cx="86" cy="18" r="7" fill="#f5b83d"/></g>
-    </svg>
-  </div>
-  <div class="iname" translate="no">GENSAT</div>
-  <div class="isub" data-i18n="isub">SOLUCIONES DIGITALES PARA TU NEGOCIO</div>
-  <div class="irot" aria-hidden="true"><span id="rot"></span><span class="cur"></span></div>
-  <button class="ienter" id="ienter" type="button" data-i18n="ienter">ENTRAR</button>
-  <div class="ihint" data-i18n="ihint">Con música · puedes silenciarla abajo</div>
-</div>
 <a class="fab" id="fab" target="_blank" rel="noopener"></a>
-<button class="snd" id="snd" type="button" aria-label="Silenciar música" hidden><span class="bars"><i></i><i></i><i></i></span></button>
 
 <header class="hero band">
   <div class="fx" aria-hidden="true"><div class="gl"></div><div class="orb o1"></div><div class="orb o2"></div></div>
   <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   <div class="in">
     <div class="logo" aria-label="GENSAT" translate="no"><span id="mark-top"></span><b>ENSAT</b></div>
-    <div class="tag" data-i18n="tag">SOLUCIONES DIGITALES · AUTOMATIZACIÓN</div>
-    <h1 data-i18n="h1">Herramientas digitales hechas a la medida de tu negocio</h1>
-    <p data-i18n="hp">Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.</p>
+    <h1 data-i18n="h1">Herramientas digitales para tu negocio</h1>
+    <p data-i18n="hp">Páginas web, datos y automatización, en español o inglés, sin palabras complicadas.</p>
   </div>
 </header>
 
@@ -257,7 +187,6 @@ section[id]{scroll-margin-top:16px}
 
   <section class="band" id="proyecto">
     <div class="in wide">
-      <div class="eyebrow" data-i18n="pe">Proyectos reales</div>
       <h2 data-i18n="ph">Trabajos que ya están funcionando</h2>
       <p class="lead" data-i18n="pl">Para el celular y para la computadora, según lo que necesite cada negocio.</p>
       <div class="projs">
@@ -279,7 +208,6 @@ section[id]{scroll-margin-top:16px}
 
   <section class="band" id="servicios">
     <div class="in wide">
-      <div class="eyebrow" data-i18n="se">Servicios</div>
       <h2 data-i18n="sh">¿Qué puede hacer GENSAT por tu negocio?</h2>
       <p class="lead" data-i18n="sl">Cada proyecto se hace a la medida. Me cuentas qué te quita tiempo y te propongo la herramienta.</p>
       <div class="svc" id="svc"></div>
@@ -288,7 +216,6 @@ section[id]{scroll-margin-top:16px}
 
   <section class="band" id="como">
     <div class="in wide">
-      <div class="eyebrow" data-i18n="ce">Cómo trabajamos</div>
       <h2 data-i18n="ch">Así de simple empezamos</h2>
       <p class="lead" data-i18n="cl">Sin contratos enredados. Primero conversamos y tú decides.</p>
       <ol class="steps">
@@ -299,17 +226,12 @@ section[id]{scroll-margin-top:16px}
     </div>
   </section>
 
-  <section class="band" id="plantillas">
-    <div class="in wide">
-      <div class="eyebrow" data-i18n="xe">Plantillas de Excel</div>
-      <div class="xl reveal"><span id="xl-ic"></span><div><b data-i18n="xt">Plantillas en español e inglés</b><small data-i18n="xd">Control de producción, costos y más. Muy pronto disponibles.</small></div><span class="soon" data-i18n="soon">Próximamente</span></div>
-    </div>
-  </section>
 </main>
 
 <footer class="band">
   <div class="in" style="display:flex;flex-direction:column;align-items:center;gap:10px">
     <div class="logo" aria-label="GENSAT" translate="no"><span id="mark-foot"></span><b>ENSAT</b></div>
+    <span class="foot-links"><a id="foot-wa" target="_blank" rel="noopener">WhatsApp</a> · <a id="foot-ig" target="_blank" rel="noopener"></a></span>
     <span id="foot-mail"></span>
     <span data-i18n="foot">© 2026 GENSAT LLC · Soluciones digitales</span>
   </div>
@@ -330,10 +252,9 @@ const GENSAT = {
 /* ===== Textos en español e inglés ===== */
 const T = {
  es: {
-  isub:'SOLUCIONES DIGITALES PARA TU NEGOCIO', ienter:'ENTRAR', fab:'Escríbeme', skip:'Saltar al contenido', ihint:'Con música · puedes silenciarla abajo',
-  rot:['Páginas web','Análisis de datos','Seguimiento de pedidos','Automatización'],
-  tag:'SOLUCIONES DIGITALES · AUTOMATIZACIÓN', h1:'Herramientas digitales hechas a la medida de tu negocio',
-  hp:'Páginas web, datos y automatización. En español o en inglés, y sin palabras complicadas.',
+  fab:'Escríbeme', skip:'Saltar al contenido',
+  tag:'SOLUCIONES DIGITALES · AUTOMATIZACIÓN', h1:'Herramientas digitales para tu negocio',
+  hp:'Páginas web, datos y automatización, en español o inglés, sin palabras complicadas.',
   fbSub:'Síguenos en Facebook', wa:'Escríbeme por WhatsApp', waSub:'Respuesta directa, sin compromiso', waSoon:'Número nuevo muy pronto', soonShort:'Pronto',
   proj:'Ver proyectos reales', projSub:'Salón, manufactura y app para choferes',
   svc:'Servicios', svcSub:'Webs, datos, automatización, redes y más',
@@ -347,13 +268,12 @@ const T = {
   ce:'Cómo trabajamos', ch:'Así de simple empezamos', cl:'Sin contratos enredados. Primero conversamos y tú decides.',
   c1:'Me escribes por WhatsApp.', c2:'Me cuentas qué necesita tu negocio.', c3:'Te muestro una propuesta clara, con precio y sin compromiso.',
   xe:'Plantillas de Excel', xt:'Plantillas en español e inglés', xd:'Control de producción, costos y más. Muy pronto disponibles.',
-  foot:'© 2026 GENSAT LLC · Soluciones digitales', mute:'Silenciar música', unmute:'Activar música'
+  foot:'© 2026 GENSAT LLC · Soluciones digitales'
  },
  en: {
-  isub:'DIGITAL SOLUTIONS FOR YOUR BUSINESS', ienter:'ENTER', fab:'Message me', skip:'Skip to content', ihint:'With music · you can mute it below',
-  rot:['Websites','Data analysis','Order tracking','Automation'],
+  fab:'Message me', skip:'Skip to content',
   tag:'DIGITAL SOLUTIONS · AUTOMATION', h1:'Digital tools built around your business',
-  hp:'Websites, data and automation. In English or Spanish, without the jargon.',
+  hp:'Websites, data and automation, in English or Spanish, without jargon.',
   fbSub:'Follow us on Facebook', wa:'Message me on WhatsApp', waSub:'Direct reply, no commitment', waSoon:'New number coming soon', soonShort:'Soon',
   proj:'See real projects', projSub:'Salon, manufacturing and driver app',
   svc:'Services', svcSub:'Websites, data, automation, social media and more',
@@ -367,7 +287,7 @@ const T = {
   ce:'How we work', ch:'Getting started is simple', cl:'No complicated contracts. We talk first and you decide.',
   c1:'You message me on WhatsApp.', c2:'You tell me what your business needs.', c3:'I show you a clear proposal, with a price and no commitment.',
   xe:'Excel templates', xt:'Templates in English and Spanish', xd:'Production control, costs and more. Available soon.',
-  foot:'© 2026 GENSAT LLC · Digital solutions', mute:'Mute music', unmute:'Play music'
+  foot:'© 2026 GENSAT LLC · Digital solutions'
  }
 };
 let LANG = (() => {
@@ -376,79 +296,6 @@ let LANG = (() => {
   return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
 })();
 
-/* ===== Entrada animada ===== */
-(function(){
-  const intro = document.getElementById('intro'), gw = document.getElementById('gwrap');
-  document.body.style.overflow = 'hidden';
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  setTimeout(() => gw.classList.add('pum', 'solid'), reduce ? 0 : 2200);
-  // Descripción que se escribe sola
-  const rot = document.getElementById('rot');
-  let w = 0, c = 0, del = false;
-  function tick(){
-    const words = T[LANG].rot; if (w >= words.length) w = 0;
-    const word = words[w];
-    rot.textContent = word.slice(0, c);
-    if (!del && c < word.length){ c++; setTimeout(tick, 55); }
-    else if (!del){ del = true; setTimeout(tick, 1300); }
-    else if (c > 0){ c--; setTimeout(tick, 28); }
-    else { del = false; w = (w + 1) % words.length; setTimeout(tick, 250); }
-  }
-  setTimeout(tick, reduce ? 0 : 2900);
-  setTimeout(() => { try { document.getElementById('ienter').focus({preventScroll:true}); } catch(_){} }, reduce ? 0 : 3300);
-  document.getElementById('ienter').addEventListener('click', () => {
-    gw.classList.remove('pum'); void gw.offsetWidth; gw.classList.add('pum');
-    startMusic();
-    setTimeout(() => { intro.classList.add('out'); document.body.style.overflow = ''; playH1(); }, 420);
-    setTimeout(() => { intro.hidden = true; document.getElementById('main').focus({preventScroll:true}); }, 1150);
-  });
-})();
-
-/* ===== Música electrónica generada en la página (original, sin derechos) ===== */
-let AC, MASTER, ON = false;
-const VOL = 0.09;
-function startMusic(){
-  try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return; }
-  MASTER = AC.createGain(); MASTER.gain.value = 0; MASTER.connect(AC.destination);
-  const comp = AC.createDynamicsCompressor(); comp.connect(MASTER);
-  const delay = AC.createDelay(); delay.delayTime.value = 0.32; const fb = AC.createGain(); fb.gain.value = 0.32;
-  const wet = AC.createGain(); wet.gain.value = 0.35; delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(comp);
-  const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 6; lp.connect(comp); lp.connect(delay);
-  // barrido lento del filtro para sensación de "máquina trabajando"
-  const lfo = AC.createOscillator(), lfoG = AC.createGain(); lfo.frequency.value = 0.06; lfoG.gain.value = 700; lfo.connect(lfoG); lfoG.connect(lp.frequency); lfo.start();
-  const noiseBuf = AC.createBuffer(1, AC.sampleRate * 0.2, AC.sampleRate); const nd = noiseBuf.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
-  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
-  const now = AC.currentTime;
-  // golpe de entrada ("pum")
-  const k = AC.createOscillator(), kg = AC.createGain(); k.frequency.setValueAtTime(140, now); k.frequency.exponentialRampToValueAtTime(40, now + 0.5);
-  kg.gain.setValueAtTime(0.9, now); kg.gain.exponentialRampToValueAtTime(0.001, now + 0.6); k.connect(kg); kg.connect(comp); k.start(now); k.stop(now + 0.65);
-  MASTER.gain.setValueAtTime(0.25, now); MASTER.gain.linearRampToValueAtTime(VOL, now + 0.8);
-  ON = true;
-  const btn = document.getElementById('snd'); btn.hidden = false;
-  btn.onclick = () => { ON = !ON; MASTER.gain.setTargetAtTime(ON ? VOL : 0, AC.currentTime, 0.25); btn.classList.toggle('muted', !ON); btn.setAttribute('aria-label', ON ? T[LANG].mute : T[LANG].unmute); };
-  const BPM = 112, S16 = 60 / BPM / 4;
-  // La menor · Fa · Do · Sol
-  const PROG = [[57,60,64,69],[53,57,60,65],[48,55,60,64],[55,59,62,67]];
-  const BASS = [45,41,36,43];
-  const PAT = [0,2,1,3,2,1,3,2,0,2,1,3,2,3,1,2];
-  function note(type, f, t, d, g, dest){ const o = AC.createOscillator(), a = AC.createGain(); o.type = type; o.frequency.value = f; a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(g, t + 0.008); a.gain.exponentialRampToValueAtTime(0.0008, t + d); o.connect(a); a.connect(dest); o.start(t); o.stop(t + d + 0.05); }
-  function hat(t, g){ const s = AC.createBufferSource(), h = AC.createBiquadFilter(), a = AC.createGain(); s.buffer = noiseBuf; h.type = 'highpass'; h.frequency.value = 7000; a.gain.setValueAtTime(g, t); a.gain.exponentialRampToValueAtTime(0.0008, t + 0.05); s.connect(h); h.connect(a); a.connect(comp); s.start(t); s.stop(t + 0.06); }
-  function kick(t){ const o = AC.createOscillator(), a = AC.createGain(); o.frequency.setValueAtTime(110, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18); a.gain.setValueAtTime(0.5, t); a.gain.exponentialRampToValueAtTime(0.001, t + 0.25); o.connect(a); a.connect(comp); o.start(t); o.stop(t + 0.3); }
-  let step = 0, next = now + 0.7;
-  (function sched(){
-    while (next < AC.currentTime + 0.3){
-      const bar = Math.floor(step / 16) % 4, s = step % 16, ch = PROG[bar];
-      const intro = step < 64; // primeras 4 barras más suaves
-      note('sawtooth', mtof(ch[PAT[s]] + 12), next, S16 * 0.9, intro ? 0.05 : 0.07, lp);
-      if (s % 2 === 0) note('triangle', mtof(BASS[bar]), next, S16 * 1.8, 0.16, comp);
-      if (!intro && s % 4 === 0) kick(next);
-      if (s % 2 === 1) hat(next, intro ? 0.015 : 0.03);
-      next += S16; step++;
-    }
-    setTimeout(sched, 60);
-  })();
-  document.addEventListener('visibilitychange', () => { if (document.hidden) AC.suspend(); else AC.resume(); });
-}
 
 const NAVY = '#0f1b2d', GOLD = '#f5b83d';
 const mark = (c) => `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M80 27 A37 37 0 1 0 87 60 L62 60" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/><rect x="30" y="58" width="8" height="15" fill="${c}"/><rect x="42" y="49" width="8" height="24" fill="${c}"/><rect x="54" y="38" width="8" height="35" fill="${GOLD}"/><circle cx="86" cy="18" r="7" fill="${GOLD}"/></svg>`;
@@ -492,7 +339,6 @@ function render(){
     btn({icon:'grid', title:t.svc, sub:t.svcSub, href:'#servicios'}),
     btn({icon:'ig', title:'Instagram', sub:'@' + GENSAT.instagram, href:'https://www.instagram.com/' + GENSAT.instagram}),
     btn({icon:'fb', title:'Facebook', sub:t.fbSub, href:GENSAT.facebook}),
-    btn({icon:'xl', title:t.xl, sub:t.xlSub, soon:t.soon}),
     btn({icon:'mail', title:t.mail, sub:GENSAT.correo, href:'mailto:' + GENSAT.correo, extra:'<button class="copy" type="button" id="copy-mail" aria-live="polite">' + t.copy + '</button>'})
   );
   document.getElementById('copy-mail').addEventListener('click', e => {
@@ -506,19 +352,18 @@ function render(){
   document.documentElement.lang = LANG;
   document.getElementById('case-link').href = 'caso-manufactura.html' + (LANG === 'en' ? '?lang=en' : '');
   document.getElementById('drv-link').href = 'demo-choferes.html' + (LANG === 'en' ? '?lang=en' : '');
-  const snd = document.getElementById('snd'); snd.setAttribute('aria-label', snd.classList.contains('muted') ? t.unmute : t.mute);
+  document.getElementById('foot-wa').href = waHref;
   const fab = document.getElementById('fab'); fab.href = waHref; fab.setAttribute('aria-label', t.wa); fab.innerHTML = I.wa + '<span>' + t.fab + '</span>';
   splitH1(); watchReveal();
 }
 /* Título que aparece letra por letra (la última palabra clave en dorado) */
-const GOLDW = { es:['medida','negocio'], en:['business'] };
 function splitH1(){
   const h = document.querySelector('.hero h1'); const txt = h.textContent; let i = 0;
   h.setAttribute('aria-label', txt);
-  h.innerHTML = txt.split(' ').map(w => '<span class="w" aria-hidden="true">' + [...w].map(c => '<span class="ch' + (GOLDW[LANG].includes(w.replace(/[^\p{L}]/gu,'')) ? ' g' : '') + '" style="--i:' + (i++) + '">' + c + '</span>').join('') + '</span>').join(' ');
+  h.innerHTML = txt.split(' ').map(w => '<span class="w" aria-hidden="true">' + [...w].map(c => '<span class="ch' + '' + '" style="--i:' + (i++) + '">' + c + '</span>').join('') + '</span>').join(' ');
   if (introDone) requestAnimationFrame(() => h.classList.add('go'));
 }
-let introDone = false;
+let introDone = true;
 function playH1(){ introDone = true; const h = document.querySelector('.hero h1'); h.classList.remove('go'); void h.offsetWidth; h.classList.add('go'); }
 /* Aparecer al bajar */
 let IO = null;
@@ -544,7 +389,7 @@ function setLang(l){ LANG = l; try { localStorage.setItem('gensat-lang', l); } c
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 document.getElementById('proj-link').href = GENSAT.proyecto;
 document.getElementById('foot-mail').textContent = GENSAT.correo;
-document.getElementById('xl-ic').innerHTML = '<span class="ic" style="width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:var(--bg)">' + I.xl.replace('<svg ','<svg width="22" height="22" ') + '</span>';
+const figl = document.getElementById('foot-ig'); figl.href = 'https://www.instagram.com/' + GENSAT.instagram; figl.textContent = 'Instagram @' + GENSAT.instagram;
 render();
 </script>
 
