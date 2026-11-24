@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🚚❓","title":"¿Dónde está el <span class='g'>chofer</span>?","note1":"Llamada 1… 2… 3…","note2":"¿ya entregó? 🤔","qT":"@entregó"},
+ "problem":{"t":"@llamadas","title":"Llamadas, mensajes, audios…","items":[{"label":"💬 Mensajes","lines":["“ya casi”","“voy llegando”","✓✓ sin leer"],"t":"@mensajes"},{"label":"🎤 Audios","lines":["0:58 min","1:12 min","2:30 min 😩"],"t":"@audios"}],"verdict":{"text":"Cliente esperando ⏳","t":"@cliente"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, entregas al instante","panel":"Entregas · hoy","cards":[{"label":"Ruta 1 · entregado 9:42","value":"✅","t":"@chofer"},{"label":"Ruta 2 · foto 10:15","value":"📸","t":"@entrega"},{"label":"Ruta 3 · en camino","value":"🚚","t":"@foto"}],"bars":[30,45,55,65,80,92],"chartT":"@instante"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
