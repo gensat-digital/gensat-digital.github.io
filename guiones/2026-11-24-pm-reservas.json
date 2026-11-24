@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🌙📱","title":"¿Citas a las <span class='g'>11 de la noche</span>?","note1":"11:04 · ¿hay cita?","note2":"11:17 · ¿mañana? 😴","qT":"@cita"},
+ "problem":{"t":"@mensajes","title":"Mensajes, fotos, “¿tienes espacio?”","items":[{"label":"💬 Mensajes","lines":["“¿a qué hora?”","“¿cuánto es?”","“¿y el sábado?”"],"t":"@fotos"},{"label":"📷 Fotos","lines":["“así lo quiero”","“¿me queda?”","“¿lo haces?”"],"t":"@espacio"}],"verdict":{"text":"Contestando hasta tarde 😩","t":"@tarde"}},
+ "solution":{"t":"@con","title":"Con una página de <span style='color:#f5b83d'>GENSAT</span>, reservan solas","panel":"Reservas · esta semana","cards":[{"label":"Mar 10:00 · Corte","value":"$25","t":"@trabajos"},{"label":"Mié 3:00 · Color","value":"$60","t":"@eligen"},{"label":"Aviso a WhatsApp","value":"✅","t":"@llega"}],"bars":[25,40,50,62,78,90],"chartT":"@directo"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
