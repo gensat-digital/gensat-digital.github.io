@@ -72,16 +72,20 @@ def combub(d,x,y,s,col):
 def share(d,x,y,s,col):
     pts=[(x-s*0.55,y+s*0.45),(x-s*0.55,y),(x+s*0.05,y-s*0.2),(x+s*0.05,y-s*0.55),(x+s*0.6,y),(x+s*0.05,y+s*0.55),(x+s*0.05,y+s*0.2),(x-s*0.25,y+s*0.2)]
     d.polygon(pts,fill=col,outline=OUT); d.line(pts+[pts[0]],fill=OUT,width=7)
+def subbtn(d,x,y,s,col):
+    d.rounded_rectangle([x-s*0.62,y-s*0.42,x+s*0.62,y+s*0.42],int(s*0.22),fill=(235,40,40),outline=OUT,width=7)
+    d.polygon([(x-s*0.16,y-s*0.22),(x-s*0.16,y+s*0.22),(x+s*0.24,y)],fill="white")
+CTA_LINE="¡Suscríbete para más videos de ¿Sabías Que?, dale like, comenta qué animal quieres para mañana y comparte este video!"
 def cta(d,t,tl,sc):
-    """Cierre obligatorio: like, comenta y comparte (se iluminan al decirlos)."""
+    """Cierre obligatorio: suscríbete, like, comenta y comparte (cada uno se ilumina cuando se dice)."""
     label(d,"¿Te gustó?",W/2,330,104,fill=(255,214,60))
-    items=[("like",thumb,"¡Like!",(120,200,255)),("comenta",combub,"Comenta",(255,214,60)),("comparte",share,"Comparte",(160,240,130))]
+    items=[("suscr",subbtn,"Suscríbete",(235,40,40)),("like",thumb,"¡Like!",(120,200,255)),("comenta",combub,"Comenta",(255,214,60)),("comparte",share,"Comparte",(160,240,130))]
     for k,(key,fn,txt,col) in enumerate(items):
         t0=tl.wt(key,sc); a=back((t-t0)/0.35)
         if a<=0.02: continue
-        x=W/2+(k-1)*320; y=600+12*math.sin(t*5+k); s=150*min(a,1.15)*(1.12 if t0<=t<t0+0.6 else 1)
+        x=W/2+(k-1.5)*250; y=590+12*math.sin(t*5+k); s=112*min(a,1.15)*(1.12 if t0<=t<t0+0.6 else 1)
         d.ellipse([x-s*0.95,y-s*0.95,x+s*0.95,y+s*0.95],fill=(255,255,255),outline=OUT,width=8)
-        fn(d,x,y,s*0.8,col); label(d,txt,x,y+s*1.25,46)
+        fn(d,x,y,s*0.8,col); label(d,txt,x,y+s*1.3,40)
 def subs(d,t,tl):
     ch=next((c for c in tl.chunks if c[0]["s"]-0.05<=t<=c[-1]["e"]+0.2),None)
     if not ch: return
