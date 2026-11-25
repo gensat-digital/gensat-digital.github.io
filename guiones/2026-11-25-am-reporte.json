@@ -1,0 +1,4 @@
+{"hook":{"emoji":"⏰😱","title":"6:00 AM… ¡el <span class='g'>reporte</span> para el jefe!","note1":"Jefe: ¿el reporte?","note2":"¡¡YA!! 😱","qT":"@ya"},
+ "problem":{"t":"@abres","title":"Excel, copiar, pegar…","items":[{"label":"📊 Excel","lines":["Hoja1 (3)","#¡REF!","=SUMA(¿?)"],"t":"@excel"},{"label":"📋 Copiar y pegar","lines":["ventas ¿?","cobros ¿?","obras ¿?"],"t":"@copias"}],"verdict":{"text":"Nada cuadra ❌","t":"@nada"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, el reporte se arma solo","panel":"Reporte semanal","cards":[{"label":"Ventas","value":"$8,450","t":"@reporte"},{"label":"Cobros","value":"$5,210","t":"@equipo"},{"label":"Enviado al jefe","value":"✅","t":"@envías"}],"bars":[40,52,48,66,74,90],"chartT":"@envías"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
