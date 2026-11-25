@@ -120,3 +120,23 @@ def build_audio_video(tl,fx,out):
     subprocess.run(["ffmpeg","-y","-loglevel","error",*ins,"-filter_complex",";".join(flt),"-map","[a]","-ac","2","-ar","44100","mezcla_raw.wav"],check=True)
     subprocess.run(["ffmpeg","-y","-loglevel","error","-i","mezcla_raw.wav","-af",f"apad,atrim=0:{tl.TOTAL},alimiter=limit=0.9","mezcla.wav"],check=True)
     subprocess.run(["ffmpeg","-y","-loglevel","error","-framerate",str(FPS),"-i","frames/%05d.jpg","-i","mezcla.wav","-c:v","libx264","-pix_fmt","yuv420p","-crf","19","-c:a","aac","-b:a","192k","-shortest","-movflags","+faststart",out],check=True)
+
+# ---------- fondo marino comun ----------
+
+def ocean_bg():
+    im=Image.new("RGB",(W,H)); d=ImageDraw.Draw(im)
+    for y in range(H):
+        a=y/H; d.line([(0,y),(W,y)],fill=(int(90-60*a),int(210-110*a),int(235-90*a)))
+    ray=Image.new("RGBA",(W,H),(0,0,0,0)); rd=ImageDraw.Draw(ray)
+    for k in range(6):
+        x=120+k*170; rd.polygon([(x,0),(x+90,0),(x+260,H*0.7),(x+150,H*0.7)],fill=(255,255,255,22))
+    im=Image.alpha_composite(im.convert("RGBA"),ray.filter(ImageFilter.GaussianBlur(25)))
+    d=ImageDraw.Draw(im)
+    d.ellipse([-300,1650,W+300,2300],fill=(244,214,150)); d.ellipse([-300,1660,W+300,2310],outline=(200,160,100),width=8)
+    for x,y,c in [(160,1760,(255,150,150)),(880,1740,(255,200,120)),(520,1820,(250,180,200))]:
+        d.pieslice([x-45,y-45,x+45,y+45],180,360,fill=c,outline=(120,70,60),width=5)
+        for k in range(4): d.line([(x,y),(x+45*math.cos(math.radians(190+k*45)),y+45*math.sin(math.radians(190+k*45)))],fill=(120,70,60),width=3)
+    return im
+def seaweed(d,x,t,h,col,ph):
+    pts=[(x+28*math.sin(t*1.6+ph+k*0.5)*(k/12),1760-k*h/12) for k in range(13)]
+    d.line(pts,fill=(30,90,60),width=46,joint="curve"); d.line(pts,fill=col,width=34,joint="curve")
