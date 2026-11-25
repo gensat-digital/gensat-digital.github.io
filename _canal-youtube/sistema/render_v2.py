@@ -41,6 +41,7 @@ if cur: chunks.append(cur)
 # 2b) B-roll: cuando la voz dice una palabra clave, aparece su ilustracion
 import unicodedata, sys as _sys
 _sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import icons
+import mg
 def norm(x): return "".join(ch for ch in unicodedata.normalize("NFD",x.lower()) if unicodedata.category(ch)!="Mn" and ch.isalnum())
 BMAP={norm(k):v for k,v in spec.get("broll",{}).items()}
 cand=[{"t":sc["t0"]+0.15,"icon":sc["icon"],"scene":i} for i,sc in enumerate(spec["scenes"]) if sc.get("icon")]
@@ -74,6 +75,7 @@ subprocess.run(["ffmpeg","-y","-loglevel","error",*inputs,"-filter_complex",";".
 B="/usr/share/fonts/opentype/inter/Inter-Black.otf"; R="/usr/share/fonts/opentype/inter/Inter-Medium.otf"; SB="/usr/share/fonts/opentype/inter/Inter-Bold.otf"
 F={}
 def f(path,s):
+    s=max(8,s)
     k=(path,int(s))
     if k not in F: F[k]=ImageFont.truetype(path,int(s))
     return F[k]
@@ -107,16 +109,26 @@ for n in range(N):
     d.rectangle([0,0,int(W*t/total),12],fill=ACC)
     d.text((70,110),spec["tag"],font=f(R,40),fill=GR)
     y=300
-    if sc.get("num"):
+    if sc.get("visual"):
+        mg.SCENES[sc["visual"]](im,lt,t,ACC); d=ImageDraw.Draw(im,"RGBA")
+        if sc.get("num"):
+            a=back(lt/0.45); d.text((70,190),sc["num"],font=f(B,int(170*min(a,1.1))),fill=ACC)
+            if sc.get("text"): 
+                for li,l in enumerate(wrap(d,sc["text"],f(B,58),W-140)): d.text((70,400+li*70),l,font=f(B,58),fill=WH)
+        elif sc.get("text"):
+            for li,l in enumerate(wrap(d,sc["text"],f(B,62),W-140)): d.text((70,230+li*74),l,font=f(B,62),fill=WH)
+        sc_draw=False
+    else: sc_draw=True
+    if sc_draw and sc.get("num"):
         a=back(lt/0.45); base=250
         txt=countup(sc["num"],lt/1.0) if sc.get("count") else sc["num"]
         while d.textlength(sc["num"],font=f(B,base))>W-140: base-=10
         fn=f(B,max(10,base*(0.5+0.5*a))); d.text((70,y+int((1-min(a,1))*30)),txt,font=fn,fill=ACC); y+=int(base*1.25)
-    if sc.get("text"):
+    if sc_draw and sc.get("text"):
         fn=f(B,sc.get("size",76))
         for li,l in enumerate(wrap(d,sc["text"],fn,W-140)):
             a=ease((lt-li*0.1)/0.35); d.text((70,y+int((1-a)*30)),l,font=fn,fill=mix(BG,WH,a)); y+=int(fn.size*1.18)
-    if sc.get("options"):
+    if sc_draw and sc.get("options"):
         y+=20
         for k,o in enumerate(sc["options"]):
             a=ease((lt-0.3-k*0.45)/0.3)
@@ -126,7 +138,7 @@ for n in range(N):
             while d.textlength(o,font=fo)>W-220: fo=f(SB,fo.size-2)
             d.rounded_rectangle([70,y,W-70,y+120],28,fill=mix(BG,ACC if hl else DK,a))
             d.text((110,y+60-fo.size//2-6),o,font=fo,fill=mix(BG,BG if hl else WH,a)); y+=145
-    if sc.get("bar") is not None:
+    if sc_draw and sc.get("bar") is not None:
         v=sc["bar"]*ease((lt-0.3)/0.9); d.rounded_rectangle([70,y+30,W-70,y+90],30,fill=DK)
         if v>0: d.rounded_rectangle([70,y+30,70+max(60,int((W-140)*v)),y+90],30,fill=ACC)
     if sc.get("sub"):
@@ -145,7 +157,7 @@ for n in range(N):
     if ch:
         fs=f(B,82); line=" ".join(w["w"] for w in ch); GAPW=26
         while d.textlength(line,font=fs)+GAPW*len(ch)>W-140 and fs.size>50: fs=f(B,fs.size-4)
-        x=(W-d.textlength(line,font=fs)-GAPW*(len(ch)-1))/2; cy=1270
+        x=(W-d.textlength(line,font=fs)-GAPW*(len(ch)-1))/2; cy=1270 if not sc.get("visual") else 1600
         cur=[w for w in ch if w["s"]<=t]; cur=cur[-1] if cur else None
         for w in ch:
             ww=d.textlength(w["w"],font=fs); act=w is cur
