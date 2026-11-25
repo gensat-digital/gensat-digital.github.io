@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🏪🏪","title":"¿Cuál de tus <span class='g'>locales</span> vende más?","note1":"Local 1: ¿$?","note2":"Local 3: ¿? 🤔","qT":"@cuál"},
+ "problem":{"t":"@uno","title":"Una foto, un audio… y nada","items":[{"label":"📷 Local 1","lines":["foto de la caja","borrosa","¿$1,2…?"],"t":"@foto"},{"label":"🎤 Local 2","lines":["audio 2:40","“más o menos”","¿y el total?"],"t":"@audio"}],"verdict":{"text":"Local 3: nada 🤷","t":"@tercero"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, todos tus locales en un panel","panel":"Sucursales · hoy","cards":[{"label":"Local 1 · Centro","value":"$1,320","t":"@sucursales"},{"label":"Local 2 · Norte","value":"$980","t":"@ventas"},{"label":"Local 3 · Sur","value":"$640","t":"@gastos"}],"bars":[60,45,30,70,52,88],"chartT":"@pendientes"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}
