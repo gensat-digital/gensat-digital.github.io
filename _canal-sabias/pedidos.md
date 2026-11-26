@@ -3,7 +3,7 @@
 ## Pendientes (en orden de llegada)
 | Pedido | Quién lo pidió | Dónde | Estado |
 |---|---|---|---|
-| 🦣 Mamut | @RamonPerez-gk6to | Short del tardígrado | Pendiente |
+| 🦣 Mamut | @RamonPerez-gk6to | Short del tardígrado | Hecho (prueba con Higgsfield), falta aprobación de Yeison |
 
 ## Hechos
 | Pedido | Quién lo pidió | Video | Fecha |
