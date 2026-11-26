@@ -64,7 +64,7 @@ sc.innerHTML=`
   <div class="note" id="note"><div>${S.hook.note1}</div><div class="q" id="nq">${S.hook.note2}</div></div></div>
 <div class="scene" id="s2"><h2 id="h2">${S.problem.title}</h2><div class="papers">
   ${S.problem.items.map((p,i)=>`<div class="paper" id="p${i}" style="left:${i?470:30}px;top:${i?160:20}px"><b>${p.label}</b>${p.lines.map(l=>`<span>${l}</span>`).join('')}</div>`).join('')}
-  </div><div class="verdict" id="vd">${S.problem.verdict.text}</div></div>
+  </div><div class="verdict" id="vd" style="${S.problem.verdict.color?'background:'+S.problem.verdict.color+';color:#0f1b2d':''}">${S.problem.verdict.text}</div></div>
 <div class="scene" id="s3"><h2 id="h3">${S.solution.title}</h2><div class="phone">
   <div class="top">${S.solution.panel}</div>
   ${S.solution.cards.map((c,i)=>`<div class="card ${i==0?'gold':''}" id="c${i}"><small>${c.label}</small><b>${c.value}</b></div>`).join('')}

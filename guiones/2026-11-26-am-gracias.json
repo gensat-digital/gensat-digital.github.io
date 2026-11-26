@@ -1,0 +1,4 @@
+{"hook":{"emoji":"🦃🙏","title":"Feliz Día de <span class='g'>Acción de Gracias</span>","note1":"Gracias por hoy 🙏","note2":"y por tu esfuerzo 💪","qT":"@gracias"},
+ "problem":{"t":"@cada","title":"Gracias a cada negocio latino","items":[{"label":"🌅 Temprano","lines":["5:00 AM","a trabajar","sin excusas"],"t":"@levanta"},{"label":"💪 Duro","lines":["llueva o nieve","con fe","sin rendirse"],"t":"@trabaja"}],"verdict":{"text":"Hoy es para la familia ❤️","t":"@familia","color":"#f5b83d"}},
+ "solution":{"t":"@con","title":"Con <span style='color:#f5b83d'>GENSAT</span>, tu negocio al día","panel":"Mi negocio · hoy","cards":[{"label":"Ventas","value":"✅","t":"@ventas"},{"label":"Cobros","value":"✅","t":"@cobros"},{"label":"Pedidos","value":"✅","t":"@pedidos"}],"bars":[45,55,60,70,80,92],"chartT":"@quedan"},
+ "cta":{"t":"@feliz","button":"Escríbeme por WhatsApp"}}
