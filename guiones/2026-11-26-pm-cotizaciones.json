@@ -1,0 +1,4 @@
+{"hook":{"emoji":"📄📄","title":"10 cotizaciones… ¿a cuántas les diste <span class='g'>seguimiento</span>?","note1":"Cotización #7: ¿?","note2":"¿le escribí? 🤔","qT":"@seguimiento"},
+ "problem":{"t":"@una","title":"Una se olvidó, otra quedó en el chat…","items":[{"label":"😶 Olvidada","lines":["Cotización #3","hace 9 días","sin respuesta"],"t":"@olvidó"},{"label":"💬 En el chat","lines":["“te aviso”","…","(nunca)"],"t":"@chat"}],"verdict":{"text":"Se fue con otro ❌","t":"@fue"}},
+ "solution":{"t":"@gensat","title":"Con <span style='color:#f5b83d'>GENSAT</span>, ninguna cotización se pierde","panel":"Cotizaciones · semana","cards":[{"label":"#7 · enviada hace 2 días","value":"💬","t":"@cotización"},{"label":"#8 · aprobada","value":"✅","t":"@estado"},{"label":"#9 · escribir hoy","value":"🔔","t":"@escribirle"}],"bars":[30,40,55,62,75,90],"chartT":"@celular"},
+ "cta":{"t":"@escríbeme","button":"Escríbeme por WhatsApp"}}

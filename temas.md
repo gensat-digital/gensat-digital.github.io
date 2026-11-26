@@ -12,6 +12,8 @@
 | 2026-11-24 | 6:30 PM | Citas a las 11 de la noche: página web con reservas | reels/2026-11-24-pm-reservas.mp4 |
 | 2026-11-25 | 7:30 AM | 6:00 AM, el reporte para el jefe: se arma solo | reels/2026-11-25-am-reporte.mp4 |
 | 2026-11-25 | 6:30 PM | ¿Cuál de tus locales vende más? Sucursales en un panel | reels/2026-11-25-pm-sucursales.mp4 |
+| 2026-11-26 | 7:30 AM | Día de Acción de Gracias: gracias al negocio latino | reels/2026-11-26-am-gracias.mp4 |
+| 2026-11-26 | 6:30 PM | 10 cotizaciones, ¿a cuántas les diste seguimiento? | reels/2026-11-26-pm-cotizaciones.mp4 |
 
 Nota: el 21 de noviembre los dos salieron en Facebook a su hora. En Instagram se publicaron de nuevo a las 7:00 PM y a las 8:45 PM, porque con autoPublish:false Instagram no se publica solo.
 
