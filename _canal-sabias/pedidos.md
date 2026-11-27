@@ -4,7 +4,7 @@
 | Pedido | Quién lo pidió | Dónde | Estado |
 |---|---|---|---|
 | 🦣 Mamut | @RamonPerez-gk6to | Short del tardígrado | Hecho (prueba con Higgsfield), falta aprobación de Yeison |
-| 🦃 Pavo | @MariaGarcia-jw5jq y @constanzadeleon9235 (lo pidieron 2) | Short del tiburón | Pendiente |
+| 🦃 Pavo | @MariaGarcia-jw5jq y @constanzadeleon9235 (lo pidieron 2) | Short del tiburón | Hecho, viernes 27 (falta aprobación) |
 
 ## Hechos
 | Pedido | Quién lo pidió | Video | Fecha |
