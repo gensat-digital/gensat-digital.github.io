@@ -3,7 +3,7 @@
 ## Pendientes (en orden de llegada)
 | Pedido | Quién lo pidió | Dónde | Estado |
 |---|---|---|---|
-| 🦣 Mamut | @RamonPerez-gk6to | Short del tardígrado | Hecho (prueba con Higgsfield), falta aprobación de Yeison |
+| 🦣 Mamut | @RamonPerez-gk6to | Short del tardígrado | Aprobado (versión dibujada por código), sale sábado 28 |
 | 🦃 Pavo | @MariaGarcia-jw5jq y @constanzadeleon9235 (lo pidieron 2) | Short del tiburón | Hecho, viernes 27 (falta aprobación) |
 
 ## Hechos
